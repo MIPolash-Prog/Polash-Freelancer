@@ -1,0 +1,574 @@
+NEW MY WEBSITE:
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monjurul Islam Polash | Digital Expert & Freelancer</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .platform-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .platform-card:hover::before {
+            left: 100%;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8), 0 0 60px rgba(118, 75, 162, 0.6); }
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .blob {
+            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            animation: blob-morph 8s ease-in-out infinite;
+        }
+        
+        @keyframes blob-morph {
+            0%, 100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; }
+            25% { border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%; }
+            50% { border-radius: 30% 70% 30% 70% / 50% 50% 70% 30%; }
+            75% { border-radius: 50% 50% 30% 70% / 70% 30% 70% 30%; }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #764ba2;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40) 1s 1 normal both, blink 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .contact-btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .contact-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            z-index: -2;
+        }
+
+        .contact-btn::before {
+            content
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .contact-btn:hover::before {
+            width: 100%;
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: particle-float 15s infinite;
+        }
+        
+        @keyframes particle-float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    
+    <!-- Hero Section -->
+    <section class="min-h-screen gradient-bg relative flex items-center justify-center">
+        <div class="particles" id="particles"></div>
+        
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/20">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-white">MIP<span class="text-yellow-400">.</span></a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#services" class="text-white/80 hover:text-white transition">Services</a>
+                    <a href="#hire" class="text-white/80 hover:text-white transition">Hire Me</a>
+                    <a href="#contact" class="text-white/80 hover:text-white transition">Contact</a>
+                </div>
+                <a href="#contact" class="bg-white text-purple-700 px-6 py-2 rounded-full font-semibold hover:bg-yellow-400 hover:text-gray-900 transition">Let's Talk</a>
+            </div>
+        </nav>
+        
+        <div class="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="text-center lg:text-left">
+                <p class="text-yellow-400 font-semibold mb-4 text-lg">👋 Hello, I'm</p>
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                    Monjurul Islam<br><span class="text-yellow-400">Polash</span>
+                </h1>
+                <div class="text-xl md:text-2xl text-white/90 mb-8 h-10">
+                    <span id="typed-text"></span><span class="animate-pulse">|</span>
+                </div>
+                <p class="text-white/70 text-lg mb-10 max-w-lg mx-auto lg:mx-0">
+                    Transforming ideas into digital success stories. Your trusted partner for all things digital marketing, web development, and online growth.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#hire" class="contact-btn px-8 py-4 rounded-full text-white font-semibold text-lg pulse-glow">
+                        <i class="fas fa-rocket mr-2"></i> Hire Me Now
+                    </a>
+                    <a href="#contact" class="border-2 border-white/50 px-8 py-4 rounded-full text-white font-semibold text-lg hover:bg-white hover:text-purple-700 transition">
+                        <i class="fas fa-envelope mr-2"></i> Get In Touch
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative flex justify-center">
+                <div class="w-72 h-72 md:w-96 md:h-96 blob gradient-bg floating flex items-center justify-center shadow-2xl">
+                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-8xl md:text-9xl font-bold text-white shadow-inner">
+                       <img src="https://uploads.onecompiler.io/44a4h29nq/44a4gxy6p/round%20main%20without%20background.png" alt="" />
+                    </div>
+                </div>
+                <!-- Floating Icons -->
+                <div class="absolute top-0 right-0 w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center floating shadow-lg" style="animation-delay: 0.5s;">
+                    <i class="fab fa-whatsapp text-3xl text-white"></i>
+                </div>
+                <div class="absolute bottom-10 left-0 w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center floating shadow-lg" style="animation-delay: 1s;">
+                    <i class="fas fa-code text-2xl text-white"></i>
+                </div>
+                <div class="absolute top-20 left-10 w-14 h-14 bg-pink-500 rounded-2xl flex items-center justify-center floating shadow-lg" style="animation-delay: 1.5s;">
+                    <i class="fas fa-chart-line text-xl text-white"></i>
+                </div>
+                 <div class="absolute top-16 right-16 w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center floating shadow-lg" style="animation-delay: 0.5s;">
+                    <i class="fab fa-rocket text-3xl text-white"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-white text-2xl"></i>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-gray-900 relative">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-20 left-20 w-72 h-72 bg-purple-500 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-20 right-20 w-72 h-72 bg-pink-500 rounded-full filter blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 scroll-reveal">
+                <p class="text-purple-400 font-semibold mb-4">WHAT I DO</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">My <span class="gradient-text">Services</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Delivering exceptional digital solutions tailored to your business needs</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Cards -->
+                <div class="card-hover bg-gray-800/50 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 scroll-reveal">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-bullhorn text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Digital Marketing</h3>
+                    <p class="text-gray-400">Strategic digital marketing campaigns that drive traffic, engagement, and conversions for your business.</p>
+                </div>
+                
+                <div class="card-hover bg-gray-800/50 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 scroll-reveal" style="transition-delay: 0.1s;">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+                    <p class="text-gray-400">Custom, responsive websites and web applications built with modern technologies and best practices.</p>
+                </div>
+                
+                <div class="card-hover bg-gray-800/50 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-search text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">SEO Expert</h3>
+                    <p class="text-gray-400">Boost your search rankings and organic traffic with proven SEO strategies and techniques.</p>
+                </div>
+                
+                <div class="card-hover bg-gray-800/50 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 scroll-reveal" style="transition-delay: 0.3s;">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-share-alt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Social Media Marketing</h3>
+                    <p class="text-gray-400">Build your brand presence and engage your audience across all major social platforms.</p>
+                </div>
+                
+                <div class="card-hover bg-gray-800/50 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 scroll-reveal" style="transition-delay: 0.4s;">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-headset text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Virtual Assistance</h3>
+                    <p class="text-gray-400">Professional virtual assistance services to help manage your daily business operations efficiently.</p>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-purple-600 to-pink-600 p-8 rounded-3xl scroll-reveal flex flex-col justify-center items-center text-center" style="transition-delay: 0.5s;">
+                    <i class="fas fa-plus text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-2">Need Something Else?</h3>
+                    <p class="text-white/80 mb-4">Let's discuss your custom requirements</p>
+                    <a href="#contact" class="bg-white text-purple-700 px-6 py-2 rounded-full font-semibold hover:bg-yellow-400 transition">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Hire Me Section -->
+    <section id="hire" class="py-24 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 scroll-reveal">
+                <p class="text-yellow-400 font-semibold mb-4">WORK WITH ME</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Hire Me On <span class="gradient-text">Top Platforms</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Available on all major freelancing platforms. Choose your preferred platform to start working with me!</p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Fiverr -->
+                <a href="https://www.fiverr.com" target="_blank" class="platform-card bg-gradient-to-br from-green-500 to-green-600 p-8 rounded-3xl text-center shadow-xl scroll-reveal">
+                    <div class="w-20 h-20 bg-white rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-green-500 font-bold text-3xl">F.</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Fiverr</h3>
+                    <p class="text-white/80 mb-4">Top Rated Seller</p>
+                    <span class="inline-flex items-center text-white font-semibold">
+                        Hire Me <i class="fas fa-arrow-right ml-2"></i>
+                    </span>
+                </a>
+                
+                <!-- Upwork -->
+                <a href="https://www.upwork.com" target="_blank" class="platform-card bg-gradient-to-br from-green-600 to-teal-600 p-8 rounded-3xl text-center shadow-xl scroll-reveal" style="transition-delay: 0.1s;">
+                    <div class="w-20 h-20 bg-white rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-green-600 font-bold text-3xl">Up</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Upwork</h3>
+                    <p class="text-white/80 mb-4">Top Freelancer</p>
+                    <span class="inline-flex items-center text-white font-semibold">
+                        Hire Me <i class="fas fa-arrow-right ml-2"></i>
+                    </span>
+                </a>
+                
+                <!-- PeoplePerHour -->
+                <a href="https://www.peopleperhour.com" target="_blank" class="platform-card bg-gradient-to-br from-blue-500 to-blue-600 p-8 rounded-3xl text-center shadow-xl scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="w-20 h-20 bg-white rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-blue-500 font-bold text-3xl">PPH</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">PeoplePerHour</h3>
+                    <p class="text-white/80 mb-4">Verified Expert</p>
+                    <span class="inline-flex items-center text-white font-semibold">
+                        Hire Me <i class="fas fa-arrow-right ml-2"></i>
+                    </span>
+                </a>
+                
+                <!-- Freelancer.com -->
+                <a href="https://www.freelancer.com" target="_blank" class="platform-card bg-gradient-to-br from-blue-600 to-indigo-600 p-8 rounded-3xl text-center shadow-xl scroll-reveal" style="transition-delay: 0.3s;">
+                    <div class="w-20 h-20 bg-white rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-blue-600 font-bold text-3xl">Fr</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Freelancer.com</h3>
+                    <p class="text-white/80 mb-4">Professional Freelancer</p>
+                    <span class="inline-flex items-center text-white font-semibold">
+                        Hire Me <i class="fas fa-arrow-right ml-2"></i>
+                    </span>
+                </a>
+                
+                <!-- Guru.com -->
+                <a href="https://www.guru.com" target="_blank" class="platform-card bg-gradient-to-br from-purple-500 to-purple-600 p-8 rounded-3xl text-center shadow-xl scroll-reveal" style="transition-delay: 0.4s;">
+                    <div class="w-20 h-20 bg-white rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-purple-500 font-bold text-3xl">G</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Guru.com</h3>
+                    <p class="text-white/80 mb-4">Trusted Expert</p>
+                    <span class="inline-flex items-center text-white font-semibold">
+                        Hire Me <i class="fas fa-arrow-right ml-2"></i>
+                    </span>
+                </a>
+                
+                <!-- Direct Contact -->
+                <a href="#contact" class="platform-card bg-gradient-to-br from-yellow-500 to-orange-500 p-8 rounded-3xl text-center shadow-xl scroll-reveal" style="transition-delay: 0.5s;">
+                    <div class="w-20 h-20 bg-white rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <i class="fas fa-handshake text-orange-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Direct Hire</h3>
+                    <p class="text-white/80 mb-4">No Platform Fees!</p>
+                    <span class="inline-flex items-center text-white font-semibold">
+                        Contact Now <i class="fas fa-arrow-right ml-2"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-gray-900 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/20 rounded-full filter blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 scroll-reveal">
+                <p class="text-purple-400 font-semibold mb-4">GET IN TOUCH</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's <span class="gradient-text">Connect</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Ready to start your project? Reach out through any of these channels!</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Phone -->
+                <a href="tel:+8801730746563" class="card-hover bg-gray-800/50 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 text-center scroll-reveal group">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition">
+                        <i class="fas fa-phone text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Call Me</h3>
+                    <p class="text-purple-400 font-medium">+880 1730-746563</p>
+                </a>
+                
+                <!-- WhatsApp -->
+                <a href="https://wa.me/8801723328481" target="_blank" class="card-hover bg-gray-800/50 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 text-center scroll-reveal group" style="transition-delay: 0.1s;">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition">
+                        <i class="fab fa-whatsapp text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">WhatsApp</h3>
+                    <p class="text-green-400 font-medium">+880 1723-328481</p>
+                </a>
+                
+                <!-- Email -->
+                <a href="mailto:Polash@work13.onmicrosoft.com" class="card-hover bg-gray-800/50 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 text-center scroll-reveal group" style="transition-delay: 0.2s;">
+                    <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-pink-500 rounded-full mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition">
+                        <i class="fas fa-envelope text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Email Me</h3>
+                    <p class="text-pink-400 font-medium text-sm">Polash@work13.onmicrosoft.com</p>
+                </a>
+                
+                <!-- Quick Message -->
+                <div class="card-hover bg-gradient-to-br from-purple-600 to-pink-600 p-8 rounded-3xl text-center scroll-reveal" style="transition-delay: 0.3s;">
+                    <div class="w-20 h-20 bg-white/20 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <i class="fas fa-paper-plane text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Quick Response</h3>
+                    <p class="text-white/80 text-sm">Usually replies within 1 hour!</p>
+                </div>
+            </div>
+            
+            <!-- CTA Banner -->
+            <div class="mt-16 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-3xl p-10 text-center scroll-reveal relative overflow-hidden">
+                <div class="absolute inset-0 bg-black/20"></div>
+                <div class="relative z-10">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Project?</h3>
+                    <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">Let's work together to bring your vision to life. Get in touch today!</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="https://wa.me/8801723328481" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition inline-flex items-center">
+                            <i class="fab fa-whatsapp mr-2 text-xl"></i> WhatsApp Now
+                        </a>
+                        <a href="mailto:Polash@work13.onmicrosoft.com" class="bg-white text-purple-700 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-400 hover:text-gray-900 transition inline-flex items-center">
+                            <i class="fas fa-envelope mr-2"></i> Send Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-950 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center">
+                <h4 class="text-3xl font-bold mb-4">Monjurul <span class="text-pink-400">Islam</span> <span class="text-yellow-400">Polash</span></h4>
+                <p class="text-gray-400 mb-8">Digital Marketing Expert | Web Developer | SEO Specialist</p>
+                <div class="flex justify-center space-x-4 mb-8">
+                    <a href="https://wa.me/8801723328481" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-500 transition">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                    </a>
+                    <a href="mailto:Polash@work13.onmicrosoft.com" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-500 transition">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                    <a href="tel:+8801730746563" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-500 transition">
+                        <i class="fas fa-phone text-xl"></i>
+                    </a>
+                </div>
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-500">© 2024 Monjurul Islam Polash. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Typing Animation
+        const roles = [
+            "Digital Marketing Expert",
+            "Web Developer",
+            "SEO Specialist",
+            "Social Media Marketer",
+            "Virtual Assistant"
+        ];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typedText = document.getElementById('typed-text');
+
+        function typeRole() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typedText.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedText.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                isDeleting = true;
+                setTimeout(typeRole, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                setTimeout(typeRole, 500);
+            } else {
+                setTimeout(typeRole, isDeleting ? 50 : 100);
+            }
+        }
+
+        typeRole();
+
+        // Scroll Reveal Animation
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.scroll-reveal');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Create Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = Math.random() * 10 + 5 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
