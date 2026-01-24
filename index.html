@@ -211,6 +211,9 @@
                     </a>
                 </div>
             </div>
+            <h1 style="color:orange" class="title">BDT Time & Date:</h1>
+            <!-- Combined display element -->
+            <h1 style="color:orange" id="bdtDateTime"></h1> 
             
             <div class="relative flex justify-center">
                 <div class="w-72 h-72 md:w-96 md:h-96 blob gradient-bg floating flex items-center justify-center shadow-2xl">
@@ -563,6 +566,35 @@
                 }
             });
         });
+
+        function updateBDTDateTime() {
+    const now = new Date();
+    
+    // Options to display the full date, time, and timezone
+    const options = {
+        timeZone: 'Asia/Dhaka',
+        weekday: 'long',  // e.g., Monday
+        year: 'numeric',  // e.g., 2026
+        day: 'numeric',   // e.g., 25
+        month: 'long',    // e.g., January
+        hour: '2-digit',  // e.g., 01
+        minute: '2-digit',// e.g., 35
+        second: '2-digit',// e.g., 40
+        hour12: true      // AM/PM format
+    };
+
+    // Format the date and time string
+    const bdtString = now.toLocaleString('en-US', options);
+    
+    // Update the HTML element
+    document.getElementById('bdtDateTime').innerText = bdtString;
+}
+
+// Update the display every second (1000 milliseconds)
+setInterval(updateBDTDateTime, 1000);
+
+// Run immediately on page load
+updateBDTDateTime();
     </script>
 </body>
 </html>
