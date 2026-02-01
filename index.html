@@ -8,6 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+            .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }               
+        
         * {
             font-family: 'Poppins', sans-serif;
         }
@@ -488,6 +499,17 @@
   <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/KV/KV_-_Waves/KV_-_01_-_Waves.mp3" type="audio/mpeg">
   Your browser does not support audio playback.
 </audio>
+    
+<!-- Audio Player -->
+    <audio id="myAudio" autoplay loop>
+        <source src="your-music-file.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+ <audio id="bgMusic" loop>
+        <source src="your-music-file.mp3" type="audio/mpeg">
+    </audio>
+
+    <button class="music-control" onclick="toggleMusic()">🔊 Pause Music</button>
     <!-- Footer -->
     <footer class="bg-gray-950 py-12">
         <div class="max-w-7xl mx-auto px-6">
@@ -657,6 +679,26 @@ window.addEventListener('DOMContentLoaded', async () => {
     document.body.appendChild(playBtn);
   }
 });
+
+        var music = document.getElementById("bgMusic");
+        var isPlaying = false;
+
+        // Try to autoplay
+        window.addEventListener('load', function() {
+            music.play().catch(function(error) {
+                console.log("Autoplay prevented. User interaction needed.");
+            });
+        });
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                document.querySelector('.music-control').innerHTML = '🔊 Pause Music';
+            } else {
+                music.pause();
+                document.querySelector('.music-control').innerHTML = '🔇 Play Music';
+            }
+        }        
 </script>
 </body>
 </html>
