@@ -513,41 +513,6 @@
   Your browser does not support audio playback.
 </audio>
 
-<script>
-// Fixes autoplay issues on modern browsers
-window.addEventListener('DOMContentLoaded', async () => {
-  const audio = document.getElementById('backgroundSong');
-  
-  try {
-    // Unmute the audio right after it starts playing (bypasses browser restrictions)
-    audio.muted = false;
-    await audio.play();
-  } catch (error) {
-    // If autoplay is still blocked for rare cases, show a tiny play button
-    const playBtn = document.createElement('button');
-    playBtn.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      border: none;
-      border-radius: 50%;
-      background: #2563eb;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      z-index: 9999;
-    `;
-    playBtn.innerText = "▶️";
-    playBtn.addEventListener('click', async () => {
-      await audio.play();
-      playBtn.remove();
-    });
-    document.body.appendChild(playBtn);
-  }
-});
-</script>
     <script>
         // Typing Animation
         const roles = [
@@ -658,6 +623,40 @@ setInterval(updateBDTDateTime, 1000);
 
 // Run immediately on page load
 updateBDTDateTime();
-    </script>
+        
+// Fixes autoplay issues on modern browsers
+window.addEventListener('DOMContentLoaded', async () => {
+  const audio = document.getElementById('backgroundSong');
+  
+  try {
+    // Unmute the audio right after it starts playing (bypasses browser restrictions)
+    audio.muted = false;
+    await audio.play();
+  } catch (error) {
+    // If autoplay is still blocked for rare cases, show a tiny play button
+    const playBtn = document.createElement('button');
+    playBtn.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 50%;
+      background: #2563eb;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 9999;
+    `;
+    playBtn.innerText = "▶️";
+    playBtn.addEventListener('click', async () => {
+      await audio.play();
+      playBtn.remove();
+    });
+    document.body.appendChild(playBtn);
+  }
+});
+</script>
 </body>
 </html>
