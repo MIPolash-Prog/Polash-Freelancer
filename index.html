@@ -506,7 +506,48 @@
             </div>
         </div>
     </footer>
+<!-- Auto-play background song code -->
+<audio id="backgroundSong" autoplay loop muted playsinline style="display: none;">
+  <!-- This is a free, legal royalty-free song link from Free Music Archive -->
+  <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/KV/KV_-_Waves/KV_-_01_-_Waves.mp3" type="audio/mpeg">
+  Your browser does not support audio playback.
+</audio>
 
+<script>
+// Fixes autoplay issues on modern browsers
+window.addEventListener('DOMContentLoaded', async () => {
+  const audio = document.getElementById('backgroundSong');
+  
+  try {
+    // Unmute the audio right after it starts playing (bypasses browser restrictions)
+    audio.muted = false;
+    await audio.play();
+  } catch (error) {
+    // If autoplay is still blocked for rare cases, show a tiny play button
+    const playBtn = document.createElement('button');
+    playBtn.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 50%;
+      background: #2563eb;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 9999;
+    `;
+    playBtn.innerText = "▶️";
+    playBtn.addEventListener('click', async () => {
+      await audio.play();
+      playBtn.remove();
+    });
+    document.body.appendChild(playBtn);
+  }
+});
+</script>
     <script>
         // Typing Animation
         const roles = [
