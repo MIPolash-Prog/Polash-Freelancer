@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monjurul Islam Polash — Digital Expert & Freelancer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #020b18;
+    --surface: #081426;
+    --card: #0c1e35;
+    --gold: #f0b429;
+    --gold2: #ffda7b;
+    --cyan: #00e5ff;
+    --text: #e8f4fd;
+    --muted: #7a9bb5;
+    --border: rgba(0,229,255,0.12);
+    --glow: 0 0 40px rgba(0,229,255,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed; top: 0; left: 0; z-index: 9999;
+    pointer-events: none;
+  }
+  .cursor-dot {
+    width: 8px; height: 8px;
+    background: var(--cyan);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+    opacity: 0.6;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.2rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(2,11,24,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-cta {
+    padding: 0.6rem 1.6rem;
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: none;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,229,255,0.05) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(240,180,41,0.06) 0%, transparent 60%),
+      linear-gradient(135deg, #020b18 0%, #051525 50%, #020b18 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: 
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    background: rgba(0,229,255,0.05);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 2rem;
+    animation: fadeSlideUp 0.8s ease both;
+  }
+  .badge-dot {
+    width: 6px; height: 6px; background: var(--cyan);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 1rem;
+    animation: fadeSlideUp 0.8s 0.1s ease both;
+  }
+  .hero h1 .highlight {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--gold);
+    display: block;
+  }
+  .hero h1 .name { color: var(--gold); display: block; }
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 520px;
+    animation: fadeSlideUp 0.8s 0.2s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeSlideUp 0.8s 0.3s ease both;
+  }
+  .btn-primary {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--gold2), var(--gold));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .btn-primary:hover::after { opacity: 1; }
+  .btn-secondary {
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 1.5px solid var(--cyan);
+    color: var(--cyan);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    cursor: none;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { background: rgba(0,229,255,0.1); }
+
+  .hero-float {
+    position: absolute; right: 4rem; top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateY(-50%) translateX(0)} 50%{transform:translateY(-52%) translateX(-10px)} }
+
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    width: 300px;
+    box-shadow: var(--glow), 0 40px 80px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .hero-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--gold), var(--cyan));
+  }
+  .hero-card-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--cyan);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .stat-row { display: flex; justify-content: space-between; margin-bottom: 1.2rem; }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; }
+  .platform-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; }
+  .pill {
+    padding: 0.25rem 0.7rem;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.2);
+    font-size: 0.65rem;
+    color: var(--cyan);
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes fadeSlideUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; position: relative; }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .section-desc { color: var(--muted); max-width: 500px; line-height: 1.7; margin-bottom: 3rem; }
+
+  /* SERVICES */
+  .services-bg { background: var(--surface); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .service-card {
+    background: var(--card);
+    padding: 2.5rem;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--cyan));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .service-card:hover { background: #0f2540; }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.7rem;
+  }
+  .service-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+  .tag {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    border: 1px solid rgba(240,180,41,0.2);
+    color: var(--gold);
+    background: rgba(240,180,41,0.05);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* PLATFORMS */
+  .platforms-section { background: var(--bg); }
+  .platforms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+  .platform-card {
+    border: 1px solid var(--border);
+    background: var(--card);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.4s;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+  .platform-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(240,180,41,0.05));
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .platform-card:hover { border-color: var(--cyan); transform: translateY(-4px); box-shadow: var(--glow); }
+  .platform-card:hover::after { opacity: 1; }
+  .platform-emoji { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
+  .platform-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--cyan);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  .platform-action { font-size: 0.72rem; color: var(--muted); }
+
+  /* AI TOOLS */
+  .ai-section { background: var(--surface); }
+  .ai-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .ai-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    transition: all 0.3s;
+    display: flex; align-items: flex-start; gap: 1rem;
+  }
+  .ai-card:hover { border-color: rgba(240,180,41,0.4); }
+  .ai-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, rgba(240,180,41,0.15), rgba(0,229,255,0.1));
+    border: 1px solid rgba(240,180,41,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .ai-name { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+  .ai-use { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+
+  /* CONTACT */
+  .contact-section { background: var(--bg); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1.2rem;
+    padding: 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .contact-item:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(240,180,41,0.1); }
+  .contact-icon-box {
+    width: 50px; height: 50px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .contact-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .contact-value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+
+  .hire-box {
+    background: linear-gradient(135deg, var(--card), #0f2540);
+    border: 1px solid var(--border);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hire-box::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--cyan), var(--gold));
+  }
+  .hire-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .hire-box p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; font-size: 0.9rem; }
+  .hire-platforms { display: flex; flex-direction: column; gap: 0.8rem; }
+  .hire-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    background: rgba(0,0,0,0.2);
+  }
+  .hire-link:hover { border-color: var(--cyan); color: var(--cyan); padding-left: 1.8rem; }
+  .hire-link-arrow { color: var(--gold); transition: transform 0.3s; }
+  .hire-link:hover .hire-link-arrow { transform: translateX(5px); }
+
+  /* FOOTER */
+  footer {
+    background: #010810;
+    border-top: 1px solid var(--border);
+    padding: 3rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+  }
+  .footer-copy { font-size: 0.8rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--cyan); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  /* Section divider */
+  .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--cyan)); margin-bottom: 2rem; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 2rem; }
+    .hero { padding: 7rem 2rem 4rem; flex-direction: column; }
+    .hero-float { position: relative; right: auto; top: auto; transform: none; margin-top: 3rem; }
+    .hero-card { width: 100%; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    footer { padding: 2rem; flex-direction: column; text-align: center; }
+  }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor">
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">M<span>.</span>Polash</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#platforms">Platforms</a></li>
+    <li><a href="#ai-tools">AI Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#hire" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Available for Freelance Work
+    </div>
+    <h1>
+      <span class="highlight">Digital Expert</span>
+      <span class="name">Monjurul Islam Polash</span>
+    </h1>
+    <p class="hero-subtitle">Web Developer · SEO Expert · Digital Marketer · Social Media Specialist · Virtual Assistant — delivering world-class results on every platform.</p>
+    <div class="hero-btns">
+      <a href="#hire" class="btn-primary">Hire Me Now</a>
+      <a href="#contact" class="btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-float">
+    <div class="hero-card">
+      <div class="hero-card-title">// live stats</div>
+      <div class="stat-row">
+        <div class="stat-item"><span class="stat-num">5+</span><span class="stat-label">Platforms</span></div>
+        <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Projects</span></div>
+        <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Success</span></div>
+      </div>
+      <div class="platform-pills">
+        <span class="pill">Fiverr</span>
+        <span class="pill">Upwork</span>
+        <span class="pill">PPH</span>
+        <span class="pill">Freelancer</span>
+        <span class="pill">Guru</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-bg" id="services">
+  <div class="section-label">// what i do</div>
+  <div class="section-title">World-Class <em>Services</em></div>
+  <p class="section-desc">From cutting-edge web development to data-driven digital marketing — every deliverable built to the highest standard.</p>
+  <div class="divider"></div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <span class="service-icon">🌐</span>
+      <div class="service-name">Web Development</div>
+      <p class="service-desc">Responsive, fast, and beautiful websites built with modern technologies. From landing pages to full-stack applications.</p>
+      <div class="service-tags"><span class="tag">HTML/CSS</span><span class="tag">JS</span><span class="tag">WordPress</span><span class="tag">React</span></div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🔍</span>
+      <div class="service-name">SEO Expert</div>
+      <p class="service-desc">Rank higher on Google with technical SEO, on-page optimization, link building, and keyword strategy that drives real traffic.</p>
+      <div class="service-tags"><span class="tag">On-Page</span><span class="tag">Off-Page</span><span class="tag">Technical</span><span class="tag">Local SEO</span></div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📱</span>
+      <div class="service-name">Social Media Marketing</div>
+      <p class="service-desc">Grow your brand across all platforms. Strategy, content creation, paid ads, and community management.</p>
+      <div class="service-tags"><span class="tag">Facebook</span><span class="tag">Instagram</span><span class="tag">LinkedIn</span><span class="tag">TikTok</span></div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📊</span>
+      <div class="service-name">Digital Marketing</div>
+      <p class="service-desc">Full-funnel digital marketing campaigns. PPC, email marketing, content strategy, analytics, and conversion optimization.</p>
+      <div class="service-tags"><span class="tag">Google Ads</span><span class="tag">Meta Ads</span><span class="tag">Email</span><span class="tag">CRO</span></div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🤖</span>
+      <div class="service-name">Social Media Management</div>
+      <p class="service-desc">Complete social media account management, scheduling, engagement, and analytics reporting for consistent brand growth.</p>
+      <div class="service-tags"><span class="tag">SMM</span><span class="tag">SME</span><span class="tag">Analytics</span><span class="tag">Growth</span></div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💼</span>
+      <div class="service-name">Virtual Assistance</div>
+      <p class="service-desc">Professional virtual assistance — admin tasks, data entry, research, email management, scheduling, and more.</p>
+      <div class="service-tags"><span class="tag">Admin</span><span class="tag">Research</span><span class="tag">Data Entry</span><span class="tag">Email</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section class="platforms-section" id="platforms">
+  <div class="section-label">// where to hire me</div>
+  <div class="section-title">Find Me On Every <em>Platform</em></div>
+  <p class="section-desc">I'm active and top-rated on the world's leading freelance marketplaces. Click any card to hire me directly.</p>
+  <div class="divider"></div>
+  <div class="platforms-grid reveal">
+    <a href="https://www.fiverr.com" target="_blank" class="platform-card">
+      <span class="platform-emoji">🟢</span>
+      <div class="platform-name">Fiverr</div>
+      <div class="platform-action">View Gigs →</div>
+    </a>
+    <a href="https://www.upwork.com" target="_blank" class="platform-card">
+      <span class="platform-emoji">🔵</span>
+      <div class="platform-name">Upwork</div>
+      <div class="platform-action">View Profile →</div>
+    </a>
+    <a href="https://www.peopleperhour.com" target="_blank" class="platform-card">
+      <span class="platform-emoji">🟠</span>
+      <div class="platform-name">PeoplePerHour</div>
+      <div class="platform-action">Hire on PPH →</div>
+    </a>
+    <a href="https://www.freelancer.com" target="_blank" class="platform-card">
+      <span class="platform-emoji">🔷</span>
+      <div class="platform-name">Freelancer.com</div>
+      <div class="platform-action">View Profile →</div>
+    </a>
+    <a href="https://www.guru.com" target="_blank" class="platform-card">
+      <span class="platform-emoji">🟣</span>
+      <div class="platform-name">Guru.com</div>
+      <div class="platform-action">View Portfolio →</div>
+    </a>
+  </div>
+</section>
+
+<!-- AI TOOLS -->
+<section class="ai-section" id="ai-tools">
+  <div class="section-label">// tech stack & ai tools</div>
+  <div class="section-title">Powered by the <em>Best AI</em></div>
+  <p class="section-desc">I leverage the most powerful AI tools to deliver faster, smarter, and higher-quality results for every project.</p>
+  <div class="divider"></div>
+  <div class="ai-grid reveal">
+    <div class="ai-card">
+      <div class="ai-icon">🤖</div>
+      <div><div class="ai-name">ChatGPT / GPT-4</div><div class="ai-use">Content writing, copywriting & strategy</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">✨</div>
+      <div><div class="ai-name">Claude AI</div><div class="ai-use">Research, analysis & creative content</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🎨</div>
+      <div><div class="ai-name">Midjourney</div><div class="ai-use">AI image generation & design assets</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">📈</div>
+      <div><div class="ai-name">Semrush / Ahrefs</div><div class="ai-use">SEO research & competitor analysis</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🔧</div>
+      <div><div class="ai-name">Jasper AI</div><div class="ai-use">AI-powered marketing content</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">📊</div>
+      <div><div class="ai-name">Google Analytics 4</div><div class="ai-use">Data analytics & reporting</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🎯</div>
+      <div><div class="ai-name">Canva AI</div><div class="ai-use">Graphic design & social media visuals</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">💬</div>
+      <div><div class="ai-name">Notion AI</div><div class="ai-use">Project management & docs</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🌐</div>
+      <div><div class="ai-name">Surfer SEO</div><div class="ai-use">AI-powered on-page SEO optimization</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">📧</div>
+      <div><div class="ai-name">Mailchimp / Klaviyo</div><div class="ai-use">Email marketing automation</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🔗</div>
+      <div><div class="ai-name">Zapier AI</div><div class="ai-use">Workflow automation & integrations</div></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🖥️</div>
+      <div><div class="ai-name">GitHub Copilot</div><div class="ai-use">AI code assistant for development</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT & HIRE -->
+<section class="contact-section" id="contact">
+  <div class="section-label">// let's work together</div>
+  <div class="section-title">Contact & <em>Hire Me</em></div>
+  <p class="section-desc">Ready to start a project? Reach me directly through any of these channels — I respond fast!</p>
+  <div class="divider"></div>
+  <div class="contact-grid" id="hire">
+    <div class="contact-info reveal">
+      <a href="tel:+8801730746563" class="contact-item">
+        <div class="contact-icon-box">📞</div>
+        <div>
+          <div class="contact-label">Phone / Call</div>
+          <div class="contact-value">+880 1730-746563</div>
+        </div>
+      </a>
+      <a href="https://wa.me/8801723328481" target="_blank" class="contact-item">
+        <div class="contact-icon-box">💬</div>
+        <div>
+          <div class="contact-label">WhatsApp</div>
+          <div class="contact-value">+880 1723-328481</div>
+        </div>
+      </a>
+      <a href="mailto:Polash@work13.onmicrosoft.com" class="contact-item">
+        <div class="contact-icon-box">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">Polash@work13.onmicrosoft.com</div>
+        </div>
+      </a>
+      <a href="https://wa.me/8801723328481" target="_blank" class="contact-item">
+        <div class="contact-icon-box">🚀</div>
+        <div>
+          <div class="contact-label">Quick Message</div>
+          <div class="contact-value">Chat on WhatsApp Now →</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="hire-box reveal">
+      <h3>Hire Me Directly</h3>
+      <p>Choose your preferred freelance platform below to hire me directly. All profiles are active with verified reviews and top ratings.</p>
+      <div class="hire-platforms">
+        <a href="https://www.fiverr.com" target="_blank" class="hire-link">
+          <span>🟢 Hire on Fiverr</span>
+          <span class="hire-link-arrow">→</span>
+        </a>
+        <a href="https://www.upwork.com" target="_blank" class="hire-link">
+          <span>🔵 Hire on Upwork</span>
+          <span class="hire-link-arrow">→</span>
+        </a>
+        <a href="https://www.peopleperhour.com" target="_blank" class="hire-link">
+          <span>🟠 Hire on PeoplePerHour</span>
+          <span class="hire-link-arrow">→</span>
+        </a>
+        <a href="https://www.freelancer.com" target="_blank" class="hire-link">
+          <span>🔷 Hire on Freelancer.com</span>
+          <span class="hire-link-arrow">→</span>
+        </a>
+        <a href="https://www.guru.com" target="_blank" class="hire-link">
+          <span>🟣 Hire on Guru.com</span>
+          <span class="hire-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">M.Polash</div>
+  <p class="footer-copy">© 2025 Monjurul Islam Polash · All rights reserved · Dhaka, Bangladesh</p>
+  <ul class="footer-links">
+    <li><a href="tel:+8801730746563">Call</a></li>
+    <li><a href="https://wa.me/8801723328481" target="_blank">WhatsApp</a></li>
+    <li><a href="mailto:Polash@work13.onmicrosoft.com">Email</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px'; });
+  function animRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animRing); }
+  animRing();
+  document.querySelectorAll('a, button, .service-card, .platform-card').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.6)'; ring.style.borderColor = '#f0b429'; });
+    el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = '#f0b429'; });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger grid children
+  document.querySelectorAll('.services-grid, .platforms-grid, .ai-grid, .contact-info').forEach(grid => {
+    [...grid.children].forEach((child, i) => {
+      child.style.transitionDelay = (i * 0.07) + 's';
+      child.classList.add('reveal');
+      observer.observe(child);
+    });
+  });
+</script>
+</body>
+</html>
