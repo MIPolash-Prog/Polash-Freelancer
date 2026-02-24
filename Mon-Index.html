@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monjurul Islam Polash | Expert Freelancer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f2ff;
+            --secondary: #7000ff;
+            --bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 { font-size: 4rem; margin-bottom: 10px; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.5rem; color: #aaa; margin-bottom: 30px; }
+
+        /* Platform Links */
+        .platforms { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+        .btn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn:hover { background: var(--primary); color: black; box-shadow: 0 0 20px var(--primary); }
+        .btn.hire { background: var(--secondary); border-color: var(--secondary); color: white; }
+
+        /* Services Grid */
+        .container { max-width: 1100px; margin: auto; padding: 50px 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+
+        /* AI Tools Section */
+        .ai-section { background: rgba(112, 0, 255, 0.1); padding: 40px; border-radius: 20px; margin-top: 50px; text-align: center; }
+
+        /* Contact Section */
+        .contact-bar {
+            background: var(--secondary);
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.9rem;
+        }
+        .contact-bar a { color: white; text-decoration: none; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .contact-bar { flex-direction: column; text-align: center; gap: 10px; position: static; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Monjurul Islam Polash</h1>
+        <p class="subtitle">Web Developer | SEO Expert | Digital Marketer</p>
+        
+        <div class="platforms">
+            <a href="https://www.fiverr.com/" class="btn">Fiverr</a>
+            <a href="https://www.upwork.com/" class="btn">Upwork</a>
+            <a href="https://www.freelancer.com/" class="btn">Freelancer</a>
+            <a href="https://www.peopleperhour.com/" class="btn">PPH</a>
+            <a href="https://www.guru.com/" class="btn">Guru</a>
+            <a href="mailto:Polash@work13.onmicrosoft.com" class="btn hire">HIRE ME NOW</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 style="text-align: center; font-size: 2.5rem;">My Specializations</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-code"></i>
+                <h3>Web Development</h3>
+                <p>Building world-class, tech-friendly, and responsive websites from scratch.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-search-dollar"></i>
+                <h3>SEO Expert</h3>
+                <p>Ranking your business #1 on Google with advanced technical SEO strategies.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-bullhorn"></i>
+                <h3>Digital Marketing</h3>
+                <p>SMM, SME, and comprehensive digital growth for modern brands.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-user-tie"></i>
+                <h3>Virtual Assistance</h3>
+                <p>Reliable and efficient business support to scale your operations.</p>
+            </div>
+        </div>
+
+        <div class="ai-section">
+            <h2>🚀 Integrated AI Workflow</h2>
+            <p>I use the best AI tools in the world to ensure your project is delivered with 100% accuracy and speed.</p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+                <span>🤖 ChatGPT-4o</span>
+                <span>🎨 Midjourney</span>
+                <span>🛠️ GitHub Copilot</span>
+                <span>📈 Jasper AI</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-bar">
+        <span><i class="fab fa-whatsapp"></i> +8801723328481</span>
+        <span><i class="fas fa-phone"></i> +8801730746563</span>
+        <span><i class="fas fa-envelope"></i> Polash@work13.onmicrosoft.com</span>
+    </div>
+
+</body>
+</html>
