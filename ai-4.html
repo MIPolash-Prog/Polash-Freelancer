@@ -1,15 +1,536 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-      <h1 class="title">Hello World! </h1>
-      <p id="currentTime"></p>
-    <iframe src="https://claude.site/public/artifacts/305cd8c2-ee2d-4f46-84e1-57f374d20db0/embed" title="Claude Artifact" width="100%" height="600" frameborder="0" allow="clipboard-write" allowfullscreen></iframe>
-      <script src="script.js"></script>
-  </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Monjurul Islam Polash — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ivory:#faf7f2;
+  --warm:#f5f0e8;
+  --parch:#ede8dc;
+  --ink:#1a1510;
+  --ink2:#2d2820;
+  --brown:#4a3728;
+  --saffron:#d4820a;
+  --saff-lt:#e8a030;
+  --terra:#c05a3a;
+  --sage:#5a7a5a;
+  --muted:#8a7e72;
+  --bdr:rgba(74,55,40,.13);
+  --bdr2:rgba(74,55,40,.22);
+  --sh:0 4px 40px rgba(26,21,16,.07);
+  --shlg:0 20px 80px rgba(26,21,16,.11);
+}
+html{scroll-behavior:smooth}
+body{background:var(--ivory);color:var(--ink);font-family:'Outfit',sans-serif;overflow-x:hidden;cursor:none}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:10px;height:10px;background:var(--saffron);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(212,130,10,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .1s ease,top .1s ease,width .25s,height .25s}
+body:has(a:hover) #cur{width:5px;height:5px;background:var(--terra)}
+body:has(a:hover) #ring{width:54px;height:54px;border-color:rgba(192,90,58,.4)}
+
+/* ── LOADER ── */
+#ld{position:fixed;inset:0;z-index:10000;background:var(--ivory);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem}
+.ld-logo{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--ink);opacity:0;animation:fdIn .6s .2s forwards}
+.ld-bar{width:260px;height:1px;background:var(--parch);overflow:hidden}
+.ld-prog{height:100%;background:linear-gradient(90deg,var(--saffron),var(--terra));transform:scaleX(0);transform-origin:left;transition:transform 1.9s cubic-bezier(.16,1,.3,1)}
+.ld-txt{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);opacity:0;animation:fdIn .5s .4s forwards}
+@keyframes fdIn{to{opacity:1}}
+#ld.gone{opacity:0;pointer-events:none;transition:opacity .6s .3s}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.6rem 5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(250,247,242,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--bdr);transition:transform .4s}
+.nl{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink)}
+.nc{display:flex;gap:2.8rem}
+.nc a{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .25s}
+.nc a:hover{color:var(--saffron)}
+.nb{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.6rem;border:1.5px solid var(--ink);color:var(--ink);background:transparent;cursor:none;transition:all .25s;font-family:'Outfit',sans-serif;font-weight:600;text-decoration:none;display:inline-block}
+.nb:hover{background:var(--ink);color:var(--ivory)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.2fr 1fr;padding:9rem 5rem 5rem;gap:5rem;align-items:center;position:relative;overflow:hidden;background:var(--ivory)}
+.hero::before{content:'';position:absolute;top:-200px;right:-150px;width:650px;height:650px;background:radial-gradient(circle,rgba(212,130,10,.07),transparent 65%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-100px;left:28%;width:500px;height:500px;background:radial-gradient(circle,rgba(192,90,58,.05),transparent 65%);pointer-events:none}
+.hero-bgw{position:absolute;bottom:-10px;right:-30px;font-family:'Playfair Display',serif;font-size:22vw;font-weight:900;font-style:italic;color:rgba(26,21,16,.028);line-height:1;pointer-events:none;letter-spacing:-.04em;user-select:none}
+
+.hl{position:relative;z-index:2}
+.h-tag{display:inline-flex;align-items:center;gap:.65rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--saffron);margin-bottom:2.5rem;opacity:0;animation:up .7s .5s forwards}
+.h-tag::before{content:'';width:24px;height:1.5px;background:var(--saffron)}
+.h-name{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,6.5vw,7.2rem);font-weight:900;line-height:.88;letter-spacing:-.03em;opacity:0;animation:up .8s .65s forwards}
+.h-n1{display:block;color:var(--ink)}
+.h-n2{display:block;font-style:italic;font-weight:400;color:var(--brown);padding-left:3rem;position:relative}
+.h-n2::before{content:'—';position:absolute;left:0;color:var(--saffron);font-style:normal;font-weight:700}
+.h-n3{display:block;color:var(--terra)}
+.h-sub{font-size:1rem;font-weight:300;line-height:1.85;color:var(--muted);margin-top:2rem;max-width:420px;opacity:0;animation:up .7s .85s forwards}
+.h-sub strong{color:var(--ink);font-weight:600}
+.h-btns{display:flex;gap:1.2rem;margin-top:3rem;flex-wrap:wrap;opacity:0;animation:up .7s 1.05s forwards}
+.ba{padding:.9rem 2.5rem;background:var(--ink);color:var(--ivory);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border:none;cursor:none;transition:all .3s;text-decoration:none;display:inline-block;font-family:'Outfit',sans-serif}
+.ba:hover{background:var(--saffron);transform:translateY(-3px);box-shadow:0 14px 50px rgba(212,130,10,.25)}
+.bb{padding:.9rem 2.5rem;background:transparent;color:var(--ink);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:400;border:1.5px solid var(--bdr2);cursor:none;transition:all .3s;text-decoration:none;display:inline-block;font-family:'Outfit',sans-serif}
+.bb:hover{border-color:var(--saffron);color:var(--saffron)}
+
+.hr{position:relative;z-index:2;display:flex;flex-direction:column;gap:1.5rem;opacity:0;animation:fromR .8s .75s forwards}
+@keyframes fromR{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:none}}
+
+.hcm{background:var(--warm);border:1px solid var(--bdr);padding:2.5rem;position:relative;overflow:hidden;box-shadow:var(--sh)}
+.hcm::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--saffron),var(--terra))}
+.hcm-tag{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--saffron);margin-bottom:1.2rem}
+.hcm-co{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--ink);line-height:1.1}
+.hcm-role{font-size:.82rem;color:var(--muted);margin-top:.5rem;font-weight:300}
+
+.hsr{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--bdr)}
+.hs{background:var(--warm);padding:1.5rem 1.2rem;text-align:center}
+.hs-n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--saffron);line-height:1}
+.hs-l{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
+
+.hpr{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--bdr)}
+.hp{background:var(--parch);padding:1.2rem 1.4rem;display:flex;align-items:center;gap:.8rem;font-size:.77rem;color:var(--brown);font-weight:500}
+
+/* ── MARQUEE ── */
+.mwrap{background:var(--ink);padding:1.1rem 0;overflow:hidden}
+.mtrack{display:flex;gap:0;width:max-content;animation:mq 30s linear infinite}
+.mitem{font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:rgba(245,240,232,.45);letter-spacing:.04em;padding:0 2rem;white-space:nowrap;display:flex;align-items:center;gap:1.5rem}
+.mdot{width:4px;height:4px;background:var(--saffron);border-radius:50%;flex-shrink:0}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTIONS ── */
+.sec{position:relative;z-index:2}
+.si{max-width:1280px;margin:0 auto;padding:8rem 5rem}
+.ov{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--saffron);display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.ov::before{content:'';width:20px;height:1.5px;background:var(--saffron)}
+.sh{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,4.5vw,4.5rem);font-weight:700;line-height:.93;letter-spacing:-.02em;margin-bottom:1.2rem}
+.sh em{font-weight:400;font-style:italic;color:var(--terra)}
+
+/* CAREER */
+.csec{background:var(--warm)}
+.cly{display:grid;grid-template-columns:5fr 7fr;gap:6rem;margin-top:5rem;align-items:start}
+.bio{border-left:3px solid var(--saffron);padding-left:2rem}
+.bio p{font-size:1.05rem;font-weight:300;line-height:1.95;color:var(--brown)}
+.bio p strong{color:var(--ink);font-weight:600}
+.bio-h{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.15em;color:var(--muted);margin-top:2rem}
+
+.dcs{display:flex;flex-direction:column;gap:2px}
+.dc{position:relative;overflow:hidden;padding:2.8rem 3rem;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;cursor:none}
+.dc:hover{transform:translateX(10px);box-shadow:var(--sh)}
+.dcp{background:var(--ivory)}.dct{background:var(--parch)}
+.dcb{position:absolute;left:0;top:0;bottom:0;width:3px}
+.dcp .dcb{background:linear-gradient(180deg,var(--saffron),var(--terra))}
+.dct .dcb{background:linear-gradient(180deg,var(--sage),var(--saffron))}
+.dch{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem}
+.dc-sm{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.dc-emo{width:46px;height:46px;border-radius:50%;background:rgba(212,130,10,.1);border:1px solid rgba(212,130,10,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.dc-ti{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:.4rem}
+.dc-su{font-size:.8rem;color:var(--muted);font-weight:300;margin-bottom:1.4rem}
+.dc-de{font-size:.84rem;color:var(--brown);line-height:1.8;font-weight:300}
+.dc-tgs{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.dc-tg{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .8rem;background:rgba(212,130,10,.08);border:1px solid rgba(212,130,10,.18);color:var(--brown);transition:all .2s}
+.dc-tg:hover{background:rgba(212,130,10,.15);color:var(--saffron)}
+
+/* AI TOOLS */
+.aisec{background:var(--ivory)}
+.aiig{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:5rem;align-items:end}
+.aitxt{font-size:.92rem;color:var(--muted);line-height:1.9;font-weight:300}
+.aigrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--bdr)}
+.aic{background:var(--warm);padding:2.2rem 2rem;position:relative;overflow:hidden;transition:all .35s cubic-bezier(.16,1,.3,1);cursor:none}
+.aic:hover{background:var(--ivory);transform:translateY(-5px);box-shadow:var(--shlg);z-index:2}
+.aic-bar{position:absolute;top:0;left:0;right:0;height:2.5px;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.aic:hover .aic-bar{transform:scaleX(1)}
+.bs{background:linear-gradient(90deg,#00b4a0,#0090ff)}
+.bc{background:linear-gradient(90deg,#7b61ff,#c77dff)}
+.ba2{background:linear-gradient(90deg,var(--terra),var(--saffron))}
+.bco{background:linear-gradient(90deg,var(--saffron),#f5c842)}
+.bd{background:linear-gradient(90deg,#e84393,#c77dff)}
+.ban{background:linear-gradient(90deg,var(--sage),#00b4a0)}
+.ach{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.1rem}
+.ai-ic{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.ics{background:#e8f7f5;border:1px solid rgba(0,180,160,.2)}
+.icc{background:#f0eeff;border:1px solid rgba(123,97,255,.2)}
+.ica{background:#fef0eb;border:1px solid rgba(192,90,58,.2)}
+.ico{background:#fef8e7;border:1px solid rgba(212,130,10,.2)}
+.icd{background:#fdeef7;border:1px solid rgba(232,67,147,.2)}
+.ican{background:#eef5ee;border:1px solid rgba(90,122,90,.2)}
+.pill{font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .65rem;font-weight:500}
+.ps{background:#e8f7f5;color:#007a70;border:1px solid rgba(0,180,160,.25)}
+.pc{background:#f0eeff;color:#5a3fcc;border:1px solid rgba(123,97,255,.25)}
+.pa{background:#fef0eb;color:var(--terra);border:1px solid rgba(192,90,58,.25)}
+.po{background:#fef8e7;color:var(--saffron);border:1px solid rgba(212,130,10,.25)}
+.pd{background:#fdeef7;color:#c0246e;border:1px solid rgba(232,67,147,.25)}
+.pan{background:#eef5ee;color:var(--sage);border:1px solid rgba(90,122,90,.25)}
+.anam{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem}
+.adesc{font-size:.77rem;color:var(--muted);line-height:1.7;font-weight:300}
+.achips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--bdr)}
+.achip{font-size:.58rem;letter-spacing:.07em;background:var(--parch);padding:.22rem .6rem;color:var(--brown)}
+
+/* SERVICES */
+.srvsec{background:var(--parch)}
+.srvg{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--bdr);margin-top:5rem}
+.srvi{background:var(--ivory);padding:3.5rem;position:relative;overflow:hidden;cursor:none;transition:background .3s,box-shadow .3s;display:flex;flex-direction:column;gap:1.2rem}
+.srvi:hover{background:var(--warm);box-shadow:var(--sh)}
+.srvn{font-family:'Playfair Display',serif;font-size:6rem;font-weight:900;font-style:italic;color:rgba(26,21,16,.05);position:absolute;top:1.5rem;right:2rem;line-height:1;pointer-events:none}
+.srvi-ico{font-size:1.8rem}
+.srvi-name{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--ink);line-height:1.1}
+.srvi-desc{font-size:.83rem;color:var(--muted);line-height:1.85;font-weight:300;flex:1}
+.srvi-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.srvi-tag{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border:1px solid var(--bdr2);color:var(--brown)}
+.sarrow{position:absolute;bottom:2.5rem;right:2.5rem;width:40px;height:40px;border:1.5px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--brown);transition:all .3s}
+.srvi:hover .sarrow{background:var(--saffron);color:var(--ivory);border-color:var(--saffron);transform:rotate(45deg)}
+
+/* SKILLS */
+.sksec{background:var(--warm);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr)}
+.skgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:4rem;margin-top:4rem}
+.skcol-t{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:2rem;padding-bottom:1rem;border-bottom:1.5px solid var(--bdr2)}
+.skrow{margin-bottom:1.5rem}
+.sklr{display:flex;justify-content:space-between;font-size:.73rem;color:var(--brown);margin-bottom:.45rem}
+.skpct{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--saffron)}
+.skb{height:2px;background:var(--parch);overflow:hidden}
+.skf{height:100%;background:linear-gradient(90deg,var(--saffron),var(--terra));transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.skf.on{transform:scaleX(1)}
+
+/* CONTACT */
+.ctsec{background:var(--ivory);overflow:hidden}
+.ctinner{max-width:1280px;margin:0 auto;padding:9rem 5rem}
+.ctbg{position:absolute;bottom:-3rem;right:-2rem;font-family:'Playfair Display',serif;font-size:17vw;font-style:italic;font-weight:900;color:rgba(26,21,16,.028);pointer-events:none;letter-spacing:-.04em;white-space:nowrap}
+.ctly{display:grid;grid-template-columns:6fr 4fr;gap:6rem;align-items:center;position:relative;z-index:2}
+.cth{font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,6rem);font-weight:900;line-height:.9;letter-spacing:-.03em}
+.cth em{display:block;font-weight:400;font-style:italic;color:var(--terra)}
+.ctsub{font-size:.9rem;color:var(--muted);line-height:1.8;margin-top:2rem;max-width:380px;font-weight:300}
+.ctbtn{display:inline-block;margin-top:3rem;padding:1rem 3rem;background:var(--ink);color:var(--ivory);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;text-decoration:none;transition:all .3s;cursor:none;font-family:'Outfit',sans-serif}
+.ctbtn:hover{background:var(--saffron);transform:translateY(-4px);box-shadow:0 25px 70px rgba(212,130,10,.25)}
+.ctlinks{display:flex;flex-direction:column;gap:.8rem}
+.ctl{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.4rem;border:1px solid var(--bdr);text-decoration:none;color:var(--brown);font-size:.78rem;transition:all .28s;cursor:none;background:var(--warm)}
+.ctl:hover{border-color:var(--saffron);color:var(--saffron);transform:translateX(8px);background:var(--ivory)}
+.ctl-name{flex:1;padding:0 1rem;font-weight:400}
+.ctl-ico{font-size:.95rem;flex-shrink:0}
+.ctl-arr{font-size:.65rem;color:var(--muted)}
+.ctl:hover .ctl-arr{color:var(--saffron)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:2.5rem 5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.3)}
+.flogo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--warm);letter-spacing:-.01em;text-transform:none}
+
+/* REVEAL */
+.sr{opacity:0;transform:translateY(45px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.sr.v{opacity:1;transform:none}
+.srl{opacity:0;transform:translateX(-40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.srl.v{opacity:1;transform:none}
+.srr{opacity:0;transform:translateX(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.srr.v{opacity:1;transform:none}
+
+.tilt{transform-style:preserve-3d}
+
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;padding:8rem 2.5rem 4rem}
+  .hr{display:none}
+  .cly{grid-template-columns:1fr;gap:3rem}
+  .aigrid{grid-template-columns:repeat(2,1fr)}
+  .srvg{grid-template-columns:1fr}
+  .skgrid{grid-template-columns:1fr;gap:3rem}
+  .ctly{grid-template-columns:1fr}
+  .ctlinks{display:none}
+  .aiig{grid-template-columns:1fr}
+  nav{padding:1.4rem 2.5rem}
+  .si,.ctinner{padding:6rem 2.5rem}
+}
+@media(max-width:640px){
+  .nc,.nb{display:none}
+  nav{padding:1.3rem 1.5rem}
+  .hero{padding:7rem 1.5rem 3rem}
+  .si,.ctinner{padding:5rem 1.5rem}
+  .aigrid{grid-template-columns:1fr}
+  footer{padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="ring"></div>
+
+<div id="ld">
+  <div class="ld-logo">MIP.</div>
+  <div class="ld-bar"><div class="ld-prog" id="ldp"></div></div>
+  <div class="ld-txt">Loading Portfolio</div>
+</div>
+
+<nav id="nav">
+  <div class="nl">Monjurul Islam Polash</div>
+  <div class="nc">
+    <a href="#about">About</a>
+    <a href="#ai">AI Tools</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="nb">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bgw">Polash</div>
+  <div class="hl">
+    <div class="h-tag">Chattogram, Bangladesh · Open to Global Work</div>
+    <h1 class="h-name">
+      <span class="h-n1">Monjurul</span>
+      <span class="h-n2">Islam</span>
+      <span class="h-n3">Polash</span>
+    </h1>
+    <p class="h-sub"><strong>Territory Manager at Novartis Bangladesh</strong> &amp; Freelance <strong>Web Developer · Digital Marketer · SEO Specialist</strong> — bridging global pharma and digital innovation.</p>
+    <div class="h-btns">
+      <a href="#contact" class="ba">Get In Touch</a>
+      <a href="https://github.com/MIPolash-Prog" target="_blank" class="bb">GitHub ↗</a>
+    </div>
+  </div>
+  <div class="hr">
+    <div class="hcm tilt">
+      <div class="hcm-tag">Current Role · Full-Time</div>
+      <div class="hcm-co">Novartis<br/>Bangladesh Ltd.</div>
+      <div class="hcm-role">Territory Manager · Chattogram Division</div>
+    </div>
+    <div class="hsr">
+      <div class="hs tilt"><div class="hs-n" id="cnt1">0+</div><div class="hs-l">GitHub Repos</div></div>
+      <div class="hs tilt"><div class="hs-n">5.0★</div><div class="hs-l">Fiverr Rating</div></div>
+      <div class="hs tilt"><div class="hs-n">12+</div><div class="hs-l">AI Tools</div></div>
+    </div>
+    <div class="hpr">
+      <div class="hp tilt"><span>⌨️</span>MIPolash-Prog</div>
+      <div class="hp tilt"><span>💼</span>AnchorTech</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mwrap">
+  <div class="mtrack">
+    <span class="mitem"><span class="mdot"></span>Web Development</span>
+    <span class="mitem"><span class="mdot"></span>SEO Specialist</span>
+    <span class="mitem"><span class="mdot"></span>Digital Marketing</span>
+    <span class="mitem"><span class="mdot"></span>Novartis Bangladesh</span>
+    <span class="mitem"><span class="mdot"></span>Facebook Ads</span>
+    <span class="mitem"><span class="mdot"></span>Google Ads</span>
+    <span class="mitem"><span class="mdot"></span>WordPress &amp; Wix</span>
+    <span class="mitem"><span class="mdot"></span>React &amp; JavaScript</span>
+    <span class="mitem"><span class="mdot"></span>AI-Powered Workflow</span>
+    <span class="mitem"><span class="mdot"></span>Territory Manager</span>
+    <span class="mitem"><span class="mdot"></span>Web Development</span>
+    <span class="mitem"><span class="mdot"></span>SEO Specialist</span>
+    <span class="mitem"><span class="mdot"></span>Digital Marketing</span>
+    <span class="mitem"><span class="mdot"></span>Novartis Bangladesh</span>
+    <span class="mitem"><span class="mdot"></span>Facebook Ads</span>
+    <span class="mitem"><span class="mdot"></span>Google Ads</span>
+    <span class="mitem"><span class="mdot"></span>WordPress &amp; Wix</span>
+    <span class="mitem"><span class="mdot"></span>React &amp; JavaScript</span>
+    <span class="mitem"><span class="mdot"></span>AI-Powered Workflow</span>
+    <span class="mitem"><span class="mdot"></span>Territory Manager</span>
+  </div>
+</div>
+
+<!-- CAREER -->
+<section class="sec csec" id="about">
+  <div class="si">
+    <div class="ov sr">Professional Identity</div>
+    <h2 class="sh sr">Two Worlds. <em>One Vision.</em></h2>
+    <div class="cly">
+      <div class="srl">
+        <div class="bio">
+          <p>I am <strong>Monjurul Islam Polash</strong> — a dual-career professional thriving at the intersection of <strong>global pharmaceuticals</strong> and <strong>digital innovation</strong>.<br/><br/>As a <strong>Territory Manager at Novartis Bangladesh Limited</strong>, I manage key accounts and drive distribution across Chattogram. As a <strong>freelance digital specialist</strong>, I build websites, engineer SEO strategies, and scale brands through high-performance advertising.</p>
+          <div class="bio-h">MIPolash-Prog · MIPolash123 · AnchorTech (Fiverr)</div>
+        </div>
+      </div>
+      <div class="srr">
+        <div class="dcs">
+          <div class="dc dcp">
+            <div class="dcb"></div>
+            <div class="dch"><div class="dc-sm">Full-Time · Pharmaceuticals</div><div class="dc-emo">💊</div></div>
+            <div class="dc-ti">Novartis<br/>Bangladesh Ltd.</div>
+            <div class="dc-su">Territory Manager · Chattogram</div>
+            <p class="dc-de">Managing sales operations, distribution strategy, and key account relationships for one of the world's most respected pharmaceutical companies.</p>
+            <div class="dc-tgs"><span class="dc-tg">Sales Strategy</span><span class="dc-tg">KPI Management</span><span class="dc-tg">Distribution</span><span class="dc-tg">Key Accounts</span></div>
+          </div>
+          <div class="dc dct">
+            <div class="dcb"></div>
+            <div class="dch"><div class="dc-sm">Freelance · Technology</div><div class="dc-emo">⚡</div></div>
+            <div class="dc-ti">AnchorTech<br/>Freelance</div>
+            <div class="dc-su">Web Dev · SEO · Digital Marketing</div>
+            <p class="dc-de">Serving global clients on Fiverr, PeoplePerHour &amp; Freelancer.com — building responsive sites, driving organic traffic, and scaling brands with performance ads.</p>
+            <div class="dc-tgs"><span class="dc-tg">HTML/CSS/JS</span><span class="dc-tg">React</span><span class="dc-tg">WordPress</span><span class="dc-tg">SEO</span><span class="dc-tg">Wix</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI TOOLS -->
+<section class="sec aisec" id="ai">
+  <div class="si">
+    <div class="aiig">
+      <div><div class="ov sr">AI-Powered Workflow</div><h2 class="sh sr">Tools That<br/><em>Amplify My Work</em></h2></div>
+      <div class="srr"><p class="aitxt">I integrate 12+ cutting-edge AI tools across every domain — intelligent SEO, code generation, campaign automation, content creation, and data analytics. These tools multiply my output and sharpen every result.</p></div>
+    </div>
+    <div class="aigrid">
+      <div class="aic sr" style="transition-delay:.04s"><div class="aic-bar bs"></div><div class="ach"><div class="ai-ic ics">🔍</div><span class="pill ps">SEO</span></div><div class="anam">Semrush AI</div><p class="adesc">AI-driven keyword research, competitor gap analysis, and automated site audits to uncover high-impact ranking opportunities at scale.</p><div class="achips"><span class="achip">Keyword Research</span><span class="achip">Site Audit</span><span class="achip">Competitor Gap</span></div></div>
+      <div class="aic sr" style="transition-delay:.08s"><div class="aic-bar bs"></div><div class="ach"><div class="ai-ic ics">📈</div><span class="pill ps">SEO</span></div><div class="anam">Surfer SEO</div><p class="adesc">NLP-powered content scoring and on-page optimization. Structure pages precisely to match what Google's algorithm rewards.</p><div class="achips"><span class="achip">Content Scoring</span><span class="achip">SERP Analysis</span><span class="achip">On-Page Opt.</span></div></div>
+      <div class="aic sr" style="transition-delay:.12s"><div class="aic-bar bc"></div><div class="ach"><div class="ai-ic icc">🤖</div><span class="pill pc">Coding</span></div><div class="anam">GitHub Copilot</div><p class="adesc">AI pair-programmer with real-time autocomplete for HTML, CSS, JavaScript &amp; React. Dramatically accelerates front-end delivery.</p><div class="achips"><span class="achip">HTML / CSS</span><span class="achip">JavaScript</span><span class="achip">React</span></div></div>
+      <div class="aic sr" style="transition-delay:.16s"><div class="aic-bar bc"></div><div class="ach"><div class="ai-ic icc">⚙️</div><span class="pill pc">Coding</span></div><div class="anam">Claude (Anthropic)</div><p class="adesc">Advanced reasoning AI for architectural decisions, complex debugging, and drafting polished client proposals with precision.</p><div class="achips"><span class="achip">Debugging</span><span class="achip">Architecture</span><span class="achip">Copywriting</span></div></div>
+      <div class="aic sr" style="transition-delay:.20s"><div class="aic-bar ba2"></div><div class="ach"><div class="ai-ic ica">📣</div><span class="pill pa">Paid Ads</span></div><div class="anam">Meta Advantage+</div><p class="adesc">Meta's intelligent campaign automation — smart audience targeting, budget distribution, and creative A/B testing for maximum ROAS.</p><div class="achips"><span class="achip">Facebook Ads</span><span class="achip">Targeting</span><span class="achip">ROAS Opt.</span></div></div>
+      <div class="aic sr" style="transition-delay:.24s"><div class="aic-bar ba2"></div><div class="ach"><div class="ai-ic ica">🎯</div><span class="pill pa">Paid Ads</span></div><div class="anam">Google Perf. Max</div><p class="adesc">Google's full-funnel AI campaign type — Smart Bidding across Search, Display, YouTube &amp; Gmail with machine learning optimization.</p><div class="achips"><span class="achip">Google Ads</span><span class="achip">Smart Bidding</span><span class="achip">Multi-channel</span></div></div>
+      <div class="aic sr" style="transition-delay:.28s"><div class="aic-bar bco"></div><div class="ach"><div class="ai-ic ico">✍️</div><span class="pill po">Content</span></div><div class="anam">Jasper AI</div><p class="adesc">Marketing-focused writing platform for blog posts, ad copy, email sequences, and landing page content — generated at scale.</p><div class="achips"><span class="achip">Blog Content</span><span class="achip">Ad Copy</span><span class="achip">Email Campaigns</span></div></div>
+      <div class="aic sr" style="transition-delay:.32s"><div class="aic-bar bco"></div><div class="ach"><div class="ai-ic ico">💬</div><span class="pill po">Content</span></div><div class="anam">ChatGPT</div><p class="adesc">Versatile AI for rapid ideation, market research synthesis, client communication drafts, and quick development snippets.</p><div class="achips"><span class="achip">Brainstorming</span><span class="achip">Research</span><span class="achip">Proposals</span></div></div>
+      <div class="aic sr" style="transition-delay:.36s"><div class="aic-bar bd"></div><div class="ach"><div class="ai-ic icd">🎨</div><span class="pill pd">Design</span></div><div class="anam">Midjourney</div><p class="adesc">AI image generation for hero visuals, social media graphics, brand assets and mood boards — crafted at a premium level.</p><div class="achips"><span class="achip">Visual Assets</span><span class="achip">Brand Design</span><span class="achip">Social Media</span></div></div>
+      <div class="aic sr" style="transition-delay:.40s"><div class="aic-bar bd"></div><div class="ach"><div class="ai-ic icd">🖼️</div><span class="pill pd">Design</span></div><div class="anam">Adobe Firefly</div><p class="adesc">Adobe's generative AI for creating and editing images, web banners, and design elements — integrated directly with Photoshop.</p><div class="achips"><span class="achip">Image Editing</span><span class="achip">Web Banners</span><span class="achip">Photoshop AI</span></div></div>
+      <div class="aic sr" style="transition-delay:.44s"><div class="aic-bar ban"></div><div class="ach"><div class="ai-ic ican">📊</div><span class="pill pan">Analytics</span></div><div class="anam">Power BI + AI</div><p class="adesc">AI-enhanced BI for tracking territory sales KPIs, forecasting pipeline, and market share dashboards for Novartis Bangladesh.</p><div class="achips"><span class="achip">Sales Reporting</span><span class="achip">Forecasting</span><span class="achip">KPI Dashboards</span></div></div>
+      <div class="aic sr" style="transition-delay:.48s"><div class="aic-bar ban"></div><div class="ach"><div class="ai-ic ican">🔬</div><span class="pill pan">Analytics</span></div><div class="anam">Google Analytics 4</div><p class="adesc">Predictive audiences, automated insights, and funnel analysis to precisely measure campaign performance and user behaviour.</p><div class="achips"><span class="achip">Web Analytics</span><span class="achip">Campaign ROI</span><span class="achip">Funnel Analysis</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec srvsec" id="services">
+  <div class="si">
+    <div class="ov sr">Freelance Offerings</div>
+    <h2 class="sh sr">Services &amp; <em>Expertise</em></h2>
+    <div class="srvg">
+      <div class="srvi sr"><div class="srvn">01</div><div class="srvi-ico">🖥️</div><div class="srvi-name">Web<br/>Development</div><p class="srvi-desc">Custom responsive websites, landing pages, and portfolios built with HTML5, CSS3, JavaScript, React, WordPress &amp; Wix. Pixel-perfect and conversion-optimised.</p><div class="srvi-tags"><span class="srvi-tag">HTML/CSS</span><span class="srvi-tag">JavaScript</span><span class="srvi-tag">WordPress</span><span class="srvi-tag">React</span></div><div class="sarrow">↗</div></div>
+      <div class="srvi sr" style="transition-delay:.08s"><div class="srvn">02</div><div class="srvi-ico">🔍</div><div class="srvi-name">SEO<br/>Optimization</div><p class="srvi-desc">Full-service SEO — technical audits, keyword strategy, on-page optimization, and link-building to rank your website on Google's first page.</p><div class="srvi-tags"><span class="srvi-tag">Technical SEO</span><span class="srvi-tag">On-Page</span><span class="srvi-tag">Link Building</span><span class="srvi-tag">Keywords</span></div><div class="sarrow">↗</div></div>
+      <div class="srvi sr" style="transition-delay:.12s"><div class="srvn">03</div><div class="srvi-ico">📣</div><div class="srvi-name">Performance<br/>Marketing</div><p class="srvi-desc">High-ROI Facebook &amp; Google Ads — from strategy and creative production to pixel setup, audience targeting, and continuous ROAS optimisation.</p><div class="srvi-tags"><span class="srvi-tag">Facebook Ads</span><span class="srvi-tag">Google Ads</span><span class="srvi-tag">Pixel Setup</span><span class="srvi-tag">ROAS</span></div><div class="sarrow">↗</div></div>
+      <div class="srvi sr" style="transition-delay:.16s"><div class="srvn">04</div><div class="srvi-ico">📱</div><div class="srvi-name">Social Media<br/>Marketing</div><p class="srvi-desc">YouTube, Twitter/X, and organic social growth strategy — building brand authority, growing engaged audiences, and converting followers into customers.</p><div class="srvi-tags"><span class="srvi-tag">YouTube</span><span class="srvi-tag">Twitter/X</span><span class="srvi-tag">Brand Strategy</span><span class="srvi-tag">Content</span></div><div class="sarrow">↗</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="sec sksec">
+  <div class="si">
+    <div class="ov sr">Technical Proficiency</div>
+    <h2 class="sh sr">Skills &amp; <em>Mastery</em></h2>
+    <div class="skgrid">
+      <div class="sr" style="transition-delay:.05s">
+        <div class="skcol-t">Development</div>
+        <div class="skrow"><div class="sklr"><span>HTML5 / CSS3</span><span class="skpct">95%</span></div><div class="skb"><div class="skf"></div></div></div>
+        <div class="skrow"><div class="sklr"><span>JavaScript</span><span class="skpct">85%</span></div><div class="skb"><div class="skf"></div></div></div>
+        <div class="skrow"><div class="sklr"><span>React</span><span class="skpct">75%</span></div><div class="skb"><div class="skf"></div></div></div>
+        <div class="skrow"><div class="sklr"><span>WordPress / Wix</span><span class="skpct">92%</span></div><div class="skb"><div class="skf"></div></div></div>
+      </div>
+      <div class="sr" style="transition-delay:.1s">
+        <div class="skcol-t">Marketing &amp; SEO</div>
+        <div class="skrow"><div class="sklr"><span>SEO Strategy</span><span class="skpct">92%</span></div><div class="skb"><div class="skf"></div></div></div>
+        <div class="skrow"><div class="sklr"><span>Facebook Ads</span><span class="skpct">90%</span></div><div class="skb"><div class="skf"></div></div></div>
+        <div class="skrow"><div class="sklr"><span>Google Ads</span><span class="skpct">85%</span></div><div class="skb"><div class="skf"></div></div></div>
+        <div class="skrow"><div class="sklr"><span>Email Marketing</span><span class="skpct">80%</span></div><div class="skb"><div class="skf"></div></div></div>
+      </div>
+      <div class="sr" style="transition-delay:.15s">
+        <div class="skcol-t">Pharma &amp; Analytics</div>
+        <div class="skrow"><div class="sklr"><span>Territory Management</span><span class="skpct">95%</span></div><div class="skb"><div class="skf"></div></div></div>
+        <div class="skrow"><div class="sklr"><span>Sales Strategy</span><span class="skpct">90%</span></div><div class="skb"><div class="skf"></div></div></div>
+        <div class="skrow"><div class="sklr"><span>Data Analytics</span><span class="skpct">82%</span></div><div class="skb"><div class="skf"></div></div></div>
+        <div class="skrow"><div class="sklr"><span>Power BI</span><span class="skpct">78%</span></div><div class="skb"><div class="skf"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec ctsec" id="contact">
+  <div class="ctbg">Contact</div>
+  <div class="ctinner">
+    <div class="ctly">
+      <div class="srl">
+        <h2 class="cth">Let's Build<br/><em>Something</em><br/>Remarkable.</h2>
+        <p class="ctsub">Available for web development, SEO, and digital marketing projects globally. Based in Chattogram — working everywhere.</p>
+        <a href="mailto:contact@polash.com" class="ctbtn">Start a Conversation →</a>
+      </div>
+      <div class="ctlinks srr">
+        <a href="https://github.com/MIPolash-Prog" target="_blank" class="ctl"><span class="ctl-ico">⌨️</span><span class="ctl-name">GitHub · MIPolash-Prog</span><span class="ctl-arr">↗</span></a>
+        <a href="https://github.com/MIPolash123" target="_blank" class="ctl"><span class="ctl-ico">📦</span><span class="ctl-name">GitHub · MIPolash123</span><span class="ctl-arr">↗</span></a>
+        <a href="https://www.fiverr.com" target="_blank" class="ctl"><span class="ctl-ico">💼</span><span class="ctl-name">Fiverr · AnchorTech</span><span class="ctl-arr">↗</span></a>
+        <a href="https://www.peopleperhour.com" target="_blank" class="ctl"><span class="ctl-ico">🌐</span><span class="ctl-name">PeoplePerHour</span><span class="ctl-arr">↗</span></a>
+        <a href="https://www.freelancer.com" target="_blank" class="ctl"><span class="ctl-ico">🚀</span><span class="ctl-name">Freelancer.com</span><span class="ctl-arr">↗</span></a>
+        <a href="https://www.influence.co" target="_blank" class="ctl"><span class="ctl-ico">✨</span><span class="ctl-name">Influence.co</span><span class="ctl-arr">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">MIP.</div>
+  <span>© 2026 Monjurul Islam Polash</span>
+  <span>Chattogram, Bangladesh</span>
+  <span>Crafted with Precision &amp; AI</span>
+</footer>
+
+<script>
+// LOADER
+window.addEventListener('load',()=>{
+  const p=document.getElementById('ldp'),l=document.getElementById('ld');
+  setTimeout(()=>p.style.transform='scaleX(1)',80);
+  setTimeout(()=>{l.classList.add('gone');setTimeout(()=>l.remove(),900)},2200);
+});
+
+// CURSOR
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function ar(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar)})();
+
+// NAV HIDE
+let lastY=0;
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY,n=document.getElementById('nav');
+  n.style.transform=y>80&&y>lastY?'translateY(-100%)':'translateY(0)';
+  n.style.transition='transform .4s';lastY=y;
+});
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.sr,.srl,.srr').forEach(el=>obs.observe(el));
+
+// SKILL BARS — collect widths, then animate
+const pcts=[.95,.85,.75,.92,.92,.90,.85,.80,.95,.90,.82,.78];
+document.querySelectorAll('.skf').forEach((f,i)=>f.dataset.w=pcts[i]||.8);
+const skObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.skf').forEach((f,i)=>{
+        setTimeout(()=>{f.style.width=(parseFloat(f.dataset.w)*100)+'%';f.classList.add('on')},i*60);
+      });
+    }
+  });
+},{threshold:.25});
+document.querySelectorAll('.skgrid').forEach(el=>skObs.observe(el));
+
+// COUNTER
+const cntEl=document.getElementById('cnt1');
+if(cntEl){
+  const co=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){
+      let s=null;
+      (function step(ts){if(!s)s=ts;const p=Math.min((ts-s)/1400,1);cntEl.textContent=Math.floor(p*21)+'+';if(p<1)requestAnimationFrame(step)})(performance.now());
+      co.unobserve(e.target);
+    }});
+  },{threshold:.5});
+  co.observe(cntEl.closest('.hs'));
+}
+
+// 3D TILT
+document.querySelectorAll('.tilt').forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)/r.width*10,y=(e.clientY-r.top-r.height/2)/r.height*10;
+    el.style.transform=`perspective(800px) rotateY(${x}deg) rotateX(${-y}deg) scale(1.02)`;
+  });
+  el.addEventListener('mouseleave',()=>{el.style.transform='perspective(800px) rotateY(0) rotateX(0) scale(1)';el.style.transition='transform .5s cubic-bezier(.16,1,.3,1)'});
+});
+
+// MAGNETIC
+document.querySelectorAll('.ba,.bb,.nb,.ctbtn').forEach(b=>{
+  b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.3,y=(e.clientY-r.top-r.height/2)*.3;b.style.transform=`translate(${x}px,${y}px)`});
+  b.addEventListener('mouseleave',()=>{b.style.transform='translate(0,0)';b.style.transition='transform .4s cubic-bezier(.16,1,.3,1)'});
+});
+</script>
+</body>
 </html>
 
 
