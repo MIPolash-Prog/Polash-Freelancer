@@ -762,6 +762,64 @@
     </footer>
                  <a href="index.html">Back to Home</a>
     <script>
+           // Language Switcher
+        let currentLang = 'en';
+        
+        const rolesEN = [
+            "Digital Marketing Expert",
+            "Web Developer",
+            "SEO Specialist",
+            "Social Media Marketer",
+            "Virtual Assistant"
+        ];
+        
+        const rolesBN = [
+            "ডিজিটাল মার্কেটিং এক্সপার্ট",
+            "ওয়েব ডেভেলপার",
+            "এসইও বিশেষজ্ঞ",
+            "সোশ্যাল মিডিয়া মার্কেটার",
+            "ভার্চুয়াল অ্যাসিস্ট্যান্ট"
+        ];
+        
+        let roles = rolesEN;
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typedText = document.getElementById('typed-text');
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update button styles
+            const btnEn = document.getElementById('btn-en');
+            const btnBn = document.getElementById('btn-bn');
+            
+            if (lang === 'en') {
+                btnEn.classList.add('bg-yellow-400', 'text-gray-900');
+                btnEn.classList.remove('text-white/70');
+                btnBn.classList.remove('bg-yellow-400', 'text-gray-900');
+                btnBn.classList.add('text-white/70');
+                roles = rolesEN;
+            } else {
+                btnBn.classList.add('bg-yellow-400', 'text-gray-900');
+                btnBn.classList.remove('text-white/70');
+                btnEn.classList.remove('bg-yellow-400', 'text-gray-900');
+                btnEn.classList.add('text-white/70');
+                roles = rolesBN;
+            }
+            
+            // Update all text elements with data attributes
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+        
         // Typing Animation
         const roles = [
             "Digital Marketing Expert",
@@ -844,6 +902,7 @@
     </script>
 </body>
 </html>
+
 
 
 
