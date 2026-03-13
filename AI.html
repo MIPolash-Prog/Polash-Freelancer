@@ -186,6 +186,17 @@
                     <a href="#hire" class="text-white/80 hover:text-white transition">Hire Me</a>
                     <a href="#contact" class="text-white/80 hover:text-white transition">Contact</a>
                 </div>
+                 <!-- Right Side: Language Switcher + Let's Talk -->
+                <div class="flex items-center gap-4">
+                    <!-- Language Switcher -->
+                    <div class="flex items-center bg-white/10 rounded-full p-1 border border-white/20">
+                        <button id="btn-en" onclick="switchLanguage('en')" class="lang-btn px-3 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 bg-yellow-400 text-gray-900">
+                            🇺🇸 EN
+                        </button>
+                        <button id="btn-bn" onclick="switchLanguage('bn')" class="lang-btn px-3 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 text-white/70 hover:text-white">
+                            🇧🇩 বাংলা
+                        </button>
+                    </div>
                 <a href="#contact" class="bg-white text-purple-700 px-6 py-2 rounded-full font-semibold hover:bg-yellow-400 hover:text-gray-900 transition">Let's Talk</a>
             </div>
         </nav>
@@ -305,7 +316,271 @@
             </div>
         </div>
     </section>
-    
+     <!-- AI Tools Section -->
+    <section id="ai-tools" class="py-24 bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-40 right-20 w-80 h-80 bg-cyan-500 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-20 left-20 w-80 h-80 bg-purple-500 rounded-full filter blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 scroll-reveal">
+                <p class="text-cyan-400 font-semibold mb-4" data-en="POWERED BY AI" data-bn="এআই দ্বারা চালিত"><i class="fas fa-robot mr-2"></i><span data-en="POWERED BY AI" data-bn="এআই দ্বারা চালিত">POWERED BY AI</span></p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6" data-en="Free AI Tools I Use" data-bn="আমি যে ফ্রি এআই টুলস ব্যবহার করি">Free <span class="gradient-text">AI Tools</span> I Use</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg" data-en="Smart AI-powered tools that help me deliver exceptional results faster and more efficiently for your projects!" data-bn="স্মার্ট এআই টুলস যা আপনার প্রজেক্টের জন্য দ্রুত ও দক্ষভাবে অসাধারণ ফলাফল দিতে সাহায্য করে!">Smart AI-powered tools that help me deliver exceptional results faster and more efficiently for your projects!</p>
+            </div>
+            
+            <div class="space-y-8">
+                <!-- Digital Marketing AI Tools -->
+                <div class="scroll-reveal bg-gray-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mr-4">
+                            <i class="fas fa-bullhorn text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Digital Marketing</h3>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <a href="https://chat.openai.com" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-green-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-comment-dots text-white"></i>
+                                </div>
+                                <span class="font-bold text-green-400 group-hover:text-green-300">ChatGPT</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Ad copy, content ideas & marketing strategies</p>
+                        </a>
+                        <a href="https://www.canva.com" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-cyan-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-palette text-white"></i>
+                                </div>
+                                <span class="font-bold text-cyan-400 group-hover:text-cyan-300">Canva AI</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">AI-powered design & visual content creation</p>
+                        </a>
+                        <a href="https://copy.ai" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-violet-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-violet-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-pen-fancy text-white"></i>
+                                </div>
+                                <span class="font-bold text-violet-400 group-hover:text-violet-300">Copy.ai</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Marketing copy & email campaigns</p>
+                        </a>
+                        <a href="https://www.hootsuite.com/owlywriter" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-orange-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-feather-alt text-white"></i>
+                                </div>
+                                <span class="font-bold text-orange-400 group-hover:text-orange-300">OwlyWriter</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Social captions & hashtag generator</p>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Web Development AI Tools -->
+                <div class="scroll-reveal bg-gray-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300" style="transition-delay: 0.1s;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mr-4">
+                            <i class="fas fa-code text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Web Development</h3>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <a href="https://github.com/features/copilot" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-gray-400 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-gray-600 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fab fa-github text-white text-xl"></i>
+                                </div>
+                                <span class="font-bold text-gray-300 group-hover:text-white">GitHub Copilot</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">AI pair programmer for faster coding</p>
+                        </a>
+                        <a href="https://claude.ai" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-amber-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-amber-600 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-brain text-white"></i>
+                                </div>
+                                <span class="font-bold text-amber-400 group-hover:text-amber-300">Claude AI</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Code review & debugging assistant</p>
+                        </a>
+                        <a href="https://v0.dev" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-white hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-black rounded-xl flex items-center justify-center mr-3 border border-gray-600">
+                                    <span class="text-white font-bold">v0</span>
+                                </div>
+                                <span class="font-bold text-gray-300 group-hover:text-white">Vercel v0</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">AI UI component generator</p>
+                        </a>
+                        <a href="https://codeium.com" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-emerald-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-bolt text-white"></i>
+                                </div>
+                                <span class="font-bold text-emerald-400 group-hover:text-emerald-300">Codeium</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Free AI code autocomplete</p>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- SEO AI Tools -->
+                <div class="scroll-reveal bg-gray-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-green-500/50 transition-all duration-300" style="transition-delay: 0.2s;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mr-4">
+                            <i class="fas fa-search text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">SEO Expert</h3>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <a href="https://surferseo.com" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-blue-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-water text-white"></i>
+                                </div>
+                                <span class="font-bold text-blue-400 group-hover:text-blue-300">Surfer SEO</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">AI content optimization & SERP analysis</p>
+                        </a>
+                        <a href="https://neuronwriter.com" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-purple-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-brain text-white"></i>
+                                </div>
+                                <span class="font-bold text-purple-400 group-hover:text-purple-300">NeuronWriter</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">NLP-powered content planning</p>
+                        </a>
+                        <a href="https://www.semrush.com" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-orange-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-chart-line text-white"></i>
+                                </div>
+                                <span class="font-bold text-orange-400 group-hover:text-orange-300">SEMrush</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Keyword research & competitor analysis</p>
+                        </a>
+                        <a href="https://www.screamingfrog.co.uk" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-yellow-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-yellow-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-frog text-white"></i>
+                                </div>
+                                <span class="font-bold text-yellow-400 group-hover:text-yellow-300">Screaming Frog</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Technical SEO crawler & auditor</p>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Social Media AI Tools -->
+                <div class="scroll-reveal bg-gray-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-pink-500/50 transition-all duration-300" style="transition-delay: 0.3s;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center mr-4">
+                            <i class="fas fa-share-alt text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Social Media Marketing</h3>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <a href="https://buffer.com/ai-assistant" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-blue-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-layer-group text-white"></i>
+                                </div>
+                                <span class="font-bold text-blue-400 group-hover:text-blue-300">Buffer AI</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Social post scheduling & AI captions</p>
+                        </a>
+                        <a href="https://predis.ai" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-pink-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-magic text-white"></i>
+                                </div>
+                                <span class="font-bold text-pink-400 group-hover:text-pink-300">Predis.ai</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">AI social media content generator</p>
+                        </a>
+                        <a href="https://flick.social" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-purple-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-purple-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-hashtag text-white"></i>
+                                </div>
+                                <span class="font-bold text-purple-400 group-hover:text-purple-300">Flick AI</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Hashtag research & analytics</p>
+                        </a>
+                        <a href="https://lately.ai" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-teal-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-teal-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-redo text-white"></i>
+                                </div>
+                                <span class="font-bold text-teal-400 group-hover:text-teal-300">Lately AI</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Content repurposing automation</p>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Virtual Assistance AI Tools -->
+                <div class="scroll-reveal bg-gray-800/60 backdrop-blur-sm rounded-3xl p-8 border border-gray-700/50 hover:border-yellow-500/50 transition-all duration-300" style="transition-delay: 0.4s;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mr-4">
+                            <i class="fas fa-headset text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Virtual Assistance</h3>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <a href="https://www.notion.so/product/ai" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-gray-400 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-gray-700 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-cube text-white"></i>
+                                </div>
+                                <span class="font-bold text-gray-300 group-hover:text-white">Notion AI</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Note-taking & project management</p>
+                        </a>
+                        <a href="https://otter.ai" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-blue-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-microphone text-white"></i>
+                                </div>
+                                <span class="font-bold text-blue-400 group-hover:text-blue-300">Otter.ai</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Meeting transcription & notes</p>
+                        </a>
+                        <a href="https://calendly.com" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-blue-400 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-calendar-alt text-white"></i>
+                                </div>
+                                <span class="font-bold text-blue-400 group-hover:text-blue-300">Calendly</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Smart scheduling automation</p>
+                        </a>
+                        <a href="https://zapier.com" target="_blank" class="ai-tool-card bg-gray-900/80 p-4 rounded-2xl border border-gray-700 hover:border-orange-500 hover:bg-gray-900 transition-all group">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center mr-3">
+                                    <i class="fas fa-bolt text-white"></i>
+                                </div>
+                                <span class="font-bold text-orange-400 group-hover:text-orange-300">Zapier AI</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">Workflow automation & integration</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Tools CTA -->
+            <div class="mt-12 text-center scroll-reveal">
+                <div class="inline-flex items-center bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm px-8 py-4 rounded-full border border-cyan-500/30">
+                    <i class="fas fa-rocket text-cyan-400 text-xl mr-3"></i>
+                    <span class="text-lg"><span class="text-cyan-400 font-semibold">AI-Powered Workflow</span> = <span class="text-purple-400 font-semibold">Faster Delivery</span> + <span class="text-pink-400 font-semibold">Better Results</span></span>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Hire Me Section -->
     <section id="hire" class="py-24 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
         <div class="max-w-7xl mx-auto px-6">
@@ -569,5 +844,6 @@
     </script>
 </body>
 </html>
+
 
 
