@@ -1556,7 +1556,7 @@ nav{
     <a href="javascript:void(0)" onclick="navTo('contact')"><i class="fas fa-envelope"></i> Contact</a>
       
  <!-- ── More ▾ overflow button (shown by JS when links overflow) ── -->
- <div> 
+    <a href="javascript:void(0)" onclick="navTo('More')"><i class="fas fa-envelope"></i>More
      <button id="nav-more-btn" onclick="toggleOverflow()" title="More options">
     More <i class="fas fa-chevron-down"></i>
       
@@ -1573,7 +1573,7 @@ nav{
     <a href="https://smart-pro-toolkit.lovable.app">AI-7</a>
     <a href="https://claude.ai/public/artifacts/31bdc28b-7d3e-4259-bbab-5822c941606d">AI-8</a>
     </button>
-  </div>  
+    </a>
   <!-- Right controls: always visible -->
   <div class="nav-right">
     <!-- Desktop Social Quick Links -->
@@ -1699,8 +1699,9 @@ nav{
 
 <!-- Google Translate (hidden) -->
 <div id="google_translate_element" style="display:none"></div>
-                       
- <div class="fixed top-15 flex-items-center justify-items-center xt-optimize-buttons">  
+  <section class="min-h-screen gradient-bg relative flex items-center justify-center">
+        <div class="particles" id="particles"></div>                      
+ <div class="fixed top-15  flex items-center justify-center xt-optimize-buttons">  
     <a>     
   <button class="xt-optimize-btn xt-ke-btn" data-url="https://gemini.google.com">
      <a href="https://gemini.google.com" target="_blank" class="-sm p-2 " style="transition-delay: 0.1s;">
