@@ -1566,13 +1566,13 @@ nav{
     </div>
 
     <a href="javascript:void(0)" onclick="navTo('contact')"><i class="fas fa-envelope"></i> Contact</a>
-      
- <!-- ── More ▾ overflow button (shown by JS when links overflow) ── -->
-    <a href="javascript:void(0)" onclick="navTo('More')"><i class="fas fa-envelope"></i>More
-     <button id="nav-more-btn" onclick="toggleOverflow()" title="More options">
-    More <i class="fas fa-chevron-down"></i>
-      
-    <a href="AI.html">About AI</a>
+
+ <!-- More Dropdown -->
+    <div class="nav-dropdown" id="dd-plat">
+      <a href="javascript:void(0)" class="nav-dropdown-btn" id="dd-plat-btn" onclick="toggleDropdown('dd-plat')">
+        <i class="fas fa-globe"></i> More <i class="fas fa-chevron-down nav-chevron"></i>
+      </a>
+       <a href="AI.html">About AI</a>
      <a href="polash-portfolio.html">Tech</a>
     <a href="Mon-Index.html">About me</a>
      <a href="https://019ce66b-ca0a-71b7-946c-6ca7bf46dcc8.arena.site">AI</a>
@@ -1584,8 +1584,20 @@ nav{
     <a href="AI best.html">AI-6</a>
     <a href="https://smart-pro-toolkit.lovable.app">AI-7</a>
     <a href="https://claude.ai/public/artifacts/31bdc28b-7d3e-4259-bbab-5822c941606d">AI-8</a>
-    </button>
-    </a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="javascript:void(0)" onclick="closeAllDropdowns();navTo('hire')" style="color:#facc15"><i class="fas fa-handshake" style="color:#facc15"></i> View All Platforms</a>
+      </div>
+    </div>
+     
+      
+ <!-- ── More ▾ overflow button (shown by JS when links overflow) ── -->
+    <a href="javascript:void(0)" onclick="navTo('More')"><i class="fas fa-envelope"></i>More
+     <button id="nav-more-btn" onclick="toggleOverflow()" title="More options">
+    More <i class="fas fa-chevron-down"></i>
+       </button>
+   
+   
+    
   <!-- Right controls: always visible -->
   <div class="nav-right">
     <!-- Desktop Social Quick Links -->
@@ -1712,7 +1724,7 @@ nav{
 <!-- Google Translate (hidden) -->
 <div id="google_translate_element" style="display:none"></div>
                       
- <div class="fixed top-15 flex-items-center xt-optimize-buttons">  
+ <div class="fixed top-10 flex-items-center xt-optimize-buttons">  
       <!-- AI Quick-Links Strip -->
       <div class="ai-strip">
     
@@ -1726,7 +1738,6 @@ nav{
         <a href="https://lovable.dev/dashboard" target="_blank" class="ai-strip-btn">Lovable</a>
         <a href="https://www.bohrium.com/en" target="_blank" class="ai-strip-btn">Bohrium</a>
         <a href="https://www.perplexity.ai" target="_blank" class="ai-strip-btn">Perplexity</a>
-        <a href="https://openai.com/dall-e-3" target="_blank" class="ai-strip-btn">DALL·E 3</a>
         <a href="https://github.com/copilot" target="_blank" class="ai-strip-btn">Copilot</a>
         <a href="https://x.com/i/grok" target="_blank" class="ai-strip-btn">Grok</a>
         <a href="https://meta.ai/" target="_blank" class="ai-strip-btn">Meta AI</a>
@@ -1754,7 +1765,7 @@ nav{
                 </div>
                 <p class="text-white/70 text-lg mb-10 max-w-lg mx-auto lg:mx-0">
                     Transforming ideas into digital success stories. Your trusted partner for all things digital marketing, web development, and online growth.
-                </p>
+                   </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                     <a href="#hire" class="contact-btn px-8 py-4 rounded-full text-white font-semibold text-lg pulse-glow">
                         <i class="fas fa-rocket mr-2"></i> Hire Me Now
@@ -1762,6 +1773,9 @@ nav{
                     <a href="#contact" class="border-2 border-white/50 px-8 py-4 rounded-full text-white font-semibold text-lg hover:bg-white hover:text-purple-700 transition">
                         <i class="fas fa-envelope mr-2"></i> Get In Touch
                     </a>
+                </div>
+            </div>
+            
                 </div>
             </div>
             
