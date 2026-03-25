@@ -1457,18 +1457,24 @@ section{padding:80px 20px;}
 
 
 
- <!-- Hero Section -->   
+ <!-- ==========================================
+         HERO SECTION
+    ========================================== -->
+    <section class="min-h-screen gradient-bg relative flex items-center justify-center hero-section">
+        <div class="particles" id="particles"></div>
+
         <div class="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center relative z-10">
             <div class="text-center lg:text-left">
-                <p class="fixed top-25 text-yellow-400 font-semibold mb-4 text-lg">👋 Hello, I'm</p>             
-              <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                    Monjurul Islam<br><span class="text-yellow-400">Polash</span></h1>
-                  <div class="text-xl md:text-2xl text-white/90 mb-8 h-10">
+                <p class="text-yellow-400 font-semibold mb-4 text-lg">👋 Hello, I'm</p>
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                    Monjurul Islam<br><span class="text-yellow-400">Polash</span>
+                </h1>
+                <div class="text-xl md:text-2xl text-white/90 mb-8 h-10">
                     <span id="typed-text"></span><span class="animate-pulse">|</span>
                 </div>
                 <p class="text-white/70 text-lg mb-10 max-w-lg mx-auto lg:mx-0">
-                    Transforming ideas into digital success stories. Your trusted partner for all things digital marketing, web development, and online growth.
-                   </p>
+                    Transforming ideas into digital success stories. Your trusted partner for digital marketing, web development, and online growth.
+                </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                     <a href="#hire" class="contact-btn px-8 py-4 rounded-full text-white font-semibold text-lg pulse-glow">
                         <i class="fas fa-rocket mr-2"></i> Hire Me Now
@@ -1477,62 +1483,53 @@ section{padding:80px 20px;}
                         <i class="fas fa-envelope mr-2"></i> Get In Touch
                     </a>
                 </div>
-              </div>
-    
-            <div class="text-center lg:text-right">
-            <//Time and Date
-            <p1 style="color:orange" top:0 class="title">BD Time & Date:
-            <!-- Combined display element -->
-            <h1 style="color:orange" id="bdtDateTime"></h1> </p>
+            </div>
 
-                     
-            <div class="relative flex justify-center">
-                <div class="w-72 h-72 md:w-96 md:h-96 blob gradient-bg floating flex items-center justify-center shadow-2xl">
-                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-8xl md:text-9xl font-bold text-white shadow-inner">
-                   <img src="https://uploads.onecompiler.io/44a4h29nq/44a4gxy6p/round%20main%20without%20background.png" alt="" />
+            <div class="text-center lg:text-right">
+                <p style="color:orange" class="title font-semibold mb-2">BD Time & Date:</p>
+                <h1 style="color:orange" id="bdtDateTime" class="text-2xl font-bold mb-8"></h1>
+
+                <div class="relative flex justify-center">
+                    <div class="w-72 h-72 md:w-96 md:h-96 blob gradient-bg floating flex items-center justify-center shadow-2xl">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-8xl md:text-9xl font-bold text-white shadow-inner overflow-hidden">
+                            <img src="https://uploads.onecompiler.io/44a4h29nq/44a4gxy6p/round%20main%20without%20background.png" alt="Monjurul Islam Polash" class="w-full h-full object-cover">
+                        </div>
                     </div>
-                </div>
-                <!-- Floating Icons -->
-                 <!-- WhatsApp -->
-                 <div class="absolute top-5 right-10 w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center floating shadow-lg" style="animation-delay: 0.5s;">
-               
-                   <a href="https://wa.me/8801723328481" target="_blank" class="-sm p-2" style="transition-delay: 0.1s;">
-                    <i class="fab fa-whatsapp text-3xl text-white"></i>
-                    </a>    
-                </div>
-               
-           
-                <!-- Email -->  
-               
-                     <div class="absolute bottom-5 right-5 w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-full mx-auto mb-6 flex items-center justify-center floating shadow-lg" style="animation-delay: 0.5s;">
-                       <a href="mailto:Polash@programmer.net" target="_blank" class="-sm p-2 " style="transition-delay: 0.1s;"> 
-                         <i class="fas fa-envelope text-2xl text-white"></i>
-                        </a>  
+
+                    <!-- Floating Icons -->
+                    <div class="absolute top-5 right-10 w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center floating shadow-lg" style="animation-delay: 0.5s;">
+                        <a href="https://wa.me/8801723328481" target="_blank" class="w-full h-full flex items-center justify-center">
+                            <i class="fab fa-whatsapp text-3xl text-white"></i>
+                        </a>
                     </div>
-           
-        <!-- Code -->     
-             
-                <div class="absolute bottom-10 left-5 w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center floating shadow-lg" style="animation-delay: 1s;">
-                <a href="https://github.com/MIPolash-Prog" target="_blank" class="-sm p-2 " style="transition-delay: 0.1s;">                       
-                 <i class="fas fa-code text-2xl text-white"></i> 
-                </a>
-                </div>
-           
-        <!-- Phone -->
-            
-                <div class="absolute top-5 left-10 w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-6  flex items-center justify-center floating shadow-lg" style="animation-delay: 1.5s;">
-                <a href="tel:+8801730746563" target="_blank" class="-sm p-2 " style="transition-delay: 0.1s;">   
-                    <i class="fas fa-phone text-3xl text-white"></i>
-                 </a>    
+
+                    <div class="absolute bottom-5 right-5 w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center floating shadow-lg" style="animation-delay: 1s;">
+                        <a href="mailto:Polash@programmer.net" target="_blank" class="w-full h-full flex items-center justify-center">
+                            <i class="fas fa-envelope text-2xl text-white"></i>
+                        </a>
+                    </div>
+
+                    <div class="absolute bottom-10 left-5 w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center floating shadow-lg" style="animation-delay: 1.5s;">
+                        <a href="https://github.com/MIPolash-Prog" target="_blank" class="w-full h-full flex items-center justify-center">
+                            <i class="fas fa-code text-2xl text-white"></i>
+                        </a>
+                    </div>
+
+                    <div class="absolute top-5 left-10 w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center floating shadow-lg" style="animation-delay: 2s;">
+                        <a href="tel:+8801730746563" target="_blank" class="w-full h-full flex items-center justify-center">
+                            <i class="fas fa-phone text-3xl text-white"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-         </div>
-        <!-- Scroll Indicator -->
+        </div>
+
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
             <i class="fas fa-chevron-down text-white text-2xl"></i>
         </div>
-    </div>         
- </section>
+    </section>
+
+
     
     <!-- Services Section -->
     <section id="services" class="py-24 bg-gray-900 relative">
