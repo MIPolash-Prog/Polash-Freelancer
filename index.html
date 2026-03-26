@@ -1455,77 +1455,6 @@ section{padding:80px 20px;}
        
       </div>
     </div>  
- <!-- Hero Section -->
-    <section id="hero" class="min-h-screen gradient-bg relative flex items-center justify-center hero-section">
-        <div class="particles" id="particles"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center relative z-10">
-            <div class="text-center lg:text-left">
-                <p class="text-yellow-400 font-semibold mb-4 text-lg">👋 Hello, I'm</p>
-                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                    Monjurul Islam<br><span class="text-yellow-400">Polash</span>
-                </h1>
-                <div class="text-xl md:text-2xl text-white/90 mb-8 h-10">
-                    <span id="typed-text"></span><span class="animate-pulse">|</span>
-                </div>
-                <p class="text-white/70 text-lg mb-10 max-w-lg mx-auto lg:mx-0">
-                    Transforming ideas into digital success stories. Your trusted partner for digital marketing, web development, and online growth.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <a href="#hire" class="contact-btn px-8 py-4 rounded-full text-white font-semibold text-lg pulse-glow">
-                        <i class="fas fa-rocket mr-2"></i> Hire Me Now
-                    </a>
-                    <a href="#contact" class="border-2 border-white/50 px-8 py-4 rounded-full text-white font-semibold text-lg hover:bg-white hover:text-purple-700 transition">
-                        <i class="fas fa-envelope mr-2"></i> Get In Touch
-                    </a>
-                </div>
-            </div>
-
-            <div class="text-center lg:text-right">
-                <p style="color:orange" class="title font-semibold mb-2">BD Time & Date:</p>
-                <h1 style="color:orange" id="bdtDateTime" class="text-2xl font-bold mb-8"></h1>
-
-                <div class="relative flex justify-center">
-                    <div class="w-72 h-72 md:w-96 md:h-96 blob gradient-bg floating flex items-center justify-center shadow-2xl">
-                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-8xl md:text-9xl font-bold text-white shadow-inner overflow-hidden">
-                            <!-- Placeholder for user image -->
-                            <img src="https://ui-avatars.com/api/?name=Monjurul+Polash&background=764ba2&color=fff&size=200" alt="Monjurul Islam Polash" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-
-                    <!-- Floating Icons -->
-                    <div class="absolute top-5 right-10 w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center floating shadow-lg" style="animation-delay: 0.5s;">
-                        <a href="https://wa.me/8801723328481" target="_blank" class="w-full h-full flex items-center justify-center">
-                            <i class="fab fa-whatsapp text-3xl text-white"></i>
-                        </a>
-                    </div>
-
-                    <div class="absolute bottom-5 right-5 w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center floating shadow-lg" style="animation-delay: 1s;">
-                        <a href="mailto:Polash@programmer.net" target="_blank" class="w-full h-full flex items-center justify-center">
-                            <i class="fas fa-envelope text-2xl text-white"></i>
-                        </a>
-                    </div>
-
-                    <div class="absolute bottom-10 left-5 w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center floating shadow-lg" style="animation-delay: 1.5s;">
-                        <a href="https://github.com/MIPolash-Prog" target="_blank" class="w-full h-full flex items-center justify-center">
-                            <i class="fas fa-code text-2xl text-white"></i>
-                        </a>
-                    </div>
-
-                    <div class="absolute top-5 left-10 w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center floating shadow-lg" style="animation-delay: 2s;">
-                        <a href="tel:+8801730746563" target="_blank" class="w-full h-full flex items-center justify-center">
-                            <i class="fas fa-phone text-3xl text-white"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i class="fas fa-chevron-down text-white text-2xl"></i>
-        </div>
-    </section>
-
  <!-Hero section- ==========================================
     ========================================== -->
     <section class="min-h-screen gradient-bg relative flex items-center justify-center hero-section">
@@ -1596,8 +1525,7 @@ section{padding:80px 20px;}
             <i class="fas fa-chevron-down text-white text-2xl"></i>
         </div>
     </div>
-            
-    </section>
+ </section>
 
 
     
@@ -2580,6 +2508,27 @@ window.addEventListener('DOMContentLoaded', async () => {
   </div>
 </div>
 
+    <!-- AI Tools Section -->
+    <section id="ai-tools">
+        <h2 class="section-title">Free AI Tools Collection</h2>
+        <div class="tools-container">
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">All Tools</button>
+                <button class="tab-btn" data-category="digital-marketing">Digital Marketing</button>
+                <button class="tab-btn" data-category="web-dev">Web Development</button>
+                <button class="tab-btn" data-category="seo">SEO</button>
+                <button class="tab-btn" data-category="social-media">Social Media</button>
+                <button class="tab-btn" data-category="virtual-assistant">Virtual Assistant</button>
+                <button class="tab-btn" data-category="video">Video Creation</button>
+            </div>
+            <div class="tools-grid" id="tools-grid">
+                <!-- Tools will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+   
+<script>
 <!-- SCRIPTS -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 'use strict';
@@ -4083,6 +4032,290 @@ var toolData=[
   _evts.forEach(function(e){document.addEventListener(e,_onFirst,{once:true,passive:true});});
   setTimeout(function(){try{var t=new AC();t.close();_boot();}catch(e){}},600);
 }());
+<//----------------new 182 adding--------------------- >
+   // AI Tools Database
+        const aiTools = [
+            // Digital Marketing
+            { name: "ChatGPT", category: "digital-marketing", description: "AI-powered content creation and marketing copy", link: "https://chat.openai.com", tags: "content, copywriting, ideas" },
+            { name: "Copy.ai", category: "digital-marketing", description: "Generate marketing copy in seconds", link: "https://www.copy.ai", tags: "copywriting, ads, social" },
+            { name: "Jasper AI", category: "digital-marketing", description: "AI writing assistant for marketers", link: "https://www.jasper.ai", tags: "content, blog, seo" },
+            { name: "Canva AI", category: "digital-marketing", description: "AI-powered design tools for marketing materials", link: "https://www.canva.com", tags: "design, graphics, social" },
+            { name: "Mailchimp AI", category: "digital-marketing", description: "Email marketing with AI optimization", link: "https://mailchimp.com", tags: "email, automation, analytics" },
+            { name: "HubSpot AI", category: "digital-marketing", description: "CRM and marketing automation with AI", link: "https://www.hubspot.com", tags: "crm, automation, leads" },
+            { name: "AdCreative.ai", category: "digital-marketing", description: "Generate ad creatives with AI", link: "https://www.adcreative.ai", tags: "ads, creatives, conversion" },
+            { name: "Surfer SEO", category: "digital-marketing", description: "AI-powered SEO content optimization", link: "https://surferseo.com", tags: "seo, content, ranking" },
+            
+            // Web Development
+            { name:"GitHub Copilot", category: "web-dev", description: "AI pair programmer for code completion", link: "https://github.com/features/copilot", tags: "coding, autocomplete, vscode" },
+            { name: "Tabnine", category: "web-dev", description: "AI code completion for all languages", link: "https://www.tabnine.com", tags: "autocomplete, ide, productivity" },
+            { name: "Replit AI", category: "web-dev", description: "Online IDE with AI coding assistant", link: "https://replit.com", tags: "ide, cloud, collaboration" },
+            { name: "Vercel AI", category: "web-dev", description: "Deploy web apps with AI optimization", link: "https://vercel.com", tags: "deployment, hosting, nextjs" },
+            { name: "Netlify AI", category: "web-dev", description: "Build and deploy modern web projects", link: "https://www.netlify.com", tags: "hosting, cms, serverless" },
+            { name: "CodeWP", category: "web-dev", description: "AI WordPress code generator", link: "https://codewp.ai", tags: "wordpress, php, snippets" },
+            { name: "Wix AI", category: "web-dev", description: "AI website builder and design", link: "https://www.wix.com", tags: "website, builder, design" },
+            { name: "Framer AI", category: "web-dev", description: "AI-powered website design and prototyping", link: "https://www.framer.com", tags: "design, prototype, animation" },
+            
+            // SEO
+            { name: "SEMrush AI", category: "seo", description: "All-in-one SEO toolkit with AI insights", link: "https://www.semrush.com", tags: "keywords, audit, competitor" },
+            { name: "Ahrefs AI", category: "seo", description: "SEO analysis and backlink research", link: "https://ahrefs.com", tags: "backlinks, keywords, rank" },
+            { name: "Moz Pro", category: "seo", description: "Complete SEO software suite", link: "https://moz.com", tags: "audit, tracking, research" },
+            { name: "Screaming Frog", category: "seo", description: "Website crawler for technical SEO", link: "https://www.screamingfrog.co.uk", tags: "crawler, technical, audit" },
+            { name: "Ubersuggest", category: "seo", description: "Free keyword research and SEO tool", link: "https://neilpatel.com/ubersuggest", tags: "keywords, ideas, analysis" },
+            { name: "AnswerThePublic", category: "seo", description: "Discover what people search for", link: "https://answerthepublic.com", tags: "questions, keywords, content" },
+            { name: "Keyword Surfer", category: "seo", description: "Free keyword research browser extension", link: "https://keywordsurfer.com", tags: "extension, volume, cpc" },
+            { name: "PageSpeed Insights", category: "seo", description: "Google's page speed analysis tool", link: "https://pagespeed.web.dev", tags: "speed, performance, coreweb" },
+            
+            // Social Media
+            { name: "Buffer AI", category: "social-media", description: "AI-powered social media scheduling", link: "https://buffer.com", tags: "scheduling, analytics, management" },
+            { name: "Hootsuite AI", category: "social-media", description: "Social media management platform", link: "https://www.hootsuite.com", tags: "management, monitoring, ads" },
+            { name: "Later AI", category: "social-media", description: "Visual social media planner with AI", link: "https://later.com", tags: "instagram, visual, scheduling" },
+            { name: "Sprout Social", category: "social-media", description: "Social media management and analytics", link: "https://sproutsocial.com", tags: "analytics, engagement, listening" },
+            { name: "Lately AI", category: "social-media", description: "AI social media content generator", link: "https://www.lately.ai", tags: "content, automation, repurposing" },
+            { name: "Predis.ai", category: "social-media", description: "AI social media content creation", link: "https://predis.ai", tags: "posts, videos, ads" },
+            { name: "Ocoya", category: "social-media", description: "AI social media automation", link: "https://www.ocoya.com", tags: "automation, design, copy" },
+            { name: "ContentStudio", category: "social-media", description: "AI social media content discovery", link: "https://contentstudio.io", tags: "discovery, curation, publishing" },
+            
+            // Virtual Assistant
+            { name: "Notion AI", category: "virtual-assistant", description: "AI writing and organization assistant", link: "https://www.notion.so", tags: "notes, docs, wiki" },
+            { name: "Motion AI", category: "virtual-assistant", description: "AI calendar and task management", link: "https://www.motion.app", tags: "calendar, tasks, scheduling" },
+            { name: "Fireflies AI", category: "virtual-assistant", description: "AI meeting notes and transcription", link: "https://fireflies.ai", tags: "meetings, notes, transcription" },
+            { name: "Otter AI", category: "virtual-assistant", description: "AI meeting assistant and transcription", link: "https://otter.ai", tags: "transcription, meetings, notes" },
+            { name: "Calendly", category: "virtual-assistant", description: "Automated scheduling assistant", link: "https://calendly.com", tags: "scheduling, meetings, automation" },
+            { name: "Zapier AI", category: "virtual-assistant", description: "Automate workflows with AI", link: "https://zapier.com", tags: "automation, workflows, integration" },
+            { name: "Trello AI", category: "virtual-assistant", description: "Project management with AI features", link: "https://trello.com", tags: "project, management, kanban" },
+            { name: "Asana AI", category: "virtual-assistant", description: "AI-powered project management", link: "https://asana.com", tags: "tasks, projects, collaboration" },
+            
+            // Video Creation
+            { name: "Runway ML", category: "video", description: "AI video editing and generation", link: "https://runwayml.com", tags: "video, editing, effects" },
+            { name: "Pictory AI", category: "video", description: "AI video creation from text", link: "https://pictory.ai", tags: "text-to-video, content, marketing" },
+            { name: "Synthesia", category: "video", description: "AI avatar video generation", link: "https://www.synthesia.io", tags: "avatar, text-to-video, training" },
+            { name: "Descript", category: "video", description: "AI video and podcast editing", link: "https://www.descript.com", tags: "editing, transcription, podcast" },
+            { name: "InVideo AI", category: "video", description: "AI video creation platform", link: "https://invideo.io", tags: "templates, marketing, social" },
+            { name: "Lumen5", category: "video", description: "AI video maker for content marketing", link: "https://www.lumen5.com", tags: "content, marketing, blog-to-video" },
+            { name: "Fliki", category: "video", description: "AI text to video with voiceovers", link: "https://fliki.ai", tags: "text-to-video, voiceover, content" },
+            { name: "Kapwing AI", category: "video", description: "AI video editing suite", link: "https://www.kapwing.com", tags: "editing, memes, subtitles" },
+            
+            // Additional Tools (Mixed Categories)
+            { name: "Grammarly", category: "digital-marketing", description: "AI writing assistant and grammar checker", link: "https://www.grammarly.com", tags: "writing, grammar, proofreading" },
+            { name: "Quillbot", category: "digital-marketing", description: "AI paraphrasing and writing tool", link: "https://quillbot.com", tags: "paraphrasing, writing, editing" },
+            { name: "Midjourney", category: "digital-marketing", description: "AI image generation for marketing", link: "https://www.midjourney.com", tags: "images, art, design" },
+            { name: "DALL-E 2", category: "digital-marketing", description: "AI image creation from text", link: "https://openai.com/dall-e-2", tags: "images, art, generation" },
+            { name: "Stable Diffusion", category: "digital-marketing", description: "Open source AI image generator", link: "https://stability.ai", tags: "images, art, open-source" },
+            { name: "Remove.bg", category: "digital-marketing", description: "AI background removal", link: "https://www.remove.bg", tags: "images, background, editing" },
+            { name: "Brandmark", category: "digital-marketing", description: "AI logo maker", link: "https://brandmark.io", tags: "logo, branding, design" },
+            { name: "Looka", category: "digital-marketing", description: "AI logo and brand design", link: "https://looka.com", tags: "logo, branding, identity" },
+            { name: "Figma AI", category: "web-dev", description: "AI design and prototyping", link: "https://www.figma.com", tags: "design, prototype, collaboration" },
+            { name: "Adobe Firefly", category: "digital-marketing", description: "Adobe's AI creative tools", link: "https://firefly.adobe.com", tags: "creative, design, images" },
+            { name: "Canva Magic Write", category: "digital-marketing", description: "AI text generation in Canva", link: "https://www.canva.com", tags: "design, content, magic" },
+            { name: "Writesonic", category: "digital-marketing", description: "AI content creation platform", link: "https://writesonic.com", tags: "content, seo, marketing" },
+            { name: "Rytr", category: "digital-marketing", description: "AI writing assistant", link: "https://rytr.me", tags: "writing, content, copy" },
+            { name: "Frase", category: "seo", description: "AI SEO content optimization", link: "https://www.frase.io", tags: "seo, content, research" },
+            { name: "MarketMuse", category: "seo", description: "AI content research and optimization", link: "https://www.marketmuse.com", tags: "content, seo, strategy" },
+            { name: "Clearscope", category: "seo", description: "AI content optimization platform", link: "https://www.clearscope.io", tags: "seo, content, grading" },
+            { name: "Surfer SEO", category: "seo", description: "AI content editor for SEO", link: "https://surferseo.com", tags: "content, editor, optimization" },
+            { name: "Tubics", category: "seo", description: "YouTube SEO and keyword tool", link: "https://www.tubics.com", tags: "youtube, seo, keywords" },
+            { name: "VidIQ", category: "seo", description: "YouTube SEO and analytics", link: "https://vidiq.com", tags: "youtube, seo, analytics" },
+            { name: "TubeBuddy", category: "seo", description: "YouTube channel management", link: "https://www.tubebuddy.com", tags: "youtube, management, seo" },
+            { name: "StreamYard", category: "video", description: "Live streaming studio", link: "https://streamyard.com", tags: "streaming, live, webinar" },
+            { name: "Restream", category: "video", description: "Multistream to multiple platforms", link: "https://restream.io", tags: "streaming, multistream, live" },
+            { name: "OBS Studio", category: "video", description: "Free and open source video recorder", link: "https://obsproject.com", tags: "recording, streaming, free" },
+            { name: "Camtasia", category: "video", description: "Screen recording and video editing", link: "https://www.techsmith.com/video-editor.html", tags: "screen, recording, editing" },
+            { name: "ScreenPal", category: "video", description: "Screen recording tool", link: "https://screenpal.com", tags: "screen, recording, capture" },
+            { name: "Loom", category: "video", description: "Video messaging for work", link: "https://www.loom.com", tags: "messaging, screen, async" },
+            { name: "Notion", category: "virtual-assistant", description: "All-in-one workspace with AI", link: "https://www.notion.so", tags: "workspace, notes, docs" },
+            { name: "ClickUp", category: "virtual-assistant", description: "Project management with AI", link: "https://clickup.com", tags: "project, management, tasks" },
+            { name: "Monday.com", category: "virtual-assistant", description: "Work management platform", link: "https://monday.com", tags: "work, management, automation" },
+            { name: "Airtable", category: "virtual-assistant", description: "Database and project management", link: "https://airtable.com", tags: "database, spreadsheet, automation" },
+            { name: "Slack AI", category: "virtual-assistant", description: "Team communication with AI", link: "https://slack.com", tags: "communication, team, messaging" },
+            { name: "Microsoft Copilot", category: "virtual-assistant", description: "AI assistant for Microsoft 365", link: "https://www.microsoft.com/copilot", tags: "office, productivity, assistant" },
+            { name: "Google Bard", category: "digital-marketing", description: "Google's AI chatbot", link: "https://bard.google.com", tags: "chatbot, research, content" },
+            { name: "Claude AI", category: "digital-marketing", description: "Anthropic's AI assistant", link: "https://claude.ai", tags: "assistant, writing, analysis" },
+            { name: "Perplexity AI", category: "digital-marketing", description: "AI search and research engine", link: "https://www.perplexity.ai", tags: "search, research, answers" },
+            { name: "You.com", category: "digital-marketing", description: "AI search engine", link: "https://you.com", tags: "search, ai, privacy" },
+            { name: "Neeva AI", category: "digital-marketing", description: "AI search engine (ad-free)", link: "https://neeva.com", tags: "search, ad-free, private" },
+            { name: "Andi", category: "digital-marketing", description: "AI search chatbot", link: "https://andisearch.com", tags: "search, chatbot, answers" },
+            { name: "Kompose", category: "digital-marketing", description: "AI chatbot builder", link: "https://www.kompose.io", tags: "chatbot, builder, nocode" },
+            { name: "Chatfuel", category: "digital-marketing", description: "AI chatbot for marketing", link: "https://chatfuel.com", tags: "chatbot, messenger, automation" },
+            { name: "ManyChat", category: "digital-marketing", description: "Chat marketing platform", link: "https://manychat.com", tags: "chatbot, messenger, marketing" },
+            { name: "Zapier ChatGPT", category: "virtual-assistant", description: "Connect ChatGPT to 5000+ apps", link: "https://zapier.com", tags: "automation, integration, workflows" },
+            { name: "Make.com", category: "virtual-assistant", description: "Visual automation platform", link: "https://www.make.com", tags: "automation, integration, visual" },
+            { name: "Pabbly Connect", category: "virtual-assistant", description: "Workflow automation tool", link: "https://www.pabbly.com/connect", tags: "automation, workflows, integration" },
+            { name: "Integrately", category: "virtual-assistant", description: "1-click automation platform", link: "https://integrately.com", tags: "automation, integration, 1-click" },
+            { name: "IFTTT", category: "virtual-assistant", description: "If This Then That automation", link: "https://ifttt.com", tags: "automation, applets, triggers" },
+            { name: "Bardeen AI", category: "virtual-assistant", description: "AI automation for repetitive tasks", link: "https://www.bardeen.ai", tags: "automation, productivity, browser" },
+            { name: "Magical AI", category: "virtual-assistant", description: "Text expansion and automation", link: "https://www.getmagical.com", tags: "text, expansion, shortcuts" },
+            { name: "Text Blaze", category: "virtual-assistant", description: "Create text snippets and templates", link: "https://blaze.today", tags: "snippets, templates, productivity" },
+            { name: "PhraseExpress", category: "virtual-assistant", description: "Text expander for Windows", link: "https://www.phraseexpress.com", tags: "text, expander, automation" },
+            { name: "AutoHotkey", category: "virtual-assistant", description: "Scripting language for automation", link: "https://www.autohotkey.com", tags: "scripting, automation, windows" },
+            { name: "Alfred", category: "virtual-assistant", description: "Productivity app for Mac", link: "https://www.alfredapp.com", tags: "productivity, launcher, mac" },
+            { name: "Raycast", category: "virtual-assistant", description: "Supercharged productivity tool", link: "https://www.raycast.com", tags: "productivity, launcher, mac" },
+            { name: "Droplr", category: "virtual-assistant", description: "Screenshot and screen recording", link: "https://droplr.com", tags: "screenshots, recording, sharing" },
+            { name: "CloudApp", category: "virtual-assistant", description: "Visual communication tool", link: "https://www.getcloudapp.com", tags: "screenshots, gifs, sharing" },
+            { name: "Nimbus Capture", category: "virtual-assistant", description: "Screen capture and recording", link: "https://nimbusweb.me/nimbus-capture", tags: "capture, recording, annotation" },
+            { name: "Greenshot", category: "virtual-assistant", description: "Free screenshot tool", link: "https://getgreenshot.org", tags: "screenshots, free, windows" },
+            { name: "ShareX", category: "virtual-assistant", description: "Free screen capture and file sharing", link: "https://getsharex.com", tags: "screenshots, recording, sharing" },
+            { name: "Lightshot", category: "virtual-assistant", description: "Fast screenshot tool", link: "https://app.prntscr.com", tags: "screenshots, fast, simple" },
+            { name: "Snagit", category: "virtual-assistant", description: "Screen capture and recording", link: "https://www.techsmith.com/screen-capture.html", tags: "capture, recording, editing" },
+            { name: "CamStudio", category: "virtual-assistant", description: "Free screen recording software", link: "https://camstudio.org", tags: "recording, free, open-source" },
+            { name: "Icecream Screen Recorder", category: "virtual-assistant", description: "Easy screen recording tool", link: "https://icecreamapps.com/Screen-Recorder", tags: "recording, simple, windows" },
+            { name: "ScreenRec", category: "virtual-assistant", description: "Free screen recorder", link: "https://screenrec.com", tags: "recording, free, sharing" },
+            { name: "Apowersoft Free Online Screen Recorder", category: "virtual-assistant", description: "Web-based screen recorder", link: "https://www.apowersoft.com/free-online-screen-recorder", tags: "online, free, recording" },
+            { name: "Clipchamp", category: "video", description: "Free video editor", link: "https://clipchamp.com", tags: "video, editing, free" },
+            { name: "OpenShot", category: "video", description: "Free video editor", link: "https://www.openshot.org", tags: "video, editing, open-source" },
+            { name: "Shotcut", category: "video", description: "Free video editor", link: "https://shotcut.org", tags: "video, editing, free" },
+            { name: "DaVinci Resolve", category: "video", description: "Professional video editing software", link: "https://www.blackmagicdesign.com/products/davinciresolve", tags: "video, editing, professional" },
+            { name: "HitFilm Express", category: "video", description: "Free video editing and VFX software", link: "https://fxhome.com/hitfilm-express", tags: "video, editing, vfx" },
+            { name: "Lightworks", category: "video", description: "Professional video editor", link: "https://www.lwks.com", tags: "video, editing, professional" },
+            { name: "VSDC Free Video Editor", category: "video", description: "Free video editing software", link: "https://www.videosoftdev.com/free-video-editor", tags: "video, editing, free" },
+            { name: "Blender", category: "video", description: "Free 3D creation suite", link: "https://www.blender.org", tags: "3d, animation, video" },
+            { name: "Inkscape", category: "digital-marketing", description: "Free vector graphics editor", link: "https://inkscape.org", tags: "vector, graphics, design" },
+            { name: "GIMP", category: "digital-marketing", description: "Free image editor", link: "https://www.gimp.org", tags: "image, editing, free" },
+            { name: "Krita", category: "digital-marketing", description: "Free digital painting software", link: "https://krita.org", tags: "painting, drawing, art" },
+            { name: "Photopea", category: "digital-marketing", description: "Free online image editor", link: "https://www.photopea.com", tags: "image, editing, online" },
+            { name: "Pixlr", category: "digital-marketing", description: "Free online photo editor", link: "https://pixlr.com", tags: "photo, editing, online" },
+            { name: "Fotor", category: "digital-marketing", description: "Free online photo editor", link: "https://www.fotor.com", tags: "photo, editing, design" },
+            { name: "Canva", category: "digital-marketing", description: "Free design tool", link: "https://www.canva.com", tags: "design, graphics, templates" },
+            { name: "Crello", category: "digital-marketing", description: "Free graphic design tool", link: "https://crello.com", tags: "design, graphics, templates" },
+            { name: "Snappa", category: "digital-marketing", description: "Free graphic design software", link: "https://snappa.com", tags: "design, graphics, templates" },
+            { name: "Stencil", category: "digital-marketing", description: "Free graphic design tool", link: "https://getstencil.com", tags: "design, graphics, social" },
+            { name: "Pablo", category: "digital-marketing", description: "Free social media image creator", link: "https://www.buffer.com/pablo", tags: "social, images, quotes" },
+            { name: "QuotesCover", category: "digital-marketing", description: "Free quote image maker", link: "https://quotescover.com", tags: "quotes, images, social" },
+            { name: "WordSwag", category: "digital-marketing", description: "Free text on photos app", link: "https://wordswag.co", tags: "text, photos, social" },
+            { name: "Typorama", category: "digital-marketing", description: "Free text on photos app", link: "https://typorama.com", tags: "text, photos, social" },
+            { name: "Over", category: "digital-marketing", description: "Free graphic design app", link: "https://www.madewithover.com", tags: "design, graphics, mobile" },
+            { name: "Skitch", category: "virtual-assistant", description: "Free screenshot annotation tool", link: "https://evernote.com/products/skitch", tags: "screenshots, annotation, evernote" },
+            { name: "Markup Hero", category: "virtual-assistant", description: "Free screenshot and annotation tool", link: "https://markuphero.com", tags: "screenshots, annotation, sharing" },
+            { name: "Awesome Screenshot", category: "virtual-assistant", description: "Free screen capture tool", link: "https://www.awesomescreenshot.com", tags: "capture, recording, annotation" },
+            { name: "Nimbus Screenshot", category: "virtual-assistant", description: "Free screen capture tool", link: "https://nimbusweb.me/screenshot", tags: "capture, recording, annotation" },
+            { name: "Fireshot", category: "virtual-assistant", description: "Free screenshot tool", link: "https://getfireshot.com", tags: "screenshots, capture, browser" },
+            { name: "Full Page Screen Capture", category: "virtual-assistant", description: "Free full page screenshot tool", link: "https://gofullpage.com", tags: "screenshots, fullpage, browser" },
+            { name: "GoFullPage", category: "virtual-assistant", description: "Free full page screenshot extension", link: "https://gofullpage.com", tags: "screenshots, fullpage, extension" },
+            { name: "Screen Capture", category: "virtual-assistant", description: "Free screen capture tool", link: "https://screencapture.com", tags: "capture, recording, free" },
+            { name: "Free Screen Video Recorder", category: "virtual-assistant", description: "Free screen recording software", link: "https://www.dvdvideosoft.com/free-screen-video-recorder", tags: "recording, free, windows" },
+            { name: "TinyTake", category: "virtual-assistant", description: "Free screen capture tool", link: "https://tinytake.com", tags: "capture, recording, sharing" },
+            { name: "Jing", category: "virtual-assistant", description: "Free screenshot and screencast software", link: "https://www.techsmith.com/jing-tool.html", tags: "screenshots, screencast, free" },
+            { name: "Screencast-O-Matic", category: "virtual-assistant", description: "Free screen recorder", link: "https://screencast-o-matic.com", tags: "recording, free, sharing" },
+            { name: "Loom Free", category: "virtual-assistant", description: "Free screen recording tool", link: "https://www.loom.com/free", tags: "recording, free, sharing" },
+            { name: "Clipchamp Free", category: "video", description: "Free video editor", link: "https://clipchamp.com/free", tags: "video, editing, free" },
+            { name: "DaVinci Resolve Free", category: "video", description: "Free video editing software", link: "https://www.blackmagicdesign.com/products/davinciresolve/free", tags: "video, editing, free" },
+            { name: "HitFilm Express Free", category: "video", description: "Free video editing and VFX software", link: "https://fxhome.com/hitfilm-express/free", tags: "video, editing, vfx" },
+            { name: "Lightworks Free", category: "video", description: "Free video editor", link: "https://www.lwks.com/free", tags: "video, editing, free" },
+            { name: "Shotcut Free", category: "video", description: "Free video editor", link: "https://shotcut.org/free", tags: "video, editing, free" },
+            { name: "OpenShot Free", category: "video", description: "Free video editor", link: "https://www.openshot.org/free", tags: "video, editing, free" },
+            { name: "VSDC Free Video Editor", category: "video", description: "Free video editing software", link: "https://www.videosoftdev.com/free-video-editor/free", tags: "video, editing, free" },
+            { name: "Blender Free", category: "video", description: "Free 3D creation suite", link: "https://www.blender.org/download", tags: "3d, animation, free" },
+            { name: "Inkscape Free", category: "digital-marketing", description: "Free vector graphics editor", link: "https://inkscape.org/download", tags: "vector, graphics, free" },
+            { name: "GIMP Free", category: "digital-marketing", description: "Free image editor", link: "https://www.gimp.org/downloads", tags: "image, editing, free" },
+            { name: "Krita Free", category: "digital-marketing", description: "Free digital painting software", link: "https://krita.org/download", tags: "painting, drawing, free" },
+            { name: "Photopea Free", category: "digital-marketing", description: "Free online image editor", link: "https://www.photopea.com", tags: "image, editing, online" },
+            { name: "Pixlr Free", category: "digital-marketing", description: "Free online photo editor", link: "https://pixlr.com/free", tags: "photo, editing, free" },
+            { name: "Fotor Free", category: "digital-marketing", description: "Free online photo editor", link: "https://www.fotor.com/free", tags: "photo, editing, free" },
+            { name: "Canva Free", category: "digital-marketing", description: "Free design tool", link: "https://www.canva.com/free", tags: "design, graphics, free" },
+            { name: "Crello Free", category: "digital-marketing", description: "Free graphic design tool", link: "https://crello.com/free", tags: "design, graphics, free" },
+            { name: "Snappa Free", category: "digital-marketing", description: "Free graphic design software", link: "https://snappa.com/free", tags: "design, graphics, free" },
+            { name: "Stencil Free", category: "digital-marketing", description: "Free graphic design tool", link: "https://getstencil.com/free", tags: "design, graphics, free" },
+            { name: "Pablo Free", category: "digital-marketing", description: "Free social media image creator", link: "https://www.buffer.com/pablo/free", tags: "social, images, free" },
+            { name: "QuotesCover Free", category: "digital-marketing", description: "Free quote image maker", link: "https://quotescover.com/free", tags: "quotes, images, free" },
+            { name: "WordSwag Free", category: "digital-marketing", description: "Free text on photos app", link: "https://wordswag.co/free", tags: "text, photos, free" },
+            { name: "Typorama Free", category: "digital-marketing", description: "Free text on photos app", link: "https://typorama.com/free", tags: "text, photos, free" },
+            { name: "Over Free", category: "digital-marketing", description: "Free graphic design app", link: "https://www.madewithover.com/free", tags: "design, graphics, free" },
+            { name: "Skitch Free", category: "virtual-assistant", description: "Free screenshot annotation tool", link: "https://evernote.com/products/skitch/free", tags: "screenshots, annotation, free" },
+            { name: "Markup Hero Free", category: "virtual-assistant", description: "Free screenshot and annotation tool", link: "https://markuphero.com/free", tags: "screenshots, annotation, free" },
+            { name: "Awesome Screenshot Free", category: "virtual-assistant", description: "Free screen capture tool", link: "https://www.awesomescreenshot.com/free", tags: "capture, recording, free" },
+            { name: "Nimbus Screenshot Free", category: "virtual-assistant", description: "Free screen capture tool", link: "https://nimbusweb.me/screenshot/free", tags: "capture, recording, free" },
+            { name: "Fireshot Free", category: "virtual-assistant", description: "Free screenshot tool", link: "https://getfireshot.com/free", tags: "screenshots, capture, free" },
+            { name: "Full Page Screen Capture Free", category: "virtual-assistant", description: "Free full page screenshot tool", link: "https://gofullpage.com/free", tags: "screenshots, fullpage, free" },
+            { name: "GoFullPage Free", category: "virtual-assistant", description: "Free full page screenshot extension", link: "https://gofullpage.com/free", tags: "screenshots, fullpage, free" },
+            { name: "Screen Capture Free", category: "virtual-assistant", description: "Free screen capture tool", link: "https://screencapture.com/free", tags: "capture, recording, free" },
+            { name: "Free Screen Video Recorder", category: "virtual-assistant", description: "Free screen recording software", link: "https://www.dvdvideosoft.com/free-screen-video-recorder/free", tags: "recording, free, windows" },
+            { name: "TinyTake Free", category: "virtual-assistant", description: "Free screen capture tool", link: "https://tinytake.com/free", tags: "capture, recording, free" },
+            { name: "Jing Free", category: "virtual-assistant", description: "Free screenshot and screencast software", link: "https://www.techsmith.com/jing-tool.html/free", tags: "screenshots, screencast, free" },
+            { name: "Screencast-O-Matic Free", category: "virtual-assistant", description: "Free screen recorder", link: "https://screencast-o-matic.com/free", tags: "recording, free, sharing" },
+            { name: "Loom Free", category: "virtual-assistant", description: "Free screen recording tool", link: "https://www.loom.com/free", tags: "recording, free, sharing" }
+        ];
+            // DOM Elements
+        const toolsGrid = document.getElementById('tools-grid');
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const loader = document.getElementById('loader');
+
+        // Initialize page
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                renderTools('all');
+            }, 1000);
+        });
+
+        // Tab functionality
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const category = button.dataset.category;
+                renderTools(category);
+            });
+        });
+
+        // Render tools based on category
+        function renderTools(category) {
+            const filteredTools = category === 'all' 
+                ? aiTools 
+                : aiTools.filter(tool => tool.category === category);
+            
+            toolsGrid.innerHTML = '';
+            
+            filteredTools.forEach((tool, index) => {
+                const toolCard = document.createElement('div');
+                toolCard.className = 'tool-card';
+                toolCard.style.animation = `fadeInUp 0.5s ease ${index * 0.05}s both`;
+                
+                toolCard.innerHTML = `
+                    <h4>${tool.name}</h4>
+                    <p>${tool.description}</p>
+                    <div style="margin-bottom: 0.5rem;">
+                        <small style="color: #94a3b8; font-size: 0.8rem;">Tags: ${tool.tags}</small>
+                    </div>
+                    <a href="${tool.link}" target="_blank" class="tool-link">
+                        Visit Tool →
+                    </a>
+                `;
+                
+                toolsGrid.appendChild(toolCard);
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(15, 23, 42, 0.95)';
+                nav.style.backdropFilter = 'blur(20px)';
+            } else {
+                nav.style.background = 'var(--glass)';
+                nav.style.backdropFilter = 'blur(12px)';
+            }
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });  
 </script> 
     <a href="Back to home" class="">  
   </body>
