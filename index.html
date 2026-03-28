@@ -4312,7 +4312,794 @@ var toolData=[
             const hero = document.querySelector('.hero');
             hero.style.transform = `translateY(${scrolled * 0.5}px)`;
         });  
-</script> 
-    <a href="Back to home" class="">  
-  </body>
+
+        <script>
+'use strict';
+
+/* ── Smooth scroll ── */
+function navTo(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+
+/* ── Typing animation ── */
+(function(){
+  var roles=['Digital Marketing Expert','Web Developer','SEO Specialist','Social Media Marketer','Virtual Assistant','AI Tools Expert'];
+  var ri=0,ci=0,del=false,el=document.getElementById('typed-text');
+  if(!el)return;
+  function tick(){
+    var r=roles[ri];
+    el.textContent=del?r.substring(0,ci-1):r.substring(0,ci+1);
+    del?ci--:ci++;
+    if(!del&&ci===r.length){del=true;return setTimeout(tick,2000);}
+    if(del&&ci===0){del=false;ri=(ri+1)%roles.length;return setTimeout(tick,500);}
+    setTimeout(tick,del?50:100);
+  }
+  tick();
+}());
+
+/* ── Scroll reveal ── */
+function revealOnScroll(){
+  document.querySelectorAll('.scroll-reveal').forEach(function(el){
+    if(el.getBoundingClientRect().top<window.innerHeight-100)el.classList.add('active');
+  });
+}
+window.addEventListener('scroll',revealOnScroll);
+revealOnScroll();
+
+/* ── Particles ── */
+(function(){
+  var pc=document.getElementById('particles');if(!pc)return;
+  for(var i=0;i<20;i++){
+    var p=document.createElement('div'),sz=Math.random()*10+5+'px';
+    p.className='particle';
+    p.style.cssText='left:'+Math.random()*100+'%;width:'+sz+';height:'+sz+';animation-duration:'+(Math.random()*10+10)+'s;animation-delay:'+Math.random()*5+'s';
+    pc.appendChild(p);
+  }
+}());
+
+/* ── BD Clock ── */
+function updateClock(){
+  var el=document.getElementById('bdtDateTime');
+  if(el)el.textContent=new Date().toLocaleString('en-US',{timeZone:'Asia/Dhaka',weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+}
+setInterval(updateClock,1000);updateClock();
+
+/* ── Anchor scroll ── */
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[href^="#"]');if(!a)return;
+  var id=a.getAttribute('href').slice(1);if(!id)return;
+  var t=document.getElementById(id);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+});
+
+/* ── Legacy music button ── */
+var bgMusic=document.getElementById('bgMusic');
+if(bgMusic){window.addEventListener('load',function(){bgMusic.play().catch(function(){});});}
+function toggleMusic(){
+  if(!bgMusic)return;
+  var btn=document.querySelector('.music-control');
+  if(bgMusic.paused){bgMusic.play();if(btn)btn.innerHTML='🔊 Pause Music';}
+  else{bgMusic.pause();if(btn)btn.innerHTML='🔇 Play Music';}
+}
+
+/* ── Old AI Modal ── */
+var _aiBtn=document.getElementById('aiButton');
+var _aiMod=document.getElementById('aiModal');
+var _aiClose=document.getElementById('closeModal');
+if(_aiBtn&&_aiMod)_aiBtn.addEventListener('click',function(){_aiMod.style.display='block';});
+if(_aiClose&&_aiMod)_aiClose.addEventListener('click',function(){_aiMod.style.display='none';var r=document.getElementById('ai-result');if(r)r.style.display='none';});
+window.addEventListener('click',function(e){
+  if(e.target===_aiMod){_aiMod.style.display='none';var r=document.getElementById('ai-result');if(r)r.style.display='none';}
+});
+
+/* ── AI option buttons (old modal) ── */
+var aiResult=document.getElementById('ai-result');
+document.querySelectorAll('.ai-option').forEach(function(option){
+  option.addEventListener('click',function(){
+    var tool=option.dataset.tool;
+    if(!aiResult)return;
+    aiResult.style.display='block';
+    aiResult.innerHTML='<div class="loader"></div>';
+    setTimeout(function(){loadTool(tool);},800);
+  });
+});
+
+function loadTool(toolName){
+  if(!aiResult)return;
+  var html='';
+  switch(toolName){
+    case 'chatbot':
+      html='<h3>🤖 AI Chatbot</h3><p>Ask me anything!</p><input type="text" id="chatInput" placeholder="Type your message..."><button class="execute" onclick="sendChat()">Send</button><div id="chatHistory" style="margin-top:10px;max-height:200px;overflow-y:auto;"></div>';break;
+    case 'textGen':
+      html='<h3>📝 Text Generator</h3><textarea id="textPrompt" rows="3" placeholder="Enter a prompt..."></textarea><button class="execute" onclick="generateText()">Generate</button><div id="generatedText" style="margin-top:10px;"></div>';break;
+    case 'imageGen':
+      html='<h3>🖼️ Image Generator</h3><textarea id="imagePrompt" rows="3" placeholder="Describe the image..."></textarea><button class="execute" onclick="generateImage()">Create Image</button><div id="generatedImage" style="margin-top:10px;"></div>';break;
+    case 'analyze':
+      html='<h3>📊 Text Analyzer</h3><textarea id="analysisText" rows="5" placeholder="Paste text here..."></textarea><button class="execute" onclick="analyzeText()">Analyze</button><div id="analysisResult" style="margin-top:10px;"></div>';break;
+  }
+  aiResult.innerHTML=html;
+}
+
+function sendChat(){
+  var inp=document.getElementById('chatInput'),hist=document.getElementById('chatHistory');
+  if(!inp||!hist||!inp.value.trim())return;
+  hist.innerHTML+='<div><strong>You:</strong> '+inp.value+'</div>';
+  var replies=["That's interesting! How can I help further?","I understand. What else do you need?","Thanks! Ask me anything.","I'm here to assist you!"];
+  var r=replies[Math.floor(Math.random()*replies.length)];
+  inp.value='';
+  setTimeout(function(){hist.innerHTML+='<div><strong>AI:</strong> '+r+'</div>';hist.scrollTop=hist.scrollHeight;},1000);
+}
+function generateText(){
+  var p=document.getElementById('textPrompt'),o=document.getElementById('generatedText');
+  if(!p||!o)return;o.innerHTML='<div class="loader"></div>';var v=p.value;
+  setTimeout(function(){o.innerHTML='<p>Generated for: "<b>'+v+'</b>"</p><p>Connect a real AI API for live results.</p>';},2000);
+}
+function generateImage(){
+  var p=document.getElementById('imagePrompt'),o=document.getElementById('generatedImage');
+  if(!p||!o)return;o.innerHTML='<div class="loader"></div>';var v=p.value;
+  setTimeout(function(){o.innerHTML='<p>Prompt: "'+v+'"</p><img src="https://via.placeholder.com/400x300?text=AI+Image" style="max-width:100%;border-radius:8px;">';},2500);
+}
+function analyzeText(){
+  var t=document.getElementById('analysisText'),o=document.getElementById('analysisResult');
+  if(!t||!o)return;o.innerHTML='<div class="loader"></div>';var v=t.value;
+  setTimeout(function(){
+    var wc=v.split(/\s+/).filter(Boolean).length;
+    o.innerHTML='<p><strong>Results:</strong></p><ul><li>Words: '+wc+'</li><li>Characters: '+v.length+'</li><li>Sentiment: <span style="color:green">Positive</span> (mock)</li><li>Keywords: '+v.split(' ').slice(0,5).join(', ')+'</li></ul>';
+  },1500);
+}
+
+/* ══════════════════════════════════════
+   NAV OVERFLOW MENU
+══════════════════════════════════════ */
+function toggleOverflow(){
+  var m=document.getElementById('nav-overflow-menu'),b=document.getElementById('nav-more-btn');
+  if(!m)return;
+  var open=m.classList.contains('open');
+  closeAllDropdowns();
+  if(!open){m.classList.add('open');if(b)b.classList.add('open');}
+}
+function closeOverflow(){
+  var m=document.getElementById('nav-overflow-menu'),b=document.getElementById('nav-more-btn');
+  if(m)m.classList.remove('open');if(b)b.classList.remove('open');
+}
+function checkNavOverflow(){
+  var strip=document.querySelector('.nav-links'),btn=document.getElementById('nav-more-btn'),menu=document.getElementById('nav-overflow-menu');
+  if(!strip||!btn||!menu)return;
+  var sr=strip.getBoundingClientRect().right,ov=[];
+  Array.from(strip.children).forEach(function(c){if(c.getBoundingClientRect().right>sr+4)ov.push(c);});
+  if(!ov.length){btn.style.display='none';return;}
+  btn.style.display='flex';
+  var html='<p class="overflow-section-label">Navigation</p>';
+  ov.forEach(function(c){
+    var label=c.getAttribute('data-overflow-label')||c.textContent.trim().replace(/▾/g,'').trim();
+    var icon=c.getAttribute('data-overflow-icon')||'fa-circle';
+    var action='';
+    if(c.classList.contains('nav-dropdown')){var id=c.getAttribute('id');if(id)action='onclick="closeOverflow();toggleDropdown(\''+id+'\')"';}
+    else{var oc=c.getAttribute('onclick');if(oc)action='onclick="closeOverflow();'+oc+'"';}
+    html+='<a class="overflow-item" '+action+'><i class="fas '+icon+'"></i> '+label+'</a>';
+  });
+  html+='<div class="overflow-divider"></div><p class="overflow-section-label">Quick Access</p>'
+    +'<a class="overflow-item" href="https://wa.me/8801723328481" target="_blank" onclick="closeOverflow()"><i class="fab fa-whatsapp" style="color:#22c55e"></i> WhatsApp</a>'
+    +'<a class="overflow-item" href="https://www.fiverr.com" target="_blank" onclick="closeOverflow()"><i class="fas fa-star" style="color:#1dbf73"></i> Fiverr</a>'
+    +'<a class="overflow-item" href="https://www.upwork.com" target="_blank" onclick="closeOverflow()"><i class="fas fa-trophy" style="color:#14a800"></i> Upwork</a>'
+    +'<div class="overflow-divider"></div>'
+    +'<a class="overflow-item" onclick="closeOverflow();document.getElementById(\'ai-modal\').classList.add(\'open\')"><i class="fas fa-robot" style="color:#a78bfa"></i> All 112 AI Tools</a>'
+    +'<a class="overflow-item" onclick="closeOverflow();navTo(\'toolkit\')"><i class="fas fa-list" style="color:#60a5fa"></i> Smart Toolkit</a>';
+  menu.innerHTML=html;
+}
+document.addEventListener('click',function(e){if(!e.target.closest('#nav-overflow-menu')&&!e.target.closest('#nav-more-btn'))closeOverflow();});
+function annotateNavItems(){
+  var map=[
+    {sel:'a[onclick*="navTo(\'hero"]',label:'Home',icon:'fa-home'},
+    {sel:'a[onclick*="navTo(\'services"]',label:'Services',icon:'fa-briefcase'},
+    {sel:'a[onclick*="navTo(\'hire"]',label:'Hire Me',icon:'fa-handshake'},
+    {sel:'a[onclick*="navTo(\'contact"]',label:'Contact',icon:'fa-envelope'},
+    {sel:'#dd-ai',label:'AI Tools',icon:'fa-robot',isDd:true},
+    {sel:'#dd-plat',label:'Platforms',icon:'fa-globe',isDd:true}
+  ];
+  map.forEach(function(m){
+    var el=document.querySelector('.nav-links '+m.sel);if(!el)return;
+    el.setAttribute('data-overflow-label',m.label);el.setAttribute('data-overflow-icon',m.icon);
+    if(m.isDd){var b=el.querySelector('.nav-dropdown-btn');if(b){b.setAttribute('data-overflow-label',m.label);b.setAttribute('data-overflow-icon',m.icon);}}
+  });
+}
+
+/* ══════════════════════════════════════
+   CLICK DROPDOWNS
+══════════════════════════════════════ */
+function toggleDropdown(ddId){
+  var menu=document.getElementById(ddId+'-menu'),btn=document.getElementById(ddId+'-btn');
+  if(!menu)return;
+  var open=menu.classList.contains('open');
+  closeAllDropdowns();if(open)return;
+  if(btn){
+    var rect=btn.getBoundingClientRect();
+    if(menu.classList.contains('wide')){menu.style.left='50%';}
+    else{var mw=230,left=rect.left;if(left+mw>window.innerWidth-16)left=window.innerWidth-mw-16;menu.style.left=left+'px';}
+  }
+  menu.classList.add('open');if(btn)btn.classList.add('open');
+}
+function closeAllDropdowns(){
+  document.querySelectorAll('.nav-dropdown-menu').forEach(function(m){m.classList.remove('open');});
+  document.querySelectorAll('.nav-dropdown-btn').forEach(function(b){b.classList.remove('open');});
+  var si=document.getElementById('mega-search-input');if(si){si.value='';megaSearch('');}
+}
+document.addEventListener('mousedown',function(e){
+  if(!e.target.closest('.nav-dropdown')&&!e.target.closest('#dd-ai-menu')&&!e.target.closest('#dd-plat-menu'))closeAllDropdowns();
+});
+function megaSearch(q){
+  q=q.toLowerCase().trim();
+  document.querySelectorAll('.mega-tool').forEach(function(t){
+    t.classList.toggle('hidden',q!==''&&!(t.getAttribute('data-name')||t.textContent.toLowerCase()).includes(q));
+  });
+  document.querySelectorAll('.mega-cat').forEach(function(c){
+    c.classList.toggle('hidden',c.querySelectorAll('.mega-tool:not(.hidden)').length===0);
+  });
+}
+
+/* ── Mobile nav ── */
+function toggleMobileNav(){document.getElementById('nav-mobile').classList.toggle('open');document.getElementById('nav-hamburger').classList.toggle('open');}
+function closeMobileNav(){document.getElementById('nav-mobile').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');}
+
+/* ══════════════════════════════════════
+   LANGUAGE SWITCHER
+══════════════════════════════════════ */
+function toggleLangMenu(){
+  var menu=document.getElementById('lang-menu'),btn=document.getElementById('lang-btn');if(!menu||!btn)return;
+  var open=menu.classList.contains('open');closeAllDropdowns();
+  if(!open){menu.classList.add('open');btn.classList.add('open');}
+  else{menu.classList.remove('open');btn.classList.remove('open');}
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('#lang-switcher')){
+    var m=document.getElementById('lang-menu'),b=document.getElementById('lang-btn');
+    if(m)m.classList.remove('open');if(b)b.classList.remove('open');
+  }
+});
+function switchLang(el){
+  var lang=el.getAttribute('data-lang'),flag=el.getAttribute('data-flag'),label=el.getAttribute('data-label'),dir=el.getAttribute('data-dir')||'ltr';
+  document.getElementById('lang-flag').textContent=flag;
+  document.getElementById('lang-current').textContent=label;
+  document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===lang);});
+  document.getElementById('lang-menu').classList.remove('open');
+  document.getElementById('lang-btn').classList.remove('open');
+  document.documentElement.setAttribute('dir',dir);
+  document.documentElement.setAttribute('lang',lang);
+  showLangToast(flag+' '+getLangName(lang));
+  translatePageFree(lang);
+}
+function getLangName(code){
+  return{en:'English',bn:'বাংলা',ar:'العربية',zh:'中文',hi:'हिंदी',fr:'Français',es:'Español',de:'Deutsch',tr:'Türkçe',ur:'اردو'}[code]||code.toUpperCase();
+}
+function showLangToast(msg){
+  var t=document.getElementById('lang-toast'),m=document.getElementById('lang-toast-msg');if(!t||!m)return;
+  m.textContent='Language: '+msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);
+}
+
+/* ══════════════════════════════════════
+   TRANSLATION ENGINE
+══════════════════════════════════════ */
+var _origNodes=null,_origTexts=null,_activeLang='en';
+var _DICT={
+  'Home':{bn:'হোম',ar:'الرئيسية',zh:'主页',hi:'होम',fr:'Accueil',es:'Inicio',de:'Startseite',tr:'Ana Sayfa',ur:'ہوم'},
+  'Services':{bn:'সেবাসমূহ',ar:'الخدمات',zh:'服务',hi:'सेवाएं',fr:'Services',es:'Servicios',de:'Dienste',tr:'Hizmetler',ur:'خدمات'},
+  'Hire Me':{bn:'আমাকে নিয়োগ করুন',ar:'وظفني',zh:'雇用我',hi:'मुझे काम पर रखें',fr:'Engagez-moi',es:'Contrátame',de:'Beauftragen',tr:'İşe Al',ur:'مجھے ہائر کریں'},
+  'Contact':{bn:'যোগাযোগ',ar:'تواصل',zh:'联系',hi:'संपर्क',fr:'Contact',es:'Contacto',de:'Kontakt',tr:'İletişim',ur:'رابطہ'},
+  "Let's Talk":{bn:'কথা বলুন',ar:'لنتحدث',zh:'联系我',hi:'बात करें',fr:'Parlons',es:'Hablemos',de:'Sprechen',tr:'Konuşalım',ur:'بات کریں'},
+  'Digital Marketing':{bn:'ডিজিটাল মার্কেটিং',ar:'التسويق الرقمي',zh:'数字营销',hi:'डिजिटल मार्केटिंग',fr:'Marketing Digital',es:'Marketing Digital',de:'Digitales Marketing',tr:'Dijital Pazarlama',ur:'ڈیجیٹل مارکیٹنگ'},
+  'Web Development':{bn:'ওয়েব ডেভেলপমেন্ট',ar:'تطوير الويب',zh:'网站开发',hi:'वेब विकास',fr:'Développement Web',es:'Desarrollo Web',de:'Webentwicklung',tr:'Web Geliştirme',ur:'ویب ڈویلپمنٹ'},
+  'SEO Expert':{bn:'এসইও বিশেষজ্ঞ',ar:'خبير السيو',zh:'SEO专家',hi:'SEO विशेषज्ञ',fr:'Expert SEO',es:'Experto SEO',de:'SEO-Experte',tr:'SEO Uzmanı',ur:'SEO ماہر'},
+  'Social Media Marketing':{bn:'সোশ্যাল মিডিয়া মার্কেটিং',ar:'تسويق التواصل الاجتماعي',zh:'社交媒体营销',hi:'सोशल मीडिया मार्केटिंग',fr:'Marketing Réseaux Sociaux',es:'Marketing en Redes Sociales',de:'Social-Media-Marketing',tr:'Sosyal Medya Pazarlama',ur:'سوشل میڈیا مارکیٹنگ'},
+  'Virtual Assistance':{bn:'ভার্চুয়াল সহায়তা',ar:'المساعدة الافتراضية',zh:'虚拟助理服务',hi:'वर्चुअल सहायता',fr:'Assistance Virtuelle',es:'Asistencia Virtual',de:'Virtueller Assistenz',tr:'Sanal Yardım',ur:'ورچوئل اسسٹنس'},
+  'Hire Me Now':{bn:'এখনই নিয়োগ করুন',ar:'وظفني الآن',zh:'立即雇用',hi:'अभी काम पर रखें',fr:'Engagez-moi maintenant',es:'Contrátame ahora',de:'Jetzt beauftragen',tr:'Şimdi İşe Al',ur:'ابھی ہائر کریں'},
+  'Get In Touch':{bn:'যোগাযোগ করুন',ar:'تواصل معي',zh:'联系我',hi:'संपर्क करें',fr:'Contactez-moi',es:'Contáctame',de:'Kontakt aufnehmen',tr:'İletişime Geç',ur:'رابطہ کریں'},
+  'Call Me':{bn:'ফোন করুন',ar:'اتصل بي',zh:'致电我',hi:'मुझे कॉल करें',fr:'Appelez-moi',es:'Llámame',de:'Ruf mich an',tr:'Beni Ara',ur:'مجھے کال کریں'},
+  'Email Me':{bn:'ইমেইল করুন',ar:'راسلني',zh:'发邮件',hi:'ईमेल करें',fr:'Envoyez-moi un email',es:'Envíame un email',de:'E-Mail senden',tr:'E-posta Gönder',ur:'ای میل کریں'},
+  'Top Rated Seller':{bn:'শীর্ষ রেটেড বিক্রেতা',ar:'بائع من الدرجة الأولى',zh:'顶级卖家',hi:'टॉप रेटेड विक्रेता',fr:'Vendeur Top Noté',es:'Vendedor Mejor Valorado',de:'Top-bewerteter Verkäufer',tr:'En İyi Satıcı',ur:'سب سے اعلی درجہ بند بیچنے والا'},
+  'Top Freelancer':{bn:'শীর্ষ ফ্রিল্যান্সার',ar:'مستقل من الدرجة الأولى',zh:'顶级自由职业者',hi:'टॉप फ्रीलांसर',fr:'Top Freelancer',es:'Top Freelancer',de:'Top-Freelancer',tr:'En İyi Freelancer',ur:'بہترین فری لانسر'},
+  'All rights reserved.':{bn:'সর্বস্বত্ব সংরক্ষিত।',ar:'جميع الحقوق محفوظة.',zh:'版权所有。',hi:'सर्वाधिकार सुरक्षित।',fr:'Tous droits réservés.',es:'Todos los derechos reservados.',de:'Alle Rechte vorbehalten.',tr:'Tüm hakları saklıdır.',ur:'جملہ حقوق محفوظ ہیں۔'}
+};
+function _collectNodes(){
+  var SKIP={SCRIPT:1,STYLE:1,NOSCRIPT:1,IFRAME:1},list=[];
+  function walk(nd){
+    if(nd.nodeType===3){if(nd.textContent.trim())list.push(nd);return;}
+    if(SKIP[nd.nodeName])return;
+    if(nd.id&&(nd.id==='mplayer'||nd.id==='ai-fab'||nd.id==='google_translate_element'))return;
+    for(var k=0;k<nd.childNodes.length;k++)walk(nd.childNodes[k]);
+  }
+  walk(document.body);return list;
+}
+function storeOriginals(){if(_origNodes)return;_origNodes=_collectNodes();_origTexts=_origNodes.map(function(n){return n.textContent;});}
+function restoreOriginal(){if(!_origNodes)return;_origNodes.forEach(function(n,i){n.textContent=_origTexts[i];});document.documentElement.setAttribute('dir','ltr');_activeLang='en';}
+function _translateNode(text,lang){
+  var t=text.trim();if(!t)return text;
+  if(_DICT[t]&&_DICT[t][lang])return _DICT[t][lang];
+  var result=text;
+  Object.keys(_DICT).sort(function(a,b){return b.length-a.length;}).forEach(function(k){if(result.includes(k)&&_DICT[k][lang])result=result.split(k).join(_DICT[k][lang]);});
+  return result;
+}
+function translatePageFree(lang){
+  if(lang==='en'){restoreOriginal();_activeLang='en';return;}
+  if(lang===_activeLang)return;
+  _activeLang=lang;
+  document.documentElement.setAttribute('dir',{ar:1,ur:1,he:1,fa:1}[lang]?'rtl':'ltr');
+  storeOriginals();
+  _origNodes.forEach(function(node,i){var tr=_translateNode(_origTexts[i],lang);if(tr!==_origTexts[i])node.textContent=tr;});
+}
+function applyTranslation(lang){translatePageFree(lang);}
+
+/* ══════════════════════════════════════
+   NAV INIT + RESIZE
+══════════════════════════════════════ */
+(function(){
+  annotateNavItems();setTimeout(checkNavOverflow,300);
+  if(window.ResizeObserver){var ro=new ResizeObserver(function(){checkNavOverflow();});var nv=document.querySelector('nav');if(nv)ro.observe(nv);}
+  window.addEventListener('resize',checkNavOverflow);
+  var sections=['hero','services','hire','contact','toolkit'];
+  window.addEventListener('scroll',function(){
+    var sy=window.scrollY+80,cur='';
+    sections.forEach(function(id){var el=document.getElementById(id);if(el&&el.offsetTop<=sy)cur=id;});
+    document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active');});
+    var map={hero:'Home',services:'Services',hire:'Hire Me',contact:'Contact',toolkit:'AI Tools'};
+    document.querySelectorAll('.nav-links a').forEach(function(a){if(a.textContent.trim().startsWith(map[cur]||'__'))a.classList.add('active');});
+    var nb=document.getElementById('main-nav');if(nb)nb.style.background=sy>100?'rgba(10,5,30,.98)':'rgba(10,5,30,.92)';
+  });
+}());
+
+/* ── New AI Hub modal backdrop ── */
+var _newMod=document.getElementById('ai-modal');
+if(_newMod)_newMod.addEventListener('click',function(e){
+  if(e.target===this){this.classList.remove('open');var s=document.getElementById('modal-search');if(s){s.value='';filterModal('');}}
+});
+function filterModal(q){
+  q=q.toLowerCase().trim();
+  document.querySelectorAll('#modal-tools-wrap .ai-cat').forEach(function(cat){
+    var any=false;
+    cat.querySelectorAll('.ai-card').forEach(function(card){var m=!q||card.textContent.toLowerCase().includes(q);card.classList.toggle('hidden',!m);if(m)any=true;});
+    cat.classList.toggle('hidden',!any);
+  });
+}
+
+/* ══════════════════════════════════════
+   TOOLKIT DATA (112 tools)
+══════════════════════════════════════ */
+var toolData=[
+  {cat:'Web Dev',color:'#a78bfa',icon:'fa-code',tools:[
+    ['ChatGPT','https://chat.openai.com','AI coding assistant & debugging helper'],
+    ['GitHub Copilot','https://github.com/features/copilot','AI pair programmer inside your editor'],
+    ['Cursor','https://cursor.sh','AI-first code editor with inline chat'],
+    ['V0 by Vercel','https://v0.dev','AI UI component & layout generator'],
+    ['Bolt.new','https://bolt.new','AI full-stack app builder in browser'],
+    ['Replit AI','https://replit.com','AI-powered cloud code editor & host'],
+    ['Codeium','https://codeium.com','Free AI autocomplete for any IDE'],
+    ['Tabnine','https://www.tabnine.com','AI code completion built for teams'],
+    ['Framer AI','https://www.framer.com','AI-powered site & animation builder'],
+    ['Galileo AI','https://www.usegalileo.ai','Generate UI designs from text prompts'],
+    ['Locofy','https://www.locofy.ai','Convert Figma designs to code with AI'],
+    ['Wix AI','https://www.wix.com','AI website builder & content designer'],
+    ['Lovable','https://lovable.dev','AI app builder from plain text prompts'],
+    ['Windsurf','https://codeium.com/windsurf','AI-first IDE with deep code understanding']
+  ]},
+  {cat:'Marketing',color:'#34d399',icon:'fa-bullhorn',tools:[
+    ['Copy.ai','https://www.copy.ai','AI marketing copy & blog writer'],
+    ['Jasper','https://www.jasper.ai','AI long-form marketing content writer'],
+    ['Writesonic','https://writesonic.com','AI blog posts & ad copy at scale'],
+    ['Anyword','https://anyword.com','AI copy with performance score prediction'],
+    ['AdCreative.ai','https://www.adcreative.ai','AI ad banner & creative generator'],
+    ['Canva AI','https://www.canva.com','AI-powered design & Magic Write tool'],
+    ['HubSpot AI','https://www.hubspot.com','AI-driven CRM & marketing automation'],
+    ['Pencil','https://www.trypencil.com','AI ad video & creative generator'],
+    ['Rytr','https://rytr.me','AI writing assistant for marketing'],
+    ['Hypotenuse AI','https://www.hypotenuse.ai','AI product descriptions & ecommerce copy'],
+    ['Wordtune','https://www.wordtune.com','AI writing rewriter & tone enhancer'],
+    ['Persado','https://www.persado.com','AI emotional language for marketing'],
+    ['Smartly.io','https://www.smartly.io','AI social ad automation & optimisation'],
+    ['Albert AI','https://albert.ai','Autonomous AI digital marketing platform']
+  ]},
+  {cat:'SEO',color:'#f472b6',icon:'fa-search',tools:[
+    ['Surfer SEO','https://surferseo.com','AI content optimisation & NLP scoring'],
+    ['SEMrush','https://www.semrush.com','All-in-one AI SEO & competitor suite'],
+    ['Ahrefs','https://ahrefs.com','Backlink analysis & keyword explorer'],
+    ['Frase.io','https://www.frase.io','AI content briefs & SERP-based outlines'],
+    ['NeuronWriter','https://neuronwriter.com','AI SEO editor with semantic NLP data'],
+    ['Clearscope','https://www.clearscope.io','AI keyword relevance & content grader'],
+    ['MarketMuse','https://www.marketmuse.com','AI content strategy & topic authority'],
+    ['RankIQ','https://www.rankiq.com','AI SEO toolset focused on bloggers'],
+    ['SEO.ai','https://seo.ai','AI-powered SEO writing platform'],
+    ['AlsoAsked','https://alsoasked.com','People Also Ask visual question maps'],
+    ['AnswerThePublic','https://answerthepublic.com','Keyword question & preposition research'],
+    ['Moz Pro','https://moz.com','AI-powered SEO & link building suite'],
+    ['Screaming Frog','https://www.screamingfrog.co.uk','Technical SEO crawler & site auditor'],
+    ['Diib','https://diib.com','AI growth analytics & SEO health checks']
+  ]},
+  {cat:'Social Media',color:'#fbbf24',icon:'fa-share-alt',tools:[
+    ['Buffer AI','https://buffer.com','AI post scheduler & content ideas'],
+    ['Hootsuite','https://www.hootsuite.com','AI-powered social media management'],
+    ['Predis.ai','https://predis.ai','AI social post & carousel generator'],
+    ['Flick AI','https://www.flick.social','AI hashtag & caption tool for Instagram'],
+    ['Ocoya','https://www.ocoya.com','AI content creation & auto-scheduling'],
+    ['ContentStudio','https://contentstudio.io','AI content discovery & multi-channel publish'],
+    ['Canva AI','https://www.canva.com','AI social media graphics & video creator'],
+    ['Vista Social','https://vistasocial.com','AI social management with deep analytics'],
+    ['Loomly','https://www.loomly.com','AI post ideas & brand content calendar'],
+    ['Sprout Social','https://sproutsocial.com','AI social analytics & publishing'],
+    ['ManyChat','https://manychat.com','AI chatbot for Instagram & Facebook DMs'],
+    ['Lately.ai','https://www.lately.ai','AI social content repurposer & publisher'],
+    ['Typefully','https://typefully.com','AI Twitter/X growth & thread writing'],
+    ['Emplifi','https://emplifi.io','AI social customer care & CX platform']
+  ]},
+  {cat:'Video AI',color:'#fb923c',icon:'fa-video',tools:[
+    ['Pictory AI','https://pictory.ai','Turn scripts & blogs into videos'],
+    ['Runway ML','https://runwayml.com','AI video generation & editing (Gen-3)'],
+    ['Pika Labs','https://pika.art','AI text-to-video & image-to-video'],
+    ['CapCut AI','https://www.capcut.com','Free AI video editor with auto-captions'],
+    ['Synthesia','https://www.synthesia.io','AI avatar video creator from text'],
+    ['InVideo AI','https://invideo.io','AI video maker from prompts & scripts'],
+    ['Lumen5','https://lumen5.com','Turn blog posts into social videos'],
+    ['Descript','https://www.descript.com','AI video & podcast editor with transcription'],
+    ['HeyGen','https://www.heygen.com','AI video with realistic talking avatars'],
+    ['Vidnoz AI','https://www.vidnoz.com','Free AI video generator & avatar maker'],
+    ['Sora','https://sora.com','OpenAI text-to-video generation model'],
+    ['Adobe Firefly','https://firefly.adobe.com','AI video & image generation by Adobe'],
+    ['Clipchamp','https://clipchamp.com','Free AI-powered browser video editor'],
+    ['Topaz Video AI','https://www.topazlabs.com','AI video upscaler & quality enhancer']
+  ]},
+  {cat:'Medical VA',color:'#f87171',icon:'fa-heartbeat',tools:[
+    ['Nuance DAX','https://www.nuance.com','AI ambient clinical documentation'],
+    ['Suki AI','https://www.suki.ai','AI voice assistant for clinical notes & EHR'],
+    ['Nabla Copilot','https://www.nabla.com','Free AI medical scribe for consultations'],
+    ['DeepScribe','https://www.deepscribe.ai','AI medical transcription & note automation'],
+    ['Abridge','https://www.abridge.com','AI summarises patient-doctor conversations'],
+    ['Doximity GPT','https://www.doximity.com','AI writing tool built for physicians'],
+    ['Glass Health','https://glass.health','AI clinical reasoning & care plan generator'],
+    ['Freed AI','https://www.freed.ai','Free AI medical scribe for any practice'],
+    ['ChatGPT (Med)','https://chat.openai.com','AI for medical summaries, FAQs & reports'],
+    ['Consensus','https://consensus.app','AI search engine for medical research'],
+    ['Mendel AI','https://www.mendel.ai','AI clinical data extraction & trial matching'],
+    ['Regard','https://www.regard.com','AI clinical decision support & diagnosis'],
+    ['Notable Health','https://www.notablehealth.com','AI patient intake & clinical workflow'],
+    ['Ambience','https://www.ambiencehealthcare.com','AI ambient scribe for specialty care']
+  ]},
+  {cat:'VA Tools',color:'#60a5fa',icon:'fa-clipboard-list',tools:[
+    ['ChatGPT','https://chat.openai.com','AI research, writing & task assistant'],
+    ['Notion AI','https://www.notion.so','AI workspace, notes & project manager'],
+    ['Motion','https://www.usemotion.com','AI calendar & project scheduling tool'],
+    ['Otter.ai','https://otter.ai','AI real-time meeting transcription'],
+    ['Fireflies.ai','https://fireflies.ai','AI meeting notes, search & action items'],
+    ['Reclaim.ai','https://reclaim.ai','AI smart time-blocking & calendar sync'],
+    ['Grammarly','https://www.grammarly.com','AI grammar, clarity & tone checker'],
+    ['Zapier AI','https://zapier.com','AI workflow & multi-app automation'],
+    ['Taskade AI','https://www.taskade.com','AI project collaboration & agents'],
+    ['Tome','https://tome.app','AI presentation & visual document builder'],
+    ['Beautiful.ai','https://www.beautiful.ai','AI slide design for polished decks'],
+    ['Mem.ai','https://mem.ai','AI-powered personal knowledge base'],
+    ['Tally','https://tally.so','AI-powered form builder & survey tool'],
+    ['Calendly AI','https://calendly.com','AI scheduling & meeting management']
+  ]},
+  {cat:'Digital Marketing',color:'#22d3ee',icon:'fa-envelope-open-text',tools:[
+    ['Mailchimp AI','https://mailchimp.com','AI email campaigns & audience insights'],
+    ['ActiveCampaign','https://www.activecampaign.com','AI-powered email & marketing automation'],
+    ['GetResponse AI','https://www.getresponse.com','AI email marketing & landing page builder'],
+    ['Google Ads AI','https://ads.google.com','AI smart bidding & performance max campaigns'],
+    ['Meta Ads AI','https://www.facebook.com/business/ads','AI-driven Facebook & Instagram targeting'],
+    ['Klaviyo AI','https://www.klaviyo.com','AI email & SMS marketing for e-commerce'],
+    ['Phrasee','https://phrasee.co','AI brand language & subject line optimiser'],
+    ['Drift AI','https://www.drift.com','AI conversational marketing & chatbot'],
+    ['Brevo','https://www.brevo.com','AI email, SMS & WhatsApp marketing'],
+    ['Omnisend','https://www.omnisend.com','AI omnichannel marketing for ecommerce'],
+    ['Optimove','https://www.optimove.com','AI customer-led marketing & retention'],
+    ['Seventh Sense','https://www.theseventhsense.com','AI send-time optimisation for email'],
+    ['SEMrush Trends','https://www.semrush.com/trends','AI market & competitor traffic intelligence'],
+    ['Marketo AI','https://business.adobe.com/products/marketo','AI-powered B2B marketing suite']
+  ]}
+];
+
+/* ══════════════════════════════════════
+   RENDER TOOLKIT + MODAL
+══════════════════════════════════════ */
+(function(){
+  var emojis={'Web Dev':'💻','Marketing':'📣','SEO':'🔍','Social Media':'📱','Video AI':'🎬','Medical VA':'🏥','VA Tools':'🗂️','Digital Marketing':'📧'};
+  var toolIcons={
+    'ChatGPT':['fa-robot','#0ea5e9','#0284c7'],'GitHub Copilot':['fa-github','#1e293b','#334155'],
+    'Cursor':['fa-terminal','#6366f1','#4f46e5'],'V0 by Vercel':['fa-layer-group','#0f172a','#1e293b'],
+    'Bolt.new':['fa-bolt','#7c3aed','#5b21b6'],'Replit AI':['fa-code','#f97316','#ea580c'],
+    'Codeium':['fa-keyboard','#10b981','#059669'],'Tabnine':['fa-magic','#8b5cf6','#7c3aed'],
+    'Framer AI':['fa-vector-square','#ec4899','#db2777'],'Galileo AI':['fa-drafting-compass','#f59e0b','#d97706'],
+    'Locofy':['fa-object-group','#14b8a6','#0d9488'],'Wix AI':['fa-globe','#3b82f6','#2563eb'],
+    'Lovable':['fa-heart','#f43f5e','#e11d48'],'Windsurf':['fa-wind','#22d3ee','#06b6d4'],
+    'Copy.ai':['fa-pen-nib','#a855f7','#9333ea'],'Jasper':['fa-feather-alt','#f97316','#ea580c'],
+    'Writesonic':['fa-pencil-alt','#10b981','#059669'],'Anyword':['fa-chart-bar','#3b82f6','#2563eb'],
+    'AdCreative.ai':['fa-ad','#ef4444','#dc2626'],'Canva AI':['fa-paint-brush','#00c4cc','#0098a6'],
+    'HubSpot AI':['fa-funnel-dollar','#f97316','#ea580c'],'Pencil':['fa-film','#8b5cf6','#7c3aed'],
+    'Rytr':['fa-r','#6366f1','#4f46e5'],'Hypotenuse AI':['fa-tag','#14b8a6','#0d9488'],
+    'Wordtune':['fa-sliders-h','#f59e0b','#d97706'],'Persado':['fa-smile','#ec4899','#db2777'],
+    'Smartly.io':['fa-bullseye','#ef4444','#dc2626'],'Albert AI':['fa-brain','#7c3aed','#6d28d9'],
+    'Surfer SEO':['fa-water','#3b82f6','#1d4ed8'],'SEMrush':['fa-search','#f97316','#ea580c'],
+    'Ahrefs':['fa-link','#f59e0b','#d97706'],'Frase.io':['fa-file-alt','#10b981','#059669'],
+    'NeuronWriter':['fa-brain','#8b5cf6','#7c3aed'],'Clearscope':['fa-crosshairs','#22d3ee','#06b6d4'],
+    'MarketMuse':['fa-chart-line','#a855f7','#9333ea'],'RankIQ':['fa-trophy','#eab308','#ca8a04'],
+    'SEO.ai':['fa-robot','#6366f1','#4f46e5'],'AlsoAsked':['fa-question-circle','#ec4899','#db2777'],
+    'AnswerThePublic':['fa-users','#14b8a6','#0d9488'],'Moz Pro':['fa-shield-alt','#3b82f6','#2563eb'],
+    'Screaming Frog':['fa-frog','#22c55e','#16a34a'],'Diib':['fa-heartbeat','#ef4444','#dc2626'],
+    'Buffer AI':['fa-calendar-check','#3b82f6','#2563eb'],'Hootsuite':['fa-share-alt','#ef4444','#dc2626'],
+    'Predis.ai':['fa-images','#a855f7','#9333ea'],'Flick AI':['fa-hashtag','#f97316','#ea580c'],
+    'Ocoya':['fa-clock','#10b981','#059669'],'ContentStudio':['fa-th-large','#6366f1','#4f46e5'],
+    'Vista Social':['fa-eye','#22d3ee','#06b6d4'],'Loomly':['fa-calendar-alt','#f59e0b','#d97706'],
+    'Sprout Social':['fa-seedling','#22c55e','#16a34a'],'ManyChat':['fa-comments','#3b82f6','#1d4ed8'],
+    'Lately.ai':['fa-recycle','#14b8a6','#0d9488'],'Typefully':['fa-feather','#1e293b','#334155'],
+    'Emplifi':['fa-star','#f59e0b','#d97706'],'Pictory AI':['fa-photo-video','#a855f7','#9333ea'],
+    'Runway ML':['fa-film','#0f172a','#1e293b'],'Pika Labs':['fa-play-circle','#7c3aed','#6d28d9'],
+    'CapCut AI':['fa-cut','#ef4444','#dc2626'],'Synthesia':['fa-user-circle','#3b82f6','#2563eb'],
+    'InVideo AI':['fa-video','#ef4444','#b91c1c'],'Lumen5':['fa-sun','#f59e0b','#d97706'],
+    'Descript':['fa-microphone','#6366f1','#4f46e5'],'HeyGen':['fa-user-tie','#7c3aed','#5b21b6'],
+    'Vidnoz AI':['fa-camera','#0369a1','#0284c7'],'Sora':['fa-magic','#0f172a','#111827'],
+    'Adobe Firefly':['fa-fire','#ef4444','#dc2626'],'Clipchamp':['fa-film','#0369a1','#0891b2'],
+    'Topaz Video AI':['fa-sliders-h','#14b8a6','#0d9488'],'Nuance DAX':['fa-stethoscope','#ef4444','#dc2626'],
+    'Suki AI':['fa-microphone-alt','#3b82f6','#2563eb'],'Nabla Copilot':['fa-notes-medical','#10b981','#059669'],
+    'DeepScribe':['fa-file-medical','#8b5cf6','#7c3aed'],'Abridge':['fa-compress-alt','#f59e0b','#d97706'],
+    'Doximity GPT':['fa-user-md','#3b82f6','#1d4ed8'],'Glass Health':['fa-heartbeat','#22d3ee','#06b6d4'],
+    'Freed AI':['fa-unlock','#22c55e','#16a34a'],'ChatGPT (Med)':['fa-robot','#0ea5e9','#0284c7'],
+    'Consensus':['fa-graduation-cap','#6366f1','#4f46e5'],'Mendel AI':['fa-dna','#a855f7','#9333ea'],
+    'Regard':['fa-clipboard-check','#14b8a6','#0d9488'],'Notable Health':['fa-hospital','#ef4444','#dc2626'],
+    'Ambience':['fa-wave-square','#f97316','#ea580c'],'Notion AI':['fa-book-open','#1e293b','#334155'],
+    'Motion':['fa-tachometer-alt','#3b82f6','#2563eb'],'Otter.ai':['fa-microphone','#0ea5e9','#0369a1'],
+    'Fireflies.ai':['fa-headset','#f59e0b','#d97706'],'Reclaim.ai':['fa-clock','#8b5cf6','#7c3aed'],
+    'Grammarly':['fa-spell-check','#22c55e','#16a34a'],'Zapier AI':['fa-random','#f97316','#ea580c'],
+    'Taskade AI':['fa-tasks','#6366f1','#4f46e5'],'Tome':['fa-file-powerpoint','#a855f7','#9333ea'],
+    'Beautiful.ai':['fa-magic','#ec4899','#db2777'],'Mem.ai':['fa-memory','#14b8a6','#0d9488'],
+    'Tally':['fa-poll','#22d3ee','#06b6d4'],'Calendly AI':['fa-calendar-check','#10b981','#059669'],
+    'Mailchimp AI':['fa-envelope','#f59e0b','#ca8a04'],'ActiveCampaign':['fa-paper-plane','#3b82f6','#2563eb'],
+    'GetResponse AI':['fa-reply','#10b981','#059669'],'Google Ads AI':['fa-google','#ef4444','#dc2626'],
+    'Meta Ads AI':['fa-facebook','#3b82f6','#1d4ed8'],'Klaviyo AI':['fa-envelope-open','#6366f1','#4f46e5'],
+    'Phrasee':['fa-comment-dots','#a855f7','#9333ea'],'Drift AI':['fa-comments','#22d3ee','#06b6d4'],
+    'Brevo':['fa-paper-plane','#10b981','#059669'],'Omnisend':['fa-broadcast-tower','#f97316','#ea580c'],
+    'Optimove':['fa-chart-line','#14b8a6','#0d9488'],'Seventh Sense':['fa-clock','#8b5cf6','#7c3aed'],
+    'SEMrush Trends':['fa-search','#ef4444','#b91c1c'],'Marketo AI':['fa-bullseye','#f97316','#ea580c']
+  };
+  var arrow='<i class="fas fa-external-link-alt tc-arrow"></i>';
+  var tkHtml='';
+  toolData.forEach(function(cat){
+    var cards=cat.tools.map(function(t){
+      var ic=toolIcons[t[0]]||['fa-robot',cat.color,cat.color];
+      return '<a href="'+t[1]+'" target="_blank" rel="noopener" class="tc-card">'
+        +'<div class="tc-ico" style="background:linear-gradient(135deg,'+ic[1]+','+ic[2]+')">'
+        +'<i class="fas '+ic[0]+'"></i></div>'
+        +'<div class="tc-body"><div class="tc-name">'+t[0]+'</div><div class="tc-desc">'+t[2]+'</div></div>'+arrow+'</a>';
+    }).join('');
+    var cg='linear-gradient(135deg,'+cat.color+'dd,'+cat.color+'88)';
+    tkHtml+='<div class="cat-block"><div class="cat-head">'
+      +'<div class="cat-ico" style="background:'+cg+'"><i class="fas '+cat.icon+'" style="color:#fff;font-size:1.4rem"></i></div>'
+      +'<div class="cat-info"><div class="cat-name">'+cat.cat+'</div><div class="cat-count">'+cat.tools.length+' AI tools</div></div>'
+      +'<div class="cat-pill" style="background:'+cat.color+'25;border:1.5px solid '+cat.color+'55;color:'+cat.color+'">'+cat.tools.length+' tools</div>'
+      +'</div><div class="tgrid">'+cards+'</div></div>';
+  });
+  var tw=document.getElementById('tools-wrap');if(tw)tw.innerHTML=tkHtml;
+
+  var modalHtml='';
+  toolData.forEach(function(cat){
+    var emoji=emojis[cat.cat]||'🤖';
+    var cards=cat.tools.map(function(t){
+      var ic=toolIcons[t[0]]||['fa-robot',cat.color,cat.color];
+      return '<a href="'+t[1]+'" target="_blank" rel="noopener" class="ai-card" style="background:linear-gradient(135deg,'+ic[1]+'dd,'+ic[2]+'99)">'
+        +'<i class="fas '+ic[0]+'"></i>'+t[0]+'</a>';
+    }).join('');
+    modalHtml+='<div class="ai-cat"><div class="ai-cat-title"><span>'+emoji+'</span> '+cat.cat
+      +' <span style="margin-left:auto;font-size:.7rem;opacity:.6">'+cat.tools.length+' tools</span></div>'
+      +'<div class="ai-tool-grid">'+cards+'</div></div>';
+  });
+  var mw=document.getElementById('modal-tools-wrap');if(mw)mw.innerHTML=modalHtml;
+  populateMegaDropdown();
+}());
+
+function populateMegaDropdown(){
+  if(typeof toolData==='undefined')return;
+  var wrap=document.getElementById('mega-cats-wrap');if(!wrap)return;
+  var emojis={'Web Dev':'💻','Marketing':'📣','SEO':'🔍','Social Media':'📱','Video AI':'🎬','Medical VA':'🏥','VA Tools':'🗂️','Digital Marketing':'📧'};
+  var html='';
+  toolData.forEach(function(cat){
+    var emoji=emojis[cat.cat]||'🤖';
+    var tools=cat.tools.map(function(t){
+      return '<a href="'+t[1]+'" target="_blank" rel="noopener" class="mega-tool" data-name="'+t[0].toLowerCase()+'" onclick="closeAllDropdowns()">'
+        +'<i class="fas fa-robot" style="color:'+cat.color+'"></i>'+t[0]+'</a>';
+    }).join('');
+    html+='<div class="mega-cat"><div class="mega-cat-title"><span>'+emoji+'</span> '+cat.cat+'</div>'
+      +'<div class="mega-tools">'+tools+'</div></div>';
+  });
+  wrap.innerHTML=html;
+}
+
+/* ══════════════════════════════════════
+   MUSIC PLAYER (Web Audio API)
+══════════════════════════════════════ */
+(function(){
+  var AC=window.AudioContext||window.webkitAudioContext;
+  var ctx,master,rv,playing=false,muted=false,started=false,pct=0,tmr,_seq,_curIdx=0;
+
+  window.mpToggle=function(){
+    if(!started){_boot();window.mpGM='female';setTimeout(_speak,900);return;}
+    if(playing){master.gain.linearRampToValueAtTime(0,ctx.currentTime+.5);playing=false;_orb(false);_ico(false);_lbl('⏸ Paused');clearTimeout(_seq);}
+    else{if(ctx.state==='suspended')ctx.resume();master.gain.linearRampToValueAtTime(muted?0:.22,ctx.currentTime+.4);playing=true;_orb(true);_ico(true);_bar();_runSeq(_curIdx);}
+  };
+  window.mpMute=function(){
+    if(!started){_boot();return;}
+    muted=!muted;master.gain.linearRampToValueAtTime(muted?0:.22,ctx.currentTime+.3);
+    var e=document.getElementById('mp-vol');if(!e)return;
+    e.innerHTML=muted?'<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>':'<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+  };
+  window.mpGender=function(){
+    window.mpGM=(window.mpGM==='female')?'male':'female';
+    var b=document.getElementById('mp-gender');if(b)b.textContent=window.mpGM==='female'?'♀':'♂';
+    if(window.speechSynthesis){window.speechSynthesis.cancel();setTimeout(_speak,400);}
+  };
+  window.mpClose=function(){
+    if(ctx)ctx.close();playing=false;started=false;clearTimeout(_seq);clearInterval(tmr);
+    var p=document.getElementById('mplayer');if(p)p.style.display='none';
+  };
+  if(!AC){window.mpToggle=window.mpMute=window.mpGender=window.mpClose=function(){};var el=document.getElementById('mp-lbl');if(el)el.textContent='⚠ No audio';return;}
+
+  function _lbl(t){var e=document.getElementById('mp-lbl');if(e)e.textContent=t;}
+  function _orb(on){var e=document.getElementById('mp-orb');if(e)e.classList.toggle('on',on);}
+  function _ico(p){var e=document.getElementById('mp-ico');if(!e)return;e.innerHTML=p?'<rect x="5" y="4" width="4" height="16"/><rect x="15" y="4" width="4" height="16"/>':'<polygon points="5 3 19 12 5 21 5 3"/>';}
+  function _bar(){clearInterval(tmr);tmr=setInterval(function(){if(!playing)return;pct=(pct+.15)%100;var b=document.getElementById('mp-prog');if(b)b.style.width=pct+'%';},200);}
+  function _mkRev(){
+    var r=ctx.createConvolver(),g=ctx.createGain();g.gain.value=.55;
+    var buf=ctx.createBuffer(2,Math.round(ctx.sampleRate*2.8),ctx.sampleRate);
+    for(var ch=0;ch<2;ch++){var d=buf.getChannelData(ch);for(var i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,2.8);}
+    r.buffer=buf;r.connect(g);g.connect(master);return r;
+  }
+  function _nb(s){var b=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*s),ctx.sampleRate),d=b.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1;return b;}
+  var _comp=null;
+  function _getComp(){
+    if(_comp)return _comp;
+    _comp=ctx.createDynamicsCompressor();_comp.threshold.value=-18;_comp.knee.value=6;_comp.ratio.value=5;_comp.attack.value=.003;_comp.release.value=.12;_comp.connect(master);return _comp;
+  }
+  function _duff(t,vol){
+    var comp=_getComp(),o=ctx.createOscillator(),og=ctx.createGain();
+    o.type='sine';o.frequency.setValueAtTime(110,t);o.frequency.exponentialRampToValueAtTime(42,t+.22);
+    og.gain.setValueAtTime(vol*1.8,t);og.gain.exponentialRampToValueAtTime(.001,t+.28);
+    o.connect(og);og.connect(comp);og.connect(rv);o.start(t);o.stop(t+.30);
+    var s=ctx.createBufferSource(),sg=ctx.createGain(),sf=ctx.createBiquadFilter();
+    s.buffer=_nb(.15);sf.type='lowpass';sf.frequency.value=220;sf.Q.value=1.2;
+    sg.gain.setValueAtTime(vol*1.4,t);sg.gain.exponentialRampToValueAtTime(.001,t+.15);
+    s.connect(sf);sf.connect(sg);sg.connect(comp);s.start(t);s.stop(t+.16);
+  }
+  function _tabla(t,vol){
+    var comp=_getComp(),o=ctx.createOscillator(),og=ctx.createGain();
+    o.type='sine';o.frequency.setValueAtTime(280,t);o.frequency.exponentialRampToValueAtTime(200,t+.10);
+    og.gain.setValueAtTime(vol*1.4,t);og.gain.exponentialRampToValueAtTime(.001,t+.14);
+    o.connect(og);og.connect(comp);og.connect(rv);o.start(t);o.stop(t+.16);
+    var s=ctx.createBufferSource(),sg=ctx.createGain(),sf=ctx.createBiquadFilter();
+    s.buffer=_nb(.10);sf.type='bandpass';sf.frequency.value=520;sf.Q.value=4;
+    sg.gain.setValueAtTime(vol*1.1,t);sg.gain.exponentialRampToValueAtTime(.001,t+.10);
+    s.connect(sf);sf.connect(sg);sg.connect(comp);s.start(t);s.stop(t+.11);
+  }
+  function _riq(t,vol){
+    var comp=_getComp(),s=ctx.createBufferSource(),sg=ctx.createGain(),sf=ctx.createBiquadFilter();
+    s.buffer=_nb(.06);sf.type='highpass';sf.frequency.value=4500;
+    sg.gain.setValueAtTime(vol*1.3,t);sg.gain.exponentialRampToValueAtTime(.001,t+.06);
+    s.connect(sf);sf.connect(sg);sg.connect(comp);s.start(t);s.stop(t+.07);
+  }
+  function _pluck(freq,vol,t,dur){
+    if(!ctx||!rv||freq<20)return;
+    var sz=Math.round(ctx.sampleRate/freq);if(sz<2)return;
+    var buf=ctx.createBuffer(1,sz,ctx.sampleRate),d=buf.getChannelData(0);
+    for(var i=0;i<sz;i++)d[i]=Math.random()*2-1;
+    var s=ctx.createBufferSource(),g=ctx.createGain(),lp=ctx.createBiquadFilter();
+    s.buffer=buf;s.loop=true;lp.type='lowpass';lp.frequency.value=freq*6;lp.Q.value=.5;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.012);
+    g.gain.setValueAtTime(vol*.9,t+dur*.5);g.gain.exponentialRampToValueAtTime(.001,t+dur+.08);
+    s.connect(lp);lp.connect(g);g.connect(master);g.connect(rv);s.start(t);s.stop(t+dur+.12);
+  }
+  var SCHEDULE;
+  function _initSchedule(){
+    SCHEDULE=[
+      {lbl:'🥁 Drum — Arabic Maqsum',dur:60000,fn:_playDrum},
+      {lbl:'🎸 Bass — Tanpura Drone',dur:4000,fn:_playBass},
+      {lbl:'🪘 Oud — Maqam Rast',dur:4000,fn:_playOud},
+      {lbl:'🎹 Pad — Choir Chords',dur:4000,fn:_playPad},
+      {lbl:'🎤 Vocal — Pentatonic Hum',dur:4000,fn:_playVocal},
+      {lbl:'🎸 Guitar — Bengali Baul',dur:4000,fn:_playGuitar}
+    ];
+  }
+  function _runSeq(i){
+    if(!playing)return;_curIdx=i;var entry=SCHEDULE[i];_lbl(entry.lbl);entry.fn();
+    _seq=setTimeout(function(){if(!playing)return;_runSeq((i+1)%SCHEDULE.length);},entry.dur);
+  }
+  function _playDrum(){
+    if(!playing)return;
+    var n=ctx.currentTime,b=60/90,bar=b*4;
+    _duff(n,.95);_tabla(n+b*.5,.55);_tabla(n+b,.75);_riq(n+b*1.5,.60);
+    _duff(n+b*2,.85);_duff(n+b*2.5,.70);_tabla(n+b*3,.80);_riq(n+b*3.5,.55);
+    _duff(n+bar,.90);_tabla(n+bar+b*.5,.50);_tabla(n+bar+b,.78);_riq(n+bar+b*1.5,.55);
+    _duff(n+bar+b*2,.88);_tabla(n+bar+b*2.5,.60);_tabla(n+bar+b*3,.82);_riq(n+bar+b*3.5,.60);
+    for(var i=0;i<8;i++){_riq(n+b*i*.5,.30);_riq(n+bar+b*i*.5,.28);}
+    if(_curIdx===0&&playing)setTimeout(function(){if(_curIdx===0&&playing)_playDrum();},(bar*2-.04)*1000);
+  }
+  function _playBass(){var now=ctx.currentTime;[[65.4,.020,0,4.5],[98.0,.014,.3,4.2],[130.8,.010,.6,4.0]].forEach(function(n){_pluck(n[0],n[1],now+n[2],n[3]);});}
+  var _oudIdx=0;
+  function _playOud(){
+    var pats=[[[146.83,.0204,0,.55],[196.00,.0204,1.15,.55],[220.00,.0228,1.75,.65],[146.83,.0228,4.85,1.8]],
+               [[146.83,.0192,0,.50],[155.56,.0216,.55,.45],[196.00,.0228,1.05,.60],[146.83,.0228,4.75,2.0]]];
+    var pat=pats[_oudIdx++%2],now=ctx.currentTime;
+    pat.forEach(function(n){_pluck(n[0],n[1],now+n[2],n[3]);});_pluck(73.42,.022,now,1.0);
+  }
+  function _playPad(){
+    var now=ctx.currentTime;
+    [146.83,220.00,261.63,293.66].forEach(function(f,i){
+      var o=ctx.createOscillator(),g=ctx.createGain(),lp=ctx.createBiquadFilter();
+      o.type='sawtooth';o.frequency.value=f;lp.type='lowpass';lp.frequency.value=f*3;lp.Q.value=.8;
+      g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(.004-i*.0005,now+2.5);
+      g.gain.setValueAtTime(.004-i*.0005,now+9);g.gain.linearRampToValueAtTime(0,now+12.8);
+      o.connect(lp);lp.connect(g);g.connect(master);g.connect(rv);o.start(now);o.stop(now+13.0);
+    });
+  }
+  function _playVocal(){
+    var pent=[146.83,196.00,220.00,261.63,293.66,220.00,196.00,146.83];
+    var timing=[0,2.2,4.5,6.8,9.0,11.2,13.4,15.6],durs=[2.1,2.2,2.2,2.1,2.1,2.1,2.0,3.0];
+    var now=ctx.currentTime;
+    pent.forEach(function(freq,i){
+      [800,1200,2400].forEach(function(ff,fi){
+        var o=ctx.createOscillator(),fm=ctx.createBiquadFilter(),g=ctx.createGain();
+        o.type='triangle';o.frequency.value=freq;fm.type='bandpass';fm.frequency.value=ff;fm.Q.value=6;
+        var vol=[.016,.009,.004][fi];
+        g.gain.setValueAtTime(0,now+timing[i]);g.gain.linearRampToValueAtTime(vol,now+timing[i]+.4);
+        g.gain.linearRampToValueAtTime(0,now+timing[i]+durs[i]);
+        o.connect(fm);fm.connect(g);g.connect(master);g.connect(rv);o.start(now+timing[i]);o.stop(now+timing[i]+durs[i]+.1);
+      });
+    });
+  }
+  var _gIdx=0;
+  function _playGuitar(){
+    var pats=[[[130.8,.0168,0,.7],[196.00,.0204,2.1,.65],[220.00,.0216,2.8,.70],[293.66,.024,4.95,2.8]],
+               [[293.66,.0204,0,.65],[261.63,.018,.7,.60],[196.00,.0192,2.75,.65],[146.83,.0252,4.1,3.5]]];
+    var pat=pats[_gIdx++%2],now=ctx.currentTime;
+    pat.forEach(function(n){_pluck(n[0],n[1],now+n[2],n[3]);});_pluck(73.42,.020,now,1.0);
+  }
+  function _boot(){
+    if(started)return;started=true;
+    ctx=new AC();master=ctx.createGain();
+    master.gain.setValueAtTime(0,ctx.currentTime);master.gain.linearRampToValueAtTime(.25,ctx.currentTime+1.5);
+    master.connect(ctx.destination);rv=_mkRev();_initSchedule();
+    playing=true;_orb(true);_ico(true);_bar();_curIdx=0;_runSeq(0);
+  }
+  window.mpGM='female';
+  function _speak(){
+    if(!window.speechSynthesis)return;window.speechSynthesis.cancel();
+    var h=new Date().getHours(),gm=window.mpGM;
+    var p=h<12?'Good Morning':h<17?'Good Afternoon':h<21?'Good Evening':'Good Night';
+    var lines=[p+'! Welcome to Monjurul Islam Polash portfolio.','I am a Digital Marketer, Web Developer, S E O Expert, and Virtual Assistant.','Available twenty four hours a day. Thank you for visiting!'];
+    var idx=0;
+    function _n(){
+      if(idx>=lines.length)return;
+      var u=new SpeechSynthesisUtterance(lines[idx]);
+      var vv=window.speechSynthesis.getVoices(),best=null,top=-1;
+      vv.forEach(function(v){
+        if(!v.lang||!v.lang.startsWith('en'))return;
+        var sc=0,n=v.name.toLowerCase();
+        if(gm==='female'){if(/female|zira|samantha|sonia/.test(n))sc+=50;if(/david|mark/.test(n))sc-=30;}
+        else{if(/david/.test(n))sc+=58;if(/mark|james/.test(n))sc+=50;if(/female|zira/.test(n))sc-=40;}
+        if(v.localService)sc+=10;if(sc>top){top=sc;best=v;}
+      });
+      if(!best)vv.forEach(function(v){if(!best&&v.lang&&v.lang.startsWith('en'))best=v;});
+      if(best)u.voice=best;
+      u.lang='en-US';u.rate=gm==='female'?.82:1.20;u.pitch=gm==='female'?1.4:.85;
+      u.onend=function(){idx++;setTimeout(_n,280);};u.onerror=function(){idx++;setTimeout(_n,100);};
+      window.speechSynthesis.speak(u);
+    }
+    var vs=window.speechSynthesis.getVoices();
+    if(vs.length)_n();else{window.speechSynthesis.onvoiceschanged=function(){window.speechSynthesis.onvoiceschanged=null;_n();};}
+  }
+  var _evts=['click','touchstart','scroll','keydown','mousemove'];
+  function _onFirst(){
+    _boot();
+    var order=['female','male'],vi=0;
+    (function _cy(){
+      window.mpGM=order[vi%2];var b=document.getElementById('mp-gender');if(b)b.textContent=window.mpGM==='female'?'♀':'♂';
+      if(window.speechSynthesis)window.speechSynthesis.cancel();setTimeout(_speak,600);vi++;setTimeout(_cy,120000);
+    }());
+    _evts.forEach(function(e){document.removeEventListener(e,_onFirst);});
+  }
+  _evts.forEach(function(e){document.addEventListener(e,_onFirst,{once:true,passive:true});});
+  setTimeout(function(){try{var t=new AC();t.close();_boot();}catch(e){}},600);
+}());
+</script>
+</body>
 </html>
+<a href="Back to home" class=""> 
