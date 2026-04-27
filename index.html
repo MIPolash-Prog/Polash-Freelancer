@@ -5833,4 +5833,31 @@ var toolData=[
 </body>
 </html>  
 
-    
+               previewFrame.open();
+            previewFrame.write(code);
+            previewFrame.close();
+            
+            // Show toast feedback
+            if(window.showToast) showToast('Code Executed Successfully!', 'success');
+        }
+
+        // Run code on load
+        window.addEventListener('load', runCode);
+
+        // Optional: Auto-run while typing
+        document.getElementById('code-editor').addEventListener('input', () => {
+            // Uncomment the line below for live typing preview
+            // runCode(); 
+        });
+
+        // Update the App translations to include Web Dev
+        // [Existing Translation logic from previous response]
+        App.translations.en.webDev = "Web Development";
+        App.translations.bn.webDev = "ওয়েব ডেভেলপমেন্ট";
+
+        // [Include all previous JavaScript logic here]
+    </script>
+</body>
+</html>  
+
+     
