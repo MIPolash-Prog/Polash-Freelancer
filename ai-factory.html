@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystic Globe Docs - Final Automation Page</title>
+    <style>
+        /* 🎨 ডার্ক সিনেমাটিক ক্লিন লেআউট */
+        body {
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        header {
+            text-align: center;
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+        header h1 { color: #38bdf8; margin: 0 0 5px 0; font-size: 26px; }
+        header p { color: #94a3b8; margin: 0; font-size: 14px; }
+
+        /* 🚨 ১. লাইভ আউটপুট জোন (সবার ওপরে স্পষ্ট ও ফিক্সড) */
+        .master-output-box {
+            background-color: #111827;
+            border: 2px solid #38bdf8;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .master-output-box h2 {
+            margin: 0 0 15px 0;
+            color: #38bdf8;
+            font-size: 20px;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 8px;
+        }
+        .output-flex {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .media-panel {
+            flex: 1;
+            min-width: 280px;
+            background-color: #030712;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #374151;
+        }
+        .video-holder {
+            width: 100%;
+            max-width: 220px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #000;
+        }
+        audio, video { width: 100%; margin-top: 10px; }
+
+        /* 📜 ২. মেইন ইনপুট ও কন্ট্রোল প্যানেল */
+        .main-input-panel {
+            background-color: #1f2937;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #374151;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-group label { font-weight: bold; color: #38bdf8; }
+        textarea {
+            width: 100%;
+            height: 140px;
+            background-color: #030712;
+            border: 1px solid #4b5563;
+            color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            resize: none;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            background-color: #030712;
+            color: #fff;
+            border: 1px solid #4b5563;
+            border-radius: 6px;
+        }
+
+        /* ⚙️ 🔑 ৩. এপিআই ইঞ্জিন গ্রিড ও জেনারেট বাটন */
+        .api-engine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .engine-card {
+            background-color: #111827;
+            border: 1px solid #374151;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .engine-card.eleven { border-top: 4px solid #00c2cb; }
+        .engine-card.heygen { border-top: 4px solid #16a34a; }
+        
+        .engine-card h4 { margin: 0; color: #f3f4f6; }
+        .engine-card input {
+            background-color: #030712;
+            border: 1px solid #4b5563;
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .action-btn {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            transition: 0.2s;
+        }
+        .el-btn { background-color: #0284c7; }
+        .el-btn:hover { background-color: #0369a1; }
+        .hg-btn { background-color: #16a34a; }
+        .hg-btn:hover { background-color: #15803d; }
+
+        #masterSaveBtn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* 🔗 ৪. বুকমার্ক সেকশন */
+        .bookmarks-panel {
+            background-color: #111827;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #374151;
+        }
+        .bookmarks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+        }
+        .bookmark-link {
+            padding: 10px;
+            background-color: #1f2937;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            border: 1px solid #374151;
+        }
+        .bookmark-link:hover { border-color: #38bdf8; }
+
+        .dl-btn {
+            display: block;
+            text-align: center;
+            background-color: #e11d48;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- হেডার -->
+        <header>
+            <h1>🌍 Mystic Globe Docs - প্রোডাকশন ফ্যাক্টরি হাব</h1>
+            <p>শিক্ষকতা ও কন্টেন্ট সাম্রাজ্যের সেরা অটোমেশন কন্ট্রোল সেন্টার 📦✌️</p>
+        </header>
+
+        <!-- 🚨 ১. লাইভ আউটপুট জোন (সবার ওপরে স্পষ্ট দেখা যাবে) -->
+        <div class="master-output-box">
+            <h2>⚙️ এআই প্রোডাকশন ইঞ্জিন এবং লাইভ আউটপুট হাব</h2>
+            <div class="output-flex">
+                <div class="media-panel">
+                    <h3 style="margin:0;">🎵 জেনারেটেড অডিও ট্র্যাক:</h3>
+                    <audio id="audioPlayer" controls></audio>
+                    <a id="downloadAudioLink" class="dl-btn" style="display:none;">📥 অডিও ডাউনলোড (.mp3)</a>
+                </div>
+                <div class="media-panel">
+                    <h3 style="margin:0 0 10px 0; text-align:center;">📹 ভিডিও প্রিভিউ (৯:১৬ শর্টস):</h3>
+                    <p id="videoStatus" style="text-align:center; margin:5px 0;">স্ক্রিপ্ট লিখে নিচের বাটনে ক্লিক করুন...</p>
+                    <div class="video-holder">
+                        <video id="videoPlayer" controls style="display:none;"></video>
+                    </div>
+                    <a id="downloadVideoLink" class="dl-btn" style="display:none;">📥 ভিডিও ডাউনলোড (.mp4)</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📜 ২. কন্ট্রোল প্যানেল (ইনপুট সেকশন) -->
+        <div class="main-input-panel">
+            <div class="form-group">
+                <label>📜 আপনার চিত্রনাট্য / স্ক্রিপ্ট পেস্ট করুন:</label>
+                <textarea id="scriptText" placeholder="আমাদের চূড়ান্ত করা ৬০ সেকেন্ড বা ৫ মিনিটের স্ক্রিপ্টটি এখানে দিন..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>🏳️ টার্গেট দেশ ও চ্যানেল হাব সিলেক্ট করুন:</label>
+                <select id="channelSelect">
+                    <option value="us_new">🇺🇸 ১. ইউএসএ New - Mystic Globe Docs (Adam)</option>
+                    <option value="us_old">🇺🇸 ২. ইউএসএ Old - Mystic Globe Docs (Adam)</option>
+                    <option value="uk">🇬🇧 ৩. ইউকে - Mystic Globe Docs [UK] (George)</option>
+                    <option value="au">🇦🇺 ৪. অস্ট্রেলিয়া - Mystic Globe Docs AU (Teacher)</option>
+                    <option value="jp">🇯🇵 ৫. জাপান - Mystic Globe Docs JP (Takumi)</option>
+                    <option value="de">🇩🇪 ৬. জার্মানি - Mystic Globe Docs DE (Stefan)</option>
+                    <option value="es">🇪🇸 ⑦. স্পেন/ল্যাটিন আমেরিকা - Mystic Globe Docs ES (Spanish)</option>
+                    <option value="nl">🇳🇱 ⑧. নেদারল্যান্ডস - Mystic Globe Docs NL (Bram)</option>
+                    <option value="no">🇳🇴 ⑨. নরওয়ে - Mystic Globe Docs NO (Lars)</option>
+                    <option value="ae">🇦🇪 ১০. আরব আমিরাত - Mystic Globe Docs AE (Tariq)</option>
+                    <option value="bd">🇧🇩 ১১. বাংলাদেশ - Mystic Globe Docs [Bangla] (Pradeep)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 🔑 ⚙️ ৩. পৃথক এপিআই ইঞ্জিন ও ডেডিকেটেড বাটন -->
+        <h3 style="color: #38bdf8; margin: 0;">🔑 এআই এপিআই ইঞ্জিন কনফিগারেশন এবং পৃথক বাটন</h3>
+        <div class="api-engine-grid">
+            <div class="engine-card eleven">
+                <h4>🎙️ ElevenLabs Engine</h4>
+                <input type="password" id="elevenKey" placeholder="ElevenLabs API Key দিন...">
+                <button id="btnVoice" class="action-btn el-btn" onclick="generateVoice()">🎙️ ElevenLabs ভয়েস বানান</button>
+            </div>
+            <div class="engine-card heygen">
+                <h4>🎬 HeyGen Video Engine</h4>
+                <input type="password" id="heygenKey" placeholder="HeyGen API Key দিন...">
+                <button id="btnVideo" class="action-btn hg-btn" onclick="generateVideo()">🎬 HeyGen ভিডিও বানান</button>
+            </div>
+        </div>
+        <button id="masterSaveBtn" onclick="saveAllKeys()">💾 সকল এপিআই কি ব্রাউজারে স্থায়ীভাবে সেভ করুন</button>
+
+        <!-- 🔗 ৪. বুকমার্ক হাব -->
+        <div class="bookmarks-panel">
+            <h3 style="color: #38bdf8; margin: 0 0 10px 0; font-size:16px;">🔗 প্রোডাকশন ও এডিটিং বুকমার্ক হাব</h3>
+            <div class="bookmarks-grid">
